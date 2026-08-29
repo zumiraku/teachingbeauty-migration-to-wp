@@ -21,8 +21,9 @@
 1. **バックアップ**：切替前にサーバー全体をFTPで完全バックアップ。
 2. **WordPress設置**：ロリポップにWordPressをインストール（まずはサブディレクトリ `/wp/` で検証推奨）。
 3. **テーマ**：`teachingbeauty-theme/` を `wp-content/themes/` に配置し有効化。
-4. **画像**：バックアップ `www/` 内の画像（`image/` フォルダ含む）を、**サイトルートの同じパス**へアップロード。
+4. **画像**：**`www-optimized/`（最適化済み・推奨）** の画像を、**サイトルートの同じパス**へアップロード。
    → 本文中の相対パス（例 `IMG_3831.png`, `image/rogo12.jpg`）がそのまま表示される。WordPress 既定の .htaccess は実ファイルを優先するため、画像は WordPress を経由せず表示される。
+   → 最適化版は見た目そのままでファイルサイズを約62%削減（表示高速化）。詳細は `validation/PERFORMANCE.md`。未最適化の原本が必要な場合は `www/` にある。
 5. **インポート**：「ツール → インポート → WordPress」で `teachingbeauty.wxr` を取り込む（全ページが作成される）。
 6. **.html 維持**：`mu-plugin__tb-html-permalinks.php` を `wp-content/mu-plugins/` に置く（フォルダが無ければ作成）。
 7. **設定**：

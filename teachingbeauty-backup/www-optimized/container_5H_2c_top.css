@@ -1,0 +1,250 @@
+@charset "Shift_JIS";
+
+/* 要素リセット */
+body{
+	width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 75%;
+    font-family: 'メイリオ' , Meiryo, 'ヒラギノ角ゴ Pro W3' , 'Hiragino Kaku Gothic Pro' , 'ＭＳ Ｐゴシック' , 'Osaka' , sans-serif;
+    color: #000000; /* 標準文字色 */
+    background-color: #ffffff;
+}
+/* Safari用ハック 文字サイズ調整 */
+/*\*/
+html:\66irst-child body{
+    font-size: 70%;
+}
+/* end */
+
+img{
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+/*--------------------------------------------------------
+  レイアウト設定
+--------------------------------------------------------*/
+@media(max-width:941px){
+	.hpb-layoutset-01 #hpb-container{
+		width: 941px;
+	}
+
+	.hpb-layoutset-02 #hpb-container{
+		width: 941px;
+	}
+}
+
+
+.hpb-layoutset-01 #hpb-container{
+	background-image : url(image/headerBg_5H_01.png);
+    background-position: center top;
+    background-repeat: repeat-x;
+	background-color: #fdf8e1;
+}
+.hpb-layoutset-02 #hpb-container{
+	background-image : url(image/headerBg_5H_02.png);
+    background-position: center top;
+    background-repeat: repeat-x;
+	background-color: #fdf8e1;
+}
+#hpb-header{
+	width: 941px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#hpb-inner{
+	width: 941px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	clear: both;
+}
+
+#hpb-inner:after{
+    content: ".";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+}
+
+#hpb-wrapper
+{
+   
+}
+
+#hpb-title{
+   width: 941px;
+   padding-top: 7px;
+}
+
+#hpb-main{
+    width: 698px;
+	float: left;
+	padding-top: 80px;
+}
+.hpb-layoutset-01 #hpb-main{
+	padding-top: 80px;
+}
+.hpb-layoutset-02 #hpb-main{
+	padding-top: 70px;
+}
+#hpb-aside{
+ 	width: 231px;
+	float: right;
+	
+}
+.hpb-layoutset-01 #hpb-aside{
+	padding-top: 80px;
+}
+.hpb-layoutset-02 #hpb-aside{
+	padding-top: 80px;
+}
+
+#hpb-footer{
+    background-image : url(image/footerBg_5H.png);
+    background-position: center top;
+    background-repeat: repeat-x;
+    padding-bottom: 20px;
+    clear: both;
+	background-color: #fff;
+}
+
+
+#hpb-nav{
+    width: 941px;
+    height: 43px;
+    overflow: hidden;
+    position: absolute;
+    left: 0px;
+}
+.hpb-layoutset-01 #hpb-nav{
+	 top: 327px;
+}
+.hpb-layoutset-02 #hpb-nav{
+	 top: 120px;
+}
+/*--------------------------------------------------------
+  デザイン設定
+--------------------------------------------------------*/
+/* 背景設定 */
+
+
+
+/* コンテンツ配置領域 */
+
+.hpb-layoutset-01 #hpb-title h2{
+    margin: 0;
+    overflow: hidden;
+    text-indent: -9999px;
+    height: 306px;
+    background-image : url(image/top_mainimg_5H.png);
+    background-position: top center;
+    background-repeat: no-repeat;
+	padding-left: 24px;
+}
+
+.hpb-layoutset-02 h2{
+    background-image : url(image/titleBg_5H.png);
+}
+/* ナビゲーション */
+#hpb-nav ul{
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    list-style-type: none;
+    height: 43px;
+    overflow: hidden;
+    width: 941px;
+}
+
+#hpb-nav ul:after{
+    content: ".";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+}
+
+#hpb-nav li{
+    display: block;
+    width: 154px;
+    float: left;
+    height: 43px;
+    overflow: hidden;
+	padding-left: 3px;
+}
+#hpb-nav li:first-child{
+	padding-left: 0;
+}
+
+#hpb-nav li a{
+    display: block;
+    height: 43px;
+	text-align: center;
+	font-family:'ヒラギノ明朝 Pro W3','Hiragino Mincho Pro','ＭＳ Ｐ明朝','MS PMincho',serif;
+	background-image : url(image/mainmenu_5H.png);
+    background-position: top center;
+    background-repeat: no-repeat;
+	line-height: 1;
+}
+
+#hpb-nav li span.en{
+    color: #fff;
+	text-transform: uppercase;
+	font-size: 10px;
+	letter-spacing:0;
+	display: block;
+	padding-top: 8px;
+	padding-bottom: 2px;
+}
+
+#hpb-nav li span.ja{
+    display: block;
+    font-size: 14px;
+	color: #fff;
+	letter-spacing: 0.1em;
+}
+
+
+#hpb-nav a:link{
+    text-decoration: none;   
+}
+#hpb-nav a:visited{
+	text-decoration: none;   
+}
+#hpb-nav a:hover{
+    background-image : url(image/mainmenu_5H_on.png);
+    background-position: top center;
+    text-decoration: none;
+}
+
+#hpb-nav a:active{
+    background-image : url(image/mainmenu_5H_on.png);
+    background-position: top center;
+    text-decoration: none;
+}
+
+
+/* バナー */
+
+#banner ul{
+    margin-top: 0;
+    margin-right: 105px;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
