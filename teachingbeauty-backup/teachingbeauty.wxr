@@ -10,7 +10,7 @@
 	<title>Teaching Beauty é¼ç¸ãƒžãƒƒã‚µãƒ¼ã‚¸æ•´éª¨é™¢ãƒ»æ•´ä½“é™¢</title>
 	<link>https://www.teachingbeauty.jp</link>
 	<description>æ¡œæ–°ç”ºã®é¼ç¸æ•´éª¨é™¢ãƒ»æ•´ä½“é™¢</description>
-	<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+	<pubDate>Sat, 29 Aug 2026 16:30:13 +0000</pubDate>
 	<language>ja</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://www.teachingbeauty.jp</wp:base_site_url>
@@ -19,7 +19,7 @@
 	<generator>manual-1to1-migration</generator>	<item>
 		<title>鍼灸｜桜新町のTeaching Beauty鍼灸整骨院・整体院｜メディアで話題</title>
 		<link>https://www.teachingbeauty.jp/index.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1001</guid>
 		<description></description>
@@ -162,8 +162,8 @@
         <!-- toppage end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1001</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[home]]></wp:post_name>
@@ -177,7 +177,7 @@
 	<item>
 		<title>当院について - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/concept.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1002</guid>
 		<description></description>
@@ -429,8 +429,8 @@
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1002</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[concept]]></wp:post_name>
@@ -444,7 +444,7 @@
 	<item>
 		<title>治療内容- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/menu.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1003</guid>
 		<description></description>
@@ -1160,8 +1160,8 @@
         <!-- main end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1003</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[menu]]></wp:post_name>
@@ -1175,7 +1175,7 @@
 	<item>
 		<title>割引- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/news.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1004</guid>
 		<description></description>
@@ -1230,8 +1230,8 @@
         <!-- news end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1004</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[news]]></wp:post_name>
@@ -1245,7 +1245,7 @@
 	<item>
 		<title>無料相談 - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/muryou.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1005</guid>
 		<description></description>
@@ -1297,8 +1297,8 @@
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1005</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[muryou]]></wp:post_name>
@@ -1312,7 +1312,7 @@
 	<item>
 		<title>ご予約 - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/reserve.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1006</guid>
 		<description></description>
@@ -1348,8 +1348,8 @@
 <!-- FC2メールフォーム End -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1006</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[reserve]]></wp:post_name>
@@ -1363,7 +1363,7 @@
 	<item>
 		<title>患者様の声- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/kanja.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1007</guid>
 		<description></description>
@@ -1753,8 +1753,8 @@
       <!-- main end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1007</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[kanja]]></wp:post_name>
@@ -1768,7 +1768,7 @@
 	<item>
 		<title>NHKにレギュラー出演している鍼灸院-TeachingBeauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/nhk.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1008</guid>
 		<description></description>
@@ -1975,8 +1975,8 @@
         </font></font></font>]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1008</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[nhk]]></wp:post_name>
@@ -1990,7 +1990,7 @@
 	<item>
 		<title>院長紹介 - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/incho.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1009</guid>
 		<description></description>
@@ -2079,8 +2079,8 @@
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1009</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[incho]]></wp:post_name>
@@ -2094,7 +2094,7 @@
 	<item>
 		<title>アクセス - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/access.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1010</guid>
 		<description></description>
@@ -2267,8 +2267,8 @@
         <!-- access end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1010</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[access]]></wp:post_name>
@@ -2282,7 +2282,7 @@
 	<item>
 		<title>治療の流れ - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/sinkyu.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1011</guid>
 		<description></description>
@@ -2426,8 +2426,8 @@
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1011</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[sinkyu]]></wp:post_name>
@@ -2441,7 +2441,7 @@
 	<item>
 		<title>桜新町徒歩1分｜交通事故、むちうち治療は無料で治療できます。</title>
 		<link>https://www.teachingbeauty.jp/beauty.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1012</guid>
 		<description></description>
@@ -2765,8 +2765,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
          <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1012</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[beauty]]></wp:post_name>
@@ -2780,7 +2780,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>桜新町徒歩1分 エステティックサロン - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/esthetichtml.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1013</guid>
 		<description></description>
@@ -2997,8 +2997,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         </div>]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1013</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[esthetichtml]]></wp:post_name>
@@ -3012,7 +3012,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>3年連続生徒合格率100％｜現役講師による鍼灸柔整国家試験予備校</title>
 		<link>https://www.teachingbeauty.jp/kokushi.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1014</guid>
 		<description></description>
@@ -3479,8 +3479,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         </font><img src="unnamed2.jpg" width="207" height="275" border="0" alt="コンサルティング依頼先の写真"><img src="unnamed12.jpg" width="206" height="274" border="0" alt="コンサルティング依頼先の先生"></div>]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1014</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[kokushi]]></wp:post_name>
@@ -3494,7 +3494,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>プライポリシー</title>
 		<link>https://www.teachingbeauty.jp/privacy.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1015</guid>
 		<description></description>
@@ -3555,8 +3555,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- privacy end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1015</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[privacy]]></wp:post_name>
@@ -3570,7 +3570,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>登録販売員 求人募集 桜新町徒歩1分</title>
 		<link>https://www.teachingbeauty.jp/kyuujin.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1016</guid>
 		<description></description>
@@ -3943,8 +3943,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1016</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[kyuujin]]></wp:post_name>
@@ -3958,7 +3958,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>不妊症には亜鉛が効く-ＴｅａｃｈｉｎｇＢｅａｕｔｙ鍼灸整骨院</title>
 		<link>https://www.teachingbeauty.jp/funin.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1017</guid>
 		<description></description>
@@ -4101,8 +4101,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         </div><!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1017</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[funin]]></wp:post_name>
@@ -4116,7 +4116,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>花粉症治療 - Teaching Beauty鍼灸整骨院</title>
 		<link>https://www.teachingbeauty.jp/kafun.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1018</guid>
 		<description></description>
@@ -4200,8 +4200,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1018</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[kafun]]></wp:post_name>
@@ -4215,7 +4215,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>逆子治療は鍼灸が効く- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/sakago.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1019</guid>
 		<description></description>
@@ -4281,8 +4281,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         </div><!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1019</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[sakago]]></wp:post_name>
@@ -4296,7 +4296,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>駅歩1分前置胎盤・低置胎盤専門の鍼灸院｜胎盤は鍼灸で改善</title>
 		<link>https://www.teachingbeauty.jp/taiban.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1020</guid>
 		<description></description>
@@ -4582,8 +4582,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1020</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[taiban]]></wp:post_name>
@@ -4597,7 +4597,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>鍼灸治療 桜新町徒歩1分- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/hari.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1021</guid>
 		<description></description>
@@ -4647,8 +4647,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1021</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[hari]]></wp:post_name>
@@ -4662,7 +4662,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>灸治療 お灸で病気を予防する - Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/kyuu.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1022</guid>
 		<description></description>
@@ -4703,8 +4703,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1022</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[kyuu]]></wp:post_name>
@@ -4718,7 +4718,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>整体院 桜新町徒歩1分 - Teaching Beauty鍼灸整骨院</title>
 		<link>https://www.teachingbeauty.jp/seitai.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1023</guid>
 		<description></description>
@@ -4786,8 +4786,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1023</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[seitai]]></wp:post_name>
@@ -4801,7 +4801,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>カイロプラクティック 桜新町徒歩1分- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/kairopura.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1024</guid>
 		<description></description>
@@ -4840,8 +4840,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1024</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[kairopura]]></wp:post_name>
@@ -4855,7 +4855,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>耳鳴りが治らない方へ｜耳鳴り・難聴専門の鍼灸院｜世田谷・桜新町 Teaching Beauty｜無料相談</title>
 		<link>https://www.teachingbeauty.jp/miminari.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1025</guid>
 		<description></description>
@@ -5122,8 +5122,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1025</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[miminari]]></wp:post_name>
@@ -5137,7 +5137,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>メニエール病だからと諦めていませんか？鍼灸により変化します！！</title>
 		<link>https://www.teachingbeauty.jp/Meniere.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1026</guid>
 		<description></description>
@@ -5456,8 +5456,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1026</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[Meniere]]></wp:post_name>
@@ -5471,7 +5471,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>つわりは鍼灸治療で簡単に治まる- Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/tsuwari.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1027</guid>
 		<description></description>
@@ -5525,8 +5525,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1027</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[tsuwari]]></wp:post_name>
@@ -5540,7 +5540,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>ＮＨＫ出演の不妊症専門鍼灸院｜妊娠率68％｜鍼灸でポカポカ子宮を！</title>
 		<link>https://www.teachingbeauty.jp/newpage4.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1028</guid>
 		<description></description>
@@ -5757,8 +5757,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1028</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage4]]></wp:post_name>
@@ -5772,7 +5772,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>過敏性腸症候群、潰瘍性大腸炎、クローン病は鍼灸で改善される。TeachinｇBeauty鍼灸整骨院</title>
 		<link>https://www.teachingbeauty.jp/newpage5.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1029</guid>
 		<description></description>
@@ -5962,8 +5962,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1029</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage5]]></wp:post_name>
@@ -5977,7 +5977,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>花粉症治療（食事編）- Teaching Beauty鍼灸整骨院</title>
 		<link>https://www.teachingbeauty.jp/newpage7.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1030</guid>
 		<description></description>
@@ -6077,8 +6077,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         </div><!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1030</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage7]]></wp:post_name>
@@ -6092,7 +6092,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>3年連続生徒合格率100％｜気現役講師による鍼灸柔整国家試験予備校</title>
 		<link>https://www.teachingbeauty.jp/newpage10.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1031</guid>
 		<description></description>
@@ -8421,8 +8421,8 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
         </div>]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1031</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage10]]></wp:post_name>
@@ -8436,7 +8436,7 @@ mso-hansi-theme-font:minor-fareast'>脳は、脳から脊髄にかけて入っ�
 	<item>
 		<title>突発性難聴専門鍼灸院｜当院の院長はNHKに3年連続レギュラー出演</title>
 		<link>https://www.teachingbeauty.jp/newpage13.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1032</guid>
 		<description></description>
@@ -9221,8 +9221,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1032</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage13]]></wp:post_name>
@@ -9236,7 +9236,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>前置胎盤の患者様の声 | Teaching Beauty鍼灸マッサージ整骨院</title>
 		<link>https://www.teachingbeauty.jp/newpage14.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1033</guid>
 		<description></description>
@@ -9649,8 +9649,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1033</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage14]]></wp:post_name>
@@ -9664,7 +9664,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>10歳若返えりたくありませんか？ハリウッド逆輸入のハリウッド美容鍼</title>
 		<link>https://www.teachingbeauty.jp/newpage17.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1034</guid>
 		<description></description>
@@ -9943,8 +9943,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1034</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage17]]></wp:post_name>
@@ -9958,7 +9958,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>2018年現在216名妊娠 妊娠率68％｜多嚢胞性卵巣症候群でも妊娠できます。</title>
 		<link>https://www.teachingbeauty.jp/newpage22.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1035</guid>
 		<description></description>
@@ -10154,8 +10154,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1035</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage22]]></wp:post_name>
@@ -10169,7 +10169,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>急性低音障害型感音難聴専門院｜当院の院長はNHKに3年連続レギュラー出演</title>
 		<link>https://www.teachingbeauty.jp/newpage23.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1036</guid>
 		<description></description>
@@ -10545,8 +10545,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1036</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage23]]></wp:post_name>
@@ -10560,7 +10560,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>難聴専門鍼灸院｜当院の院長はNHKに3年連続レギュラー出演</title>
 		<link>https://www.teachingbeauty.jp/newpage24.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1037</guid>
 		<description></description>
@@ -10690,8 +10690,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1037</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage24]]></wp:post_name>
@@ -10705,7 +10705,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>不妊治療専門鍼灸院｜当院の院長はNHKに3年連続レギュラー出演</title>
 		<link>https://www.teachingbeauty.jp/newpage25.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1038</guid>
 		<description></description>
@@ -10851,8 +10851,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1038</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage25]]></wp:post_name>
@@ -10866,7 +10866,7 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span></font></font></font></f
 	<item>
 		<title>耳管開放症専門鍼灸院｜当院の院長はNHKに3年連続レギュラー出演</title>
 		<link>https://www.teachingbeauty.jp/newpage27.html</link>
-		<pubDate>Sat, 29 Aug 2026 15:45:55 +0000</pubDate>
+		<pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://www.teachingbeauty.jp/?page_id=1039</guid>
 		<description></description>
@@ -11283,8 +11283,8 @@ mso-fareast-language:JA;mso-bidi-language:AR-SA'></span>
         <!-- concept end -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1039</wp:post_id>
-		<wp:post_date><![CDATA[2026-08-29 15:45:55]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2026-08-29 15:45:55]]></wp:post_date_gmt>
+		<wp:post_date><![CDATA[2020-01-01 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2020-01-01 00:00:00]]></wp:post_date_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[newpage27]]></wp:post_name>
