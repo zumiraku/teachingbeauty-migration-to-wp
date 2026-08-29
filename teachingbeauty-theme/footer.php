@@ -19,9 +19,9 @@
 				);
 			} else {
 				echo '<ul class="menu">';
-				echo '<li><a href="' . esc_url( home_url( '/kokushi/' ) ) . '">国家試験予備校</a></li>';
-				echo '<li><a href="' . esc_url( home_url( '/recruit/' ) ) . '">求人募集</a></li>';
-				echo '<li><a href="' . esc_url( home_url( '/privacy/' ) ) . '">プライバシーポリシー</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/kokushi.html' ) ) . '">国家試験予備校</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/kyuujin.html' ) ) . '">求人募集</a></li>';
+				echo '<li><a href="' . esc_url( home_url( '/privacy.html' ) ) . '">プライバシーポリシー</a></li>';
 				echo '</ul>';
 			}
 			?>

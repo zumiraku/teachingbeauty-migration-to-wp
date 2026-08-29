@@ -26,6 +26,28 @@ add_action(
 );
 
 /**
+ * 現行サイトの /index.html はトップ（/）へ 301。
+ * 旧サイトの index.html への内部リンク・被リンクを維持しつつ、
+ * / と /index.html の重複（インデックス重複の主因）を正規化する。
+ */
+add_action(
+	'template_redirect',
+	function () {
+		$req = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
+		$path = rawurldecode( (string) wp_parse_url( $req, PHP_URL_PATH ) );
+		if ( '/index.html' === $path ) {
+			wp_safe_redirect( home_url( '/' ), 301 );
+			exit;
+		}
+		// 旧サイトの不正URL（空白入り）funin aen.html を funin.html へ 301。
+		if ( '/funin aen.html' === $path ) {
+			wp_safe_redirect( home_url( '/funin.html' ), 301 );
+			exit;
+		}
+	}
+);
+
+/**
  * 固定ページのパーマリンクを .html 付きで出力し、内部リンクを現行と一致させる。
  * フロントページ（home）は「/」のまま。
  */

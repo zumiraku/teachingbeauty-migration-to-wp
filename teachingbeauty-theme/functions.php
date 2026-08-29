@@ -116,12 +116,12 @@ function tb_breadcrumb() {
  */
 function tb_primary_menu_fallback() {
 	echo '<ul class="menu">';
-	echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '"><span class="en">top</span>ホーム</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '"><span class="en">about</span>当院について</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/menu/' ) ) . '"><span class="en">menu</span>施術メニュー</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/news/' ) ) . '"><span class="en">news</span>お知らせ</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/muryou/' ) ) . '"><span class="en">free</span>無料相談</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/reserve/' ) ) . '"><span class="en">reserve</span>ご予約</a></li>';
+	echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '"><span class="en">top</span>トップページ</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/concept.html' ) ) . '"><span class="en">concept</span>当院について</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/menu.html' ) ) . '"><span class="en">menu</span>治療内容・料金</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/news.html' ) ) . '"><span class="en">news</span>キャンペーン・割引</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/muryou.html' ) ) . '"><span class="en">free</span>無料相談</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/reserve.html' ) ) . '"><span class="en">reserve</span>ご予約</a></li>';
 	echo '</ul>';
 }
 

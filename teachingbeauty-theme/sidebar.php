@@ -13,15 +13,15 @@
 <?php else : ?>
 
 	<ul class="tb-banners">
-		<li><a href="<?php echo esc_url( home_url( '/voice/' ) ); ?>"><span class="en">voice</span>患者様の声</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/media/' ) ); ?>"><span class="en">media</span>メディア出演</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/director/' ) ); ?>"><span class="en">director</span>院長紹介</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/access/' ) ); ?>"><span class="en">access</span>アクセス</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/flow/' ) ); ?>"><span class="en">flow</span>治療の流れ</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/jiko/' ) ); ?>"><span class="en">accident</span>交通事故・自賠責</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/reserve/' ) ); ?>"><span class="en">reserve</span>ご予約</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/kokushi/' ) ); ?>"><span class="en">school</span>国家試験予備校</a></li>
-		<li><a href="<?php echo esc_url( home_url( '/esthetic/' ) ); ?>"><span class="en">esthetic</span>エステティック</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/kanja.html' ) ); ?>"><span class="en">voice</span>患者様の声</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/nhk.html' ) ); ?>"><span class="en">media</span>メディア出演</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/incho.html' ) ); ?>"><span class="en">director</span>院長紹介</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/access.html' ) ); ?>"><span class="en">access</span>アクセス</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/sinkyu.html' ) ); ?>"><span class="en">flow</span>治療の流れ</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/beauty.html' ) ); ?>"><span class="en">accident</span>交通事故・自賠責</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/reserve.html' ) ); ?>"><span class="en">reserve</span>ご予約</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/kokushi.html' ) ); ?>"><span class="en">school</span>国家試験予備校</a></li>
+		<li><a href="<?php echo esc_url( home_url( '/esthetichtml.html' ) ); ?>"><span class="en">esthetic</span>エステティック</a></li>
 		<li><a href="https://ameblo.jp/teaching-beauty/" rel="noopener"><span class="en">blog</span>スタッフブログ</a></li>
 	</ul>
 
