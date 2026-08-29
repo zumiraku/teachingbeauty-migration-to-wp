@@ -1,0 +1,921 @@
+@charset "Shift_JIS";
+
+/******************************
+ * float clear
+ ******************************/
+.hpb-clear {
+    clear: both;
+}
+
+.hpb-clearfix:after {
+    content: ".";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+}
+.hpb-clearfix {
+    zoom: 1; /* for IE6 */
+}
+
+/******************************
+ * レイアウト コンテナ (div)
+ ******************************/
+
+/* 飾りなし 幅自動 */
+.hpb-parts-cnt-01 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: auto;
+    float: none;
+    clear: both;
+}
+
+/* 飾りなし 幅60px */
+.hpb-parts-cnt-01-060 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 60px;
+    float: left;
+}
+
+/* 飾りなし 幅120px */
+.hpb-parts-cnt-01-120 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 120px;
+    float: left;
+}
+
+/* 飾りなし 幅180px */
+.hpb-parts-cnt-01-180 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 180px;
+    float: left;
+}
+
+/* 飾りなし 幅240px */
+.hpb-parts-cnt-01-240 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 240px;
+    float: left;
+}
+
+/* 飾りなし 幅360px */
+.hpb-parts-cnt-01-360 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 360px;
+    float: left;
+}
+
+/* 線囲み 幅自動 */
+.hpb-parts-cnt-02 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    width: auto;
+    float: none;
+    clear: both;
+}
+
+/* 線囲み 幅60px */
+.hpb-parts-cnt-02-060 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    width: 60px;
+    float: left;
+}
+
+/* 線囲み 幅120px */
+.hpb-parts-cnt-02-120 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    width: 120px;
+    float: left;
+}
+
+/* 線囲み 幅180px */
+.hpb-parts-cnt-02-180 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    width: 180px;
+    float: left;
+}
+
+/* 線囲み 幅240px */
+.hpb-parts-cnt-02-240 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    width: 240px;
+    float: left;
+}
+
+/* 線囲み 幅360px */
+.hpb-parts-cnt-02-360 {
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    width: 360px;
+    float: left;
+}
+
+/******************************
+ * 見出し (h1-h6)
+ ******************************/
+
+/* 飾りなし */
+.hpb-parts-hl-01 {
+    margin: 0px;
+    padding: 0px 0.2em;
+    border: none !important;
+    line-height: 1.2em;
+}
+
+/* 下線 1 */
+.hpb-parts-hl-02 {
+    margin: 0px;
+    padding: 0px 0.2em;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-top-style: none !important;
+    border-right-style: none !important;
+    border-left-style: none !important;
+    line-height: 1.2em;
+}
+
+/* 下線 2 (2重線) */
+.hpb-parts-hl-03 {
+    margin: 0px;
+    padding: 0px 0.2em;
+    border-bottom-width: 3px !important;
+    border-bottom-style: double !important;
+    border-top-style: none !important;
+    border-right-style: none !important;
+    border-left-style: none !important;
+    line-height: 1.2em;
+}
+
+/* 線囲み 1 */
+.hpb-parts-hl-04 {
+    margin: 0px;
+    padding: 0px 0.2em;
+    border-width: 1px !important;
+    border-style: solid !important;
+    line-height: 1.2em;
+}
+
+/* 線囲み 2 (2重線) */
+.hpb-parts-hl-05 {
+    margin: 0px;
+    padding: 0px 0.2em;
+    border-width: 3px !important;
+    border-style: double !important;
+    line-height: 1.2em;
+}
+
+/* 飾りつき 1 (左■付き) */
+.hpb-parts-hl-06 {
+    margin: 0px;
+    padding: 0px 0px 0px 0.2em;
+    border-left-width: 1.2em !important;
+    border-left-style: solid !important;
+    border-top-style: none !important;
+    border-right-style: none !important;
+    border-bottom-style: none !important;
+    line-height: 1.2em;
+}
+
+/* 飾りつき 2 (左■付き＆下線) */
+.hpb-parts-hl-07 {
+    margin: 0px;
+    padding: 0px 0px 0px 0.2em;
+    border-left-width: 1.2em !important;
+    border-left-style: solid !important;
+    border-bottom-width: 2px !important;
+    border-bottom-style: solid !important;
+    border-top-style: none !important;
+    border-right-style: none !important;
+    line-height: 1.2em;
+}
+
+/* 飾りつき 3 (左■付き＆線囲み) */
+.hpb-parts-hl-08 {
+    margin: 0px;
+    padding: 0px 0px 0px 0.2em;
+    border-style: solid !important;
+    border-width: 2px 2px 2px 1.2em !important;
+    line-height: 1.2em;
+}
+
+/******************************
+ * 文章枠 (div)
+ ******************************/
+
+/* 装飾なし */
+.hpb-parts-cbox-01 {
+    margin: 0px;
+    padding: 5px;
+    border: none;
+}
+
+/* 線囲み 1 (実線) */
+.hpb-parts-cbox-02 {
+    margin: 0px;
+    padding: 4px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/* 線囲み 2 (点線) */
+.hpb-parts-cbox-03 {
+    margin: 0px;
+    padding: 4px;
+    border-width: 1px;
+    border-style: dotted;
+}
+
+/* 線囲み 3 (2重線) */
+.hpb-parts-cbox-04 {
+    margin: 0px;
+    padding: 2px;
+    border-width: 3px;
+    border-style: double;
+}
+
+/******************************
+ * 写真/画像 (img)
+ ******************************/
+
+/* 余白なし */
+.hpb-parts-img-01 {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    float: left;
+}
+
+/* 余白あり */
+.hpb-parts-img-02 {
+    margin: 0px;
+    padding: 5px;
+    border: none;
+    float: left;
+}
+
+/* 写真ボックス 左寄せ配置用 */
+.hpb-parts-img-03 {
+    margin: 0px 5px 0px 0px !important;
+    padding: 5px;
+    border: none;
+    float: left;
+}
+
+/* 写真ボックス 右寄せ配置用 */
+.hpb-parts-img-04 {
+    margin: 0px 0px 0px 5px !important;
+    padding: 5px;
+    border: none;
+    float: right;
+}
+
+/* 複数写真ボックス 左端用 */
+.hpb-parts-img-05 {
+    margin: 0px;
+    padding: 5px;
+    border: none;
+    float: left;
+    clear: both;
+}
+
+/* 複数写真ボックス 2列目用 */
+.hpb-parts-img-06 {
+    margin: 0px;
+    padding: 5px 5px 5px 0px;
+    border: none;
+    float: left;
+}
+
+/* 複数写真ボックス 左端・2行目用 */
+.hpb-parts-img-07 {
+    margin: 0px;
+    padding: 0px 5px 5px 5px;
+    border: none;
+    float: left;
+    clear: both;
+}
+
+/* 複数写真ボックス 2行目用 */
+.hpb-parts-img-08 {
+    margin: 0px;
+    padding: 0px 5px 5px 0px;
+    border: none;
+    float: left;
+}
+
+/******************************
+ * 水平線 (hr)
+ ******************************/
+
+/* 水平線 1 (実線・細) */
+.hpb-parts-hr-01 {
+    margin: 0.5em 0px;
+    border-width: 1px 0px 0px 0px !important;
+    border-top-style: solid !important;
+}
+
+/* 水平線 2 (実線・太) */
+.hpb-parts-hr-02 {
+    margin: 0.5em 0px;
+    border-width: 2px 0px 0px 0px;
+    border-top-style: solid;
+}
+
+/* 水平線 3 (点線・細) */
+.hpb-parts-hr-03 {
+    margin: 0.5em 0px;
+    border-width: 1px 0px 0px 0px;
+    border-top-style: dotted;
+    height: 0px;
+}
+
+/* 水平線 4 (点線・太) */
+.hpb-parts-hr-04 {
+    margin: 0.5em 0px;
+    border-width: 2px 0px 0px 0px;
+    border-top-style: dotted;
+    height: 0px;
+}
+
+/* 水平線 5 (破線・細) */
+.hpb-parts-hr-05 {
+    margin: 0.5em 0px;
+    border-width: 1px 0px 0px 0px;
+    border-top-style: dashed;
+}
+
+/* 水平線 6 (破線・太) */
+.hpb-parts-hr-06 {
+    margin: 0.5em 0px;
+    border-width: 2px 0px 0px 0px;
+    border-top-style: dashed;
+}
+
+/* 水平線 7 (2重線) */
+.hpb-parts-hr-07 {
+    margin: 0.5em 0px;
+    border-width: 3px 0px 0px 0px;
+    border-top-style: double;
+}
+
+/******************************
+ * 写真ボックス (div)
+ ******************************/
+
+/* 飾りなし */
+.hpb-parts-pbox-01 {
+    margin: 5px;
+    padding: 0px;
+    border: none;
+    text-align: left;
+    width: auto;
+    float: none;
+    clear: both;
+}
+
+/* 飾りなし 画像幅60px */
+.hpb-parts-pbox-01-060 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 70px;
+    float: left;
+}
+
+/* 飾りなし 画像幅120px */
+.hpb-parts-pbox-01-120 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 130px;
+    float: left;
+}
+
+/* 飾りなし 画像幅180px */
+.hpb-parts-pbox-01-180 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 190px;
+    float: left;
+}
+
+/* 飾りなし 画像幅240px */
+.hpb-parts-pbox-01-240 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 250px;
+    float: left;
+}
+
+/* 線囲み */
+.hpb-parts-pbox-02 {
+    margin: 4px;
+    padding: 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: auto;
+    float: none;
+}
+
+/* 線囲み 画像幅60px */
+.hpb-parts-pbox-02-060 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 70px;
+    float: left;
+}
+
+/* 線囲み 画像幅120px */
+.hpb-parts-pbox-02-120 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 130px;
+    float: left;
+}
+
+/* 線囲み 画像幅180px */
+.hpb-parts-pbox-02-180 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 190px;
+    float: left;
+}
+
+/* 線囲み 画像幅240px */
+.hpb-parts-pbox-02-240 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 250px;
+    float: left;
+}
+
+/* 写真ボックス用 文章領域 */
+.hpb-parts-pbox-desc {
+    margin: 0px;
+    padding: 5px 5px 0px 5px;
+    border: none;
+}
+
+/******************************
+ * 複数写真ボックス (div)
+ ******************************/
+
+/* 飾りなし 画像幅60px 横2x縦1 */
+.hpb-parts-mpbox-01-2060 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 135px;
+    float: left;
+}
+
+/* 飾りなし 画像幅60px 横3x縦1 */
+.hpb-parts-mpbox-01-3060 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 200px;
+    float: left;
+}
+
+/* 飾りなし 画像幅60px 横4x縦1 */
+.hpb-parts-mpbox-01-4060 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 265px;
+    float: left;
+}
+
+/* 飾りなし 画像幅120px 横2x縦1 */
+.hpb-parts-mpbox-01-2120 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 255px;
+    float: left;
+}
+
+/* 飾りなし 画像幅120px 横3x縦1 */
+.hpb-parts-mpbox-01-3120 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 380px;
+    float: left;
+}
+
+/* 飾りなし 画像幅120px 横4x縦1 */
+.hpb-parts-mpbox-01-4120 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 505px;
+    float: left;
+}
+
+/* 飾りなし 画像幅180px 横2x縦1 */
+.hpb-parts-mpbox-01-2180 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 375px;
+    float: left;
+}
+
+/* 飾りなし 画像幅180px 横3x縦1 */
+.hpb-parts-mpbox-01-3180 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 560px;
+    float: left;
+}
+
+/* 飾りなし 画像幅180px 横4x縦1 */
+.hpb-parts-mpbox-01-4180 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 745px;
+    float: left;
+}
+
+/* 飾りなし 画像幅240px 横2x縦1 */
+.hpb-parts-mpbox-01-2240 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 495px;
+    float: left;
+}
+
+/* 飾りなし 画像幅240px 横3x縦1 */
+.hpb-parts-mpbox-01-3240 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 740px;
+    float: left;
+}
+
+/* 飾りなし 画像幅240px 横4x縦1 */
+.hpb-parts-mpbox-01-4240 {
+    margin: 5px;
+    padding: 0px 0px 5px 0px;
+    border: none;
+    text-align: left;
+    width: 985px;
+    float: left;
+}
+
+/* 線囲み 画像幅60px 横2x縦1 */
+.hpb-parts-mpbox-02-2060 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 135px;
+    float: left;
+}
+
+/* 線囲み 画像幅60px 横3x縦1 */
+.hpb-parts-mpbox-02-3060 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 200px;
+    float: left;
+}
+
+/* 線囲み 画像幅60px 横4x縦1 */
+.hpb-parts-mpbox-02-4060 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 265px;
+    float: left;
+}
+
+/* 線囲み 画像幅120px 横2x縦1 */
+.hpb-parts-mpbox-02-2120 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 255px;
+    float: left;
+}
+
+/* 線囲み 画像幅120px 横3x縦1 */
+.hpb-parts-mpbox-02-3120 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 380px;
+    float: left;
+}
+
+/* 線囲み 画像幅120px 横4x縦1 */
+.hpb-parts-mpbox-02-4120 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 505px;
+    float: left;
+}
+
+/* 線囲み 画像幅180px 横2x縦1 */
+.hpb-parts-mpbox-02-2180 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 375px;
+    float: left;
+}
+
+/* 線囲み 画像幅180px 横3x縦1 */
+.hpb-parts-mpbox-02-3180 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 560px;
+    float: left;
+}
+
+/* 線囲み 画像幅180px 横4x縦1 */
+.hpb-parts-mpbox-02-4180 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 745px;
+    float: left;
+}
+
+/* 線囲み 画像幅240px 横2x縦1 */
+.hpb-parts-mpbox-02-2240 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 495px;
+    float: left;
+}
+
+/* 線囲み 画像幅240px 横3x縦1 */
+.hpb-parts-mpbox-02-3240 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 740px;
+    float: left;
+}
+
+/* 線囲み 画像幅240px 横4x縦1 */
+.hpb-parts-mpbox-02-4240 {
+    margin: 4px;
+    padding: 0px 0px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    width: 985px;
+    float: left;
+}
+
+/******************************
+ * バナーリスト
+ ******************************/
+
+/* 文字型 1 */
+.hpb-parts-blist-01 {
+    margin: 0px;
+    padding: 0px;
+}
+.hpb-parts-blist-01 ul {
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    list-style-type: none;
+    text-align: center;
+}
+.hpb-parts-blist-01 li {
+    padding: 0px 5px 5px 5px;
+}
+.hpb-parts-blist-01 li a {
+    display: block;
+    margin: 0px;
+    padding: 5px;
+    text-decoration: none;
+    border-style: none;
+}
+
+/* 文字型 2 */
+.hpb-parts-blist-02 {
+    margin: 0px;
+    padding: 0px;
+}
+.hpb-parts-blist-02 ul {
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    list-style-type: none;
+    text-align: center;
+}
+.hpb-parts-blist-02 li {
+    padding: 0px 5px 5px 5px;
+}
+.hpb-parts-blist-02 li a {
+    display: block;
+    margin: 0px;
+    padding: 5px;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/* 文字型 3 */
+.hpb-parts-blist-03 {
+    margin: 0px;
+    padding: 0px;
+}
+.hpb-parts-blist-03 ul {
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    list-style-type: none;
+    text-align: center;
+}
+.hpb-parts-blist-03 li {
+    padding: 0px 5px 5px 5px;
+}
+.hpb-parts-blist-03 li a {
+    display: block;
+    margin: 0px auto;
+    padding: 5px;
+    text-decoration: none;
+    border-left-width: 2em;
+    border-left-style: solid;
+    border-right-width: 2em;
+    border-right-style: solid;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+/* 画像付き 1 */
+.hpb-parts-blist-04 {
+    margin: 0px;
+    padding: 0px;
+}
+.hpb-parts-blist-04 ul {
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    list-style-type: none;
+    text-align: left;
+}
+.hpb-parts-blist-04 li {
+    padding: 0px 5px 5px 5px;
+}
+.hpb-parts-blist-04 li a {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    border-style: none;
+    height: 30px;
+}
+.hpb-parts-blist-04 li a img {
+    margin: 0px;
+    padding: 0px 5px 0px 0px;
+    border: none;
+    vertical-align: middle;
+}
+
+/* 画像付き 2 */
+.hpb-parts-blist-05 {
+    margin: 0px;
+    padding: 0px;
+}
+.hpb-parts-blist-05 ul {
+    margin: 0px;
+    padding: 5px 0px 0px 0px;
+    list-style-type: none;
+    text-align: left;
+}
+.hpb-parts-blist-05 li {
+    padding: 0px 5px 5px 5px;
+}
+.hpb-parts-blist-05 li a {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    height: 30px;
+}
+.hpb-parts-blist-05 li a img {
+    margin: 0px;
+    padding: 0px 5px 0px 0px;
+    border: none;
+    vertical-align: middle;
+}
+
+/******************************
+ * デフォルトスタイル設定
+ ******************************/
+
+.hpb-parts-cnt-style {
+    text-align: left;
+}
+
+.hpb-parts-hl-style {
+    border-color: #cccccc;
+}
+
+.hpb-parts-cbox-style {
+    text-align: left;
+}
+
+.hpb-parts-hr-style {
+    clear: both;
+}
+
+.hpb-parts-pbox-style {
+    border-color: #cccccc;
+}

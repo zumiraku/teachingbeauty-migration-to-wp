@@ -1,0 +1,162 @@
+@charset "utf-8";
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,figure, figcaption, footer, header, hgroup,menu, nav, output, ruby, section, summary,time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-style:normal;
+	font-weight: normal;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+/* eng - font */
+body{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 1rem;
+}
+
+/*touch-device link speed */
+a,area,button,[role="button"],input:not([type=range]),label,
+select,summary,textarea {
+	-ms-touch-action: manipulation;
+	  touch-action: manipulation;
+}
+
+/*image size max-width-100% */
+img{
+	max-width:100%;
+	height:auto;
+	width/***/:auto;
+	}
+ 
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section,details, menu{
+	display: block;
+}
+
+blockquote, q {
+	quotes: none;
+}
+ 
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+ 
+input, textarea{
+    margin: 0;
+    padding: 0;
+}
+ 
+ol, ul{
+    list-style:none;
+}
+
+
+
+table{
+    border-collapse: collapse; 
+    border-spacing:0;
+}
+ 
+caption, th{
+    text-align: left;
+}
+ 
+a:focus {
+    outline:none;
+}
+ 
+.clearfix:after {
+    content: "."; 
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+ 
+
+
+* html .clearfix {
+    height: 1px;
+    /*¥*//*/
+    height: auto;
+    overflow: hidden;
+    /**/
+}
+ 
+.both{
+    clear:both;
+}
+ 
+.inline_block {  
+    display: inline-block;  
+    *display: inline;  
+    *zoom: 1;  
+}
+
+table {
+    width:100%;
+}
+ 
+ /*
+よく使うCSS end -----
+時々使うCSS3 start ---
+ 
+テキストシャドウ {
+    text-shadow: 1px 1px 3px #000;
+}
+ 
+テキストシャドウ {
+    text-shadow: 1px 1px 3px #000;
+}
+ 
+ボックスシャドウ {
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+ 
+ボックスシャドウ内側 {
+    -moz-box-shadow: inset 1px 1px 3px #000;
+    -webkit-box-shadow: inset 1px 1px 3px #000;
+    box-shadow: inset 1px 1px 3px #000;
+}
+ 
+角丸 {
+    border-radius: 8px; 
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px; 
+}
+ 
+トランジション {
+    -webkit-transition: 1.5s;
+    -moz-transition: 1.5s;
+    -o-transition: 1.5s;
+    transition: 1.5s;
+}
+ 
+透明 {
+    filter: alpha(opacity=25);
+    -moz-opacity:0.25;
+    opacity:0.25;
+}
+ 
+背景のみ透明 {
+    background-color:rgba(255,255,255,0.2);
+}
+ 
+スマホ対応
+@media screen and (max-width: 480px){
+    
+}
+@media screen and (max-width: 320px){
+    
+}
+*/
+.cr-of{
+	overflow: hidden;
+	clear: both;
+}
+
