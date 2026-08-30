@@ -134,8 +134,11 @@
 }
 /* ロゴが余白ぶん詰まってもはみ出さないように収める（比率は維持） */
 .tb-enhanced #hpb-aside #shopinfo img { max-width: 100%; height: auto; }
-/* 電話番号は余白で折り返さないよう1行を維持（サイズ・書体は原本のまま） */
-.tb-enhanced #hpb-aside #shopinfo a[href^="tel:"] { white-space: nowrap; }
+/* 電話番号：1行を維持しつつ、余白内に収まるよう文字サイズを調整（はみ出し防止） */
+.tb-enhanced #hpb-aside #shopinfo a[href^="tel:"] {
+	white-space: nowrap;
+	font-size: 22px;
+}
 
 /* ---------- テキストリンクに伸びる下線 ---------- */
 .tb-enhanced #hpb-main a {
