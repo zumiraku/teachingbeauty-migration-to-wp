@@ -124,6 +124,54 @@
 }
 .tb-enhanced #shopinfo img { border-radius: 6px; }
 
+/* ---------- サイドバー 店舗情報を上品に整える（余白・行間・区切り） ---------- */
+/* 詰まって見える <br> 主体のテキストにゆとりある行間を与える */
+.tb-enhanced #hpb-aside #shopinfo,
+.tb-enhanced #hpb-aside #shopinfo font {
+	line-height: 1.85 !important;
+}
+.tb-enhanced #hpb-aside #shopinfo { padding-bottom: 16px; }
+/* ロゴ画像の下に余白 */
+.tb-enhanced #hpb-aside #shopinfo img { margin: 4px 0 12px; }
+/* 太字ラベル（月火金土・木曜日など）をブロック化し、上に余白を取って群として見せる */
+.tb-enhanced #hpb-aside #shopinfo b {
+	display: block;
+	margin: 13px 0 1px;
+	color: #91384b;
+	font-weight: bold;
+	letter-spacing: .04em;
+}
+/* 「診療時間」は主見出しとして金の下線で区切る */
+.tb-enhanced #hpb-aside #shopinfo font[size="4"] b {
+	margin: 6px 0 6px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ead78d;
+	color: #480a17;
+}
+/* 細かな注記（size1）は行間を詰めて控えめに */
+.tb-enhanced #hpb-aside #shopinfo font[size="1"] {
+	display: inline-block;
+	line-height: 1.5 !important;
+}
+/* 「→アクセス」を上品なピル型ボタンに */
+.tb-enhanced #hpb-aside #shopinfo a[href*="access"] {
+	display: inline-block;
+	margin: 4px 0 8px;
+	padding: 5px 15px;
+	border: 1px solid #d9b862;
+	border-radius: 20px;
+	background: linear-gradient(#fffdf6, #f4e8cd);
+	line-height: 1.2 !important;
+	transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.tb-enhanced #hpb-aside #shopinfo a[href*="access"]:hover {
+	background: linear-gradient(#ffffff, #efdcad);
+	box-shadow: 0 3px 10px rgba(72,10,23,.18);
+	transform: translateY(-1px);
+}
+/* 電話番号を少し読みやすく */
+.tb-enhanced #hpb-aside #shopinfo a[href^="tel:"] { letter-spacing: .01em; }
+
 /* ---------- テキストリンクに伸びる下線 ---------- */
 .tb-enhanced #hpb-main a {
 	background-image: linear-gradient(#a9770b, #a9770b);
