@@ -106,15 +106,18 @@ add_action(
 add_filter( 'wp_speculation_rules_configuration', '__return_null' );
 
 /**
- * Contact Form 7 の JS/CSS はフォームを含むページ（reserve/muryou）のみ読み込む。
- * 他ページに不要なスクリプトを出力せず、原本に近い軽量な出力にする。
+ * Contact Form 7 の JS/CSS・フォーム専用スタイルは、フォームを含むページのみ読み込む。
+ * 他ページには不要な出力をせず、原本に近い軽量な出力にする。
  */
 add_action(
 	'wp_enqueue_scripts',
 	function () {
 		if ( is_singular() ) {
-			$post = get_post( get_queried_object_id() );
-			if ( $post && false === strpos( (string) $post->post_content, '[contact-form-7' ) ) {
+			$post     = get_post( get_queried_object_id() );
+			$has_form = $post && false !== strpos( (string) $post->post_content, '[contact-form-7' );
+			if ( $has_form ) {
+				wp_enqueue_style( 'tb-form', get_template_directory_uri() . '/form.css', array( 'hpbuser' ), TB_VERSION );
+			} else {
 				wp_dequeue_script( 'contact-form-7' );
 				wp_dequeue_script( 'swv' );
 				wp_dequeue_style( 'contact-form-7' );
@@ -122,6 +125,21 @@ add_action(
 		}
 	},
 	100
+);
+
+/**
+ * CF7 の select 空白オプションの文言を日本語にする（include_blank）。
+ */
+add_filter(
+	'gettext',
+	function ( $translation, $text, $domain ) {
+		if ( 'contact-form-7' === $domain && '&#8212;Please choose an option&#8212;' === $text ) {
+			return '選択してください';
+		}
+		return $translation;
+	},
+	10,
+	3
 );
 
 /**

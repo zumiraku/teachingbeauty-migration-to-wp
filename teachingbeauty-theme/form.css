@@ -1,0 +1,150 @@
+/* =========================================================
+   Teaching Beauty — 予約フォーム（Contact Form 7）専用スタイル
+   元サイトの配色（クリーム #fdf8e1 / 金罫 #ead78d / 臙脂 #91384b・#480a17）に統一。
+   ========================================================= */
+
+.wpcf7 { max-width: 720px; margin: 0 auto; }
+
+/* 導入文 */
+.wpcf7 > form > p:first-child { margin: 0 0 1em; color: #480a17; font-size: 14px; }
+
+/* フォーム本体テーブル */
+table.tb-form {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin: 0 0 1.4em;
+	border: 1px solid #e6d9a8;
+	border-radius: 6px;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 1.7;
+	background: #fff;
+}
+table.tb-form td {
+	padding: 16px 16px;
+	border-bottom: 1px solid #efe4c2;
+	vertical-align: top;
+	text-align: left;
+	background: #fff;
+}
+table.tb-form tr:last-child td { border-bottom: 0; }
+table.tb-form td.td-item-title {
+	width: 34%;
+	background: #f7efd6;
+	color: #480a17;
+	font-weight: 700;
+	line-height: 1.6;
+	border-right: 1px solid #efe4c2;
+}
+table.tb-form td p { margin: 0; padding: 0; }
+
+/* 入力欄 */
+.tb-form input[type="text"],
+.tb-form input[type="email"],
+.tb-form input[type="tel"],
+.tb-form textarea,
+.tb-form select {
+	font-size: 14px;
+	padding: 9px 11px;
+	border: 1px solid #cdbf85;
+	border-radius: 5px;
+	background: #fffdf6;
+	color: #2a2320;
+	box-sizing: border-box;
+	max-width: 100%;
+	font-family: inherit;
+}
+.tb-form input:focus,
+.tb-form textarea:focus,
+.tb-form select:focus {
+	outline: none;
+	border-color: #91384b;
+	box-shadow: 0 0 0 2px rgba(145,56,75,.15);
+	background: #fff;
+}
+.tb-form input.wpcf7-text { width: 100%; max-width: 340px; }
+.tb-form input[name="sei"],
+.tb-form input[name="mei"],
+.tb-form input[name="kana-sei"],
+.tb-form input[name="kana-mei"] { width: 46%; max-width: 170px; }
+.tb-form input[name="post1"],
+.tb-form input[name="post2"] { width: 90px; }
+.tb-form input[name="address"] { width: 100%; max-width: 440px; margin-top: 8px; }
+.tb-form textarea { width: 100%; max-width: 480px; min-height: 110px; resize: vertical; }
+.tb-form select { min-width: 160px; }
+
+/* 姓：/ 名： のラベル */
+.tb-form td.td-item-comment,
+.tb-form td:not(.td-item-title) { color: #2a2320; }
+
+/* チェックボックス・ラジオを整然としたカラムに */
+.tb-form .wpcf7-checkbox,
+.tb-form .wpcf7-radio {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 10px 18px;
+	margin: 2px 0;
+}
+.tb-form .wpcf7-list-item { margin: 0; }
+.tb-form .wpcf7-list-item > label {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	cursor: pointer;
+	line-height: 1.45;
+	font-weight: normal;
+}
+.tb-form .wpcf7-list-item input[type="checkbox"],
+.tb-form .wpcf7-list-item input[type="radio"] {
+	margin: 2px 0 0;
+	flex: none;
+	width: 16px;
+	height: 16px;
+	accent-color: #91384b;
+}
+.tb-form .wpcf7-list-item-label { flex: 1; }
+
+/* 送信ボタン */
+.wpcf7 .wpcf7-submit {
+	display: inline-block;
+	background: #91384b;
+	color: #fff;
+	border: 0;
+	padding: 13px 52px;
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: .08em;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background .15s;
+}
+.wpcf7 .wpcf7-submit:hover { background: #480a17; }
+.wpcf7 form > p:last-of-type { text-align: center; margin-top: 1em; }
+.wpcf7-spinner { margin: 0 0 0 10px; }
+
+/* CF7 の応答メッセージ */
+.wpcf7-response-output {
+	border-radius: 5px !important;
+	padding: 12px 16px !important;
+	margin: 14px 0 0 !important;
+	font-size: 14px;
+}
+.wpcf7 .wpcf7-not-valid-tip { color: #c00; font-size: 12px; margin-top: 4px; }
+
+/* レスポンシブ：狭い画面ではラベルを上に */
+@media (max-width: 600px) {
+	table.tb-form td { display: block; width: 100%; }
+	table.tb-form td.td-item-title {
+		width: 100%;
+		border-right: 0;
+		border-bottom: 0;
+		padding: 12px 14px 6px;
+	}
+	.tb-form .wpcf7-checkbox,
+	.tb-form .wpcf7-radio { grid-template-columns: 1fr 1fr; }
+	.tb-form input[name="sei"],
+	.tb-form input[name="mei"],
+	.tb-form input[name="kana-sei"],
+	.tb-form input[name="kana-mei"] { max-width: 44%; }
+}
