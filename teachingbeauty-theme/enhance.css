@@ -4,14 +4,21 @@
    （元サイトの配色: クリーム #fdf8e1 / 金 #ead78d・#a9770b / 臙脂 #91384b・#480a17）
    ============================================================ */
 
-/* ---------- 本文の行間を少しゆったりと（読みやすさ向上） ---------- */
+/* ---------- 本文をゆったり・上品に（行間＋字間を広げて読みやすく） ---------- */
 .tb-enhanced #hpb-main,
 .tb-enhanced #hpb-main p,
 .tb-enhanced #hpb-main li,
 .tb-enhanced #hpb-main dt,
 .tb-enhanced #hpb-main dd,
 .tb-enhanced #hpb-main td,
-.tb-enhanced #hpb-main font { line-height: 1.75; }
+.tb-enhanced #hpb-main span,
+.tb-enhanced #hpb-main font {
+	line-height: 2.1 !important;
+	letter-spacing: .045em;
+}
+/* 段落・ブロックの上下に余白を足してさらに読みやすく */
+.tb-enhanced #hpb-main p { margin-bottom: 1.4em; }
+.tb-enhanced #hpb-main li { padding-top: 7px; padding-bottom: 7px; }
 
 /* ---------- なめらかな遷移 ---------- */
 .tb-enhanced a,
