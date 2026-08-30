@@ -26,6 +26,24 @@ add_action(
 );
 
 /**
+ * 自作の .html パーマリンクに対して WordPress の正規化リダイレクト
+ * （redirect_canonical）が誤作動し、空応答を返すのを防ぐ。
+ * 固定ページ・投稿では canonical リダイレクトを無効化し、
+ * 重複対策は wp_head の canonical タグに任せる。
+ */
+add_filter(
+	'redirect_canonical',
+	function ( $redirect_url ) {
+		if ( is_singular() || is_page() || is_front_page() ) {
+			return false;
+		}
+		return $redirect_url;
+	},
+	10,
+	1
+);
+
+/**
  * 現行サイトの /index.html はトップ（/）へ 301。
  * 旧サイトの index.html への内部リンク・被リンクを維持しつつ、
  * / と /index.html の重複（インデックス重複の主因）を正規化する。
