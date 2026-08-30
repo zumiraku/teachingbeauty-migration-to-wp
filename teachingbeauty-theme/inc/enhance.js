@@ -1,6 +1,7 @@
 /**
  * Teaching Beauty — 装飾・アニメーション強化
- * レイアウトは変えず、スクロール演出と「先頭へ戻る」ボタンを付与。
+ * 本文を段落・要素ごとの単位に分け、画面に入った時点でフェードインさせる。
+ * 初期表示（ファーストビュー）の文章は読み込み時点で自動的にフェードイン。
  */
 ( function () {
 	'use strict';
@@ -10,29 +11,97 @@
 		else { document.addEventListener( 'DOMContentLoaded', fn ); }
 	}
 
+	/* 本文コンテナの子ノードを、段落・ブロック単位のフェードイン対象に分割する。
+	   ・見出し/画像/表/div 等はそれぞれ独立した対象に
+	   ・地の文は連続する <br><br>（空行）で段落に分割して対象に          */
+	function buildChunks( root ) {
+		var out = [];
+		var nodes = Array.prototype.slice.call( root.childNodes );
+		var buf = [];
+
+		function isBlock( n ) {
+			return n.nodeType === 1 &&
+				/^(H1|H2|H3|H4|H5|HR|TABLE|SECTION|IMG|UL|OL|DL|DIV|IFRAME)$/.test( n.tagName );
+		}
+		function hasText( arr ) {
+			return arr.some( function ( n ) {
+				return ( n.nodeType === 3 && n.textContent.trim() ) ||
+				       ( n.nodeType === 1 && n.tagName !== 'BR' );
+			} );
+		}
+		function wrap( arr ) {
+			if ( ! hasText( arr ) ) { return; }
+			var w = document.createElement( 'div' );
+			w.className = 'tb-rv';
+			root.insertBefore( w, arr[0] );
+			arr.forEach( function ( n ) { w.appendChild( n ); } );
+			out.push( w );
+		}
+		function flush() {
+			if ( ! buf.length ) { return; }
+			// 連続する <br> が2つ以上続く箇所で段落に分割
+			var para = [], brRun = 0;
+			buf.forEach( function ( n ) {
+				var isBr = ( n.nodeType === 1 && n.tagName === 'BR' );
+				para.push( n );
+				if ( isBr ) {
+					brRun++;
+					if ( brRun >= 2 ) { wrap( para ); para = []; brRun = 0; }
+				} else if ( ! ( n.nodeType === 3 && ! n.textContent.trim() ) ) {
+					brRun = 0;
+				}
+			} );
+			wrap( para );
+			buf = [];
+		}
+
+		nodes.forEach( function ( n ) {
+			if ( isBlock( n ) ) {
+				flush();
+				n.classList.add( 'tb-rv' );
+				out.push( n );
+			} else {
+				buf.push( n );
+			}
+		} );
+		flush();
+		return out;
+	}
+
 	ready( function () {
 		var reduce = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 		document.body.classList.add( 'tb-enhanced' );
 
-		/* --- スクロールで浮かび上がる演出 ---
-		   本文はブロック単位でまとめてフェードイン（文章・画像を一体で。
-		   一部だけ animate される不自然さを避ける）。 */
-		var selector = '#hpb-title, #hpb-main, #hpb-aside #banner, #hpb-aside #shopinfo';
-		var targets = Array.prototype.slice.call( document.querySelectorAll( selector ) );
+		try {
+			var targets = [];
+			var main = document.getElementById( 'hpb-main' );
+			if ( main ) {
+				var root = document.getElementById( 'toppage' ) || main;
+				targets = buildChunks( root );
+			}
+			// タイトル画像・サイドバーの各ブロックも対象に
+			Array.prototype.forEach.call(
+				document.querySelectorAll( '#hpb-title, #hpb-aside #banner li, #hpb-aside #shopinfo' ),
+				function ( el ) { el.classList.add( 'tb-rv' ); targets.push( el ); }
+			);
 
-		if ( ! reduce && 'IntersectionObserver' in window ) {
-			var io = new IntersectionObserver( function ( entries ) {
-				entries.forEach( function ( entry ) {
-					if ( entry.isIntersecting ) {
-						entry.target.classList.add( 'tb-in' );
-						io.unobserve( entry.target );
-					}
-				} );
-			}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' } );
-
-			targets.forEach( function ( el ) {
-				el.classList.add( 'tb-reveal' );
-				io.observe( el );
+			if ( ! reduce && 'IntersectionObserver' in window ) {
+				var io = new IntersectionObserver( function ( entries ) {
+					entries.forEach( function ( entry ) {
+						if ( entry.isIntersecting ) {
+							entry.target.classList.add( 'tb-in' );
+							io.unobserve( entry.target );
+						}
+					} );
+				}, { threshold: 0, rootMargin: '0px 0px -6% 0px' } );
+				targets.forEach( function ( el ) { io.observe( el ); } );
+			} else {
+				targets.forEach( function ( el ) { el.classList.add( 'tb-in' ); } );
+			}
+		} catch ( e ) {
+			// 何らかの理由で失敗しても、本文が隠れたままにならないよう全て表示する。
+			Array.prototype.forEach.call( document.querySelectorAll( '.tb-rv' ), function ( el ) {
+				el.classList.add( 'tb-in' );
 			} );
 		}
 
@@ -43,11 +112,9 @@
 		btn.setAttribute( 'aria-label', 'ページの先頭へ戻る' );
 		btn.innerHTML = '▲';
 		document.body.appendChild( btn );
-
 		btn.addEventListener( 'click', function () {
 			window.scrollTo( { top: 0, behavior: reduce ? 'auto' : 'smooth' } );
 		} );
-
 		var ticking = false;
 		window.addEventListener( 'scroll', function () {
 			if ( ticking ) { return; }
