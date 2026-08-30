@@ -38,12 +38,21 @@ add_action(
 );
 
 /**
- * <title> は元の値をそのまま（サイト名サフィックスを付けない）。
+ * <title> は元ページの <title> をそのまま出力する。
+ * post_title（生値）を使うことで、WordPress の自動整形（ハイフン→ダッシュ等）や
+ * サイト名サフィックス、フロントページのサイト名置換を回避し、原本と完全一致させる。
  */
 add_filter(
-	'document_title_parts',
-	function ( $parts ) {
-		return array( 'title' => isset( $parts['title'] ) ? $parts['title'] : get_the_title() );
+	'pre_get_document_title',
+	function () {
+		$id = get_queried_object_id();
+		if ( $id ) {
+			$post = get_post( $id );
+			if ( $post && '' !== (string) $post->post_title ) {
+				return $post->post_title; // 生値（フィルタ未適用）
+			}
+		}
+		return get_bloginfo( 'name' );
 	}
 );
 
@@ -95,6 +104,25 @@ add_action(
 	}
 );
 add_filter( 'wp_speculation_rules_configuration', '__return_null' );
+
+/**
+ * Contact Form 7 の JS/CSS はフォームを含むページ（reserve/muryou）のみ読み込む。
+ * 他ページに不要なスクリプトを出力せず、原本に近い軽量な出力にする。
+ */
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		if ( is_singular() ) {
+			$post = get_post( get_queried_object_id() );
+			if ( $post && false === strpos( (string) $post->post_content, '[contact-form-7' ) ) {
+				wp_dequeue_script( 'contact-form-7' );
+				wp_dequeue_script( 'swv' );
+				wp_dequeue_style( 'contact-form-7' );
+			}
+		}
+	},
+	100
+);
 
 /**
  * 原文HTMLをそのまま出力（ショートコードのみ処理）。
