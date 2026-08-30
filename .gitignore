@@ -1,6 +1,10 @@
 # 大容量の重複バックアップ（www/ ミラーと内容が重複するため除外）
 teachingbeauty-backup_2026-08-29.zip
 
+# サーバー完全バックアップ（84MB・FTP取得）: マニフェストと.htaccessのみリポジトリに保持
+teachingbeauty-server-backup/
+teachingbeauty-server-backup_2026-08-29.zip
+
 # OS / エディタ
 Thumbs.db
 Desktop.ini

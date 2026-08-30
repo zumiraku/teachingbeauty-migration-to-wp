@@ -1,0 +1,21 @@
+RewriteEngine On
+
+# http -> https ??
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# main.jp -> teachingbeauty.jp (www??)
+RewriteCond %{HTTP_HOST} ^(www\.)?teachingbeauty\.main\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+# ssl-lolipop -> teachingbeauty.jp (www??)
+RewriteCond %{HTTP_HOST} ^main-teachingbeauty\.ssl-lolipop\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+# www?? -> www??
+RewriteCond %{HTTP_HOST} ^teachingbeauty\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+DirectoryIndex index.html index.php
+
+Redirect 301 /funin_aen.html https://www.teachingbeauty.jp/funin.html
