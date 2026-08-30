@@ -64,6 +64,23 @@
 }
 .tb-enhanced .tb-rv.tb-in { opacity: 1; transform: none; }
 
+/* ---------- 見出し（ゴールドバー）のテキストを縦中央に ---------- */
+.tb-enhanced #hpb-main h3:not(.hpb-c-index),
+.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index) {
+	line-height: 33px !important;   /* バー画像 indexBg_5H.png の高さに合わせて縦中央 */
+	min-height: 33px;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	display: flex;
+	align-items: center;
+}
+.tb-enhanced #hpb-main h3:not(.hpb-c-index) font,
+.tb-enhanced #hpb-main h3:not(.hpb-c-index) span,
+.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index) font,
+.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index) span {
+	line-height: 1.3 !important;
+}
+
 /* ---------- 見出しに金のアンダーライン ---------- */
 .tb-enhanced #hpb-main h3,
 .tb-enhanced .hpb-layoutset-02 #hpb-wrapper h3 { position: relative; }
