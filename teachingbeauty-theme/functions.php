@@ -34,6 +34,10 @@ add_action(
 		wp_enqueue_style( 'hpbcontainer', $root . 'container_5H_2c_top.css', array( 'hpbparts' ), null );
 		wp_enqueue_style( 'hpbmain', $root . 'main_5H_2c.css', array( 'hpbcontainer' ), null );
 		wp_enqueue_style( 'hpbuser', $root . 'user.css', array( 'hpbmain' ), null );
+
+		// 装飾・アニメーション強化レイヤー（レイアウトは不変）。
+		wp_enqueue_style( 'tb-enhance', get_template_directory_uri() . '/enhance.css', array( 'hpbuser' ), TB_VERSION );
+		wp_enqueue_script( 'tb-enhance', get_template_directory_uri() . '/inc/enhance.js', array(), TB_VERSION, true );
 	}
 );
 

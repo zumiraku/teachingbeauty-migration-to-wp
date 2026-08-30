@@ -1,0 +1,142 @@
+/* ============================================================
+   Teaching Beauty — 装飾・アニメーション強化レイヤー
+   レイアウトは変えず、上品な動きと金の装飾で高級感を付与する。
+   （元サイトの配色: クリーム #fdf8e1 / 金 #ead78d・#a9770b / 臙脂 #91384b・#480a17）
+   ============================================================ */
+
+/* ---------- なめらかな遷移 ---------- */
+.tb-enhanced a,
+.tb-enhanced #hpb-main img,
+.tb-enhanced #banner li a,
+.tb-enhanced #hpb-nav li a,
+.tb-enhanced #hpb-footerExtra1 li a {
+	transition: transform .35s cubic-bezier(.2,.7,.3,1),
+	            box-shadow .35s ease, filter .35s ease,
+	            color .25s ease, background-size .4s ease;
+}
+
+/* ---------- コンテナに奥行きと金の縁 ---------- */
+.tb-enhanced #hpb-container {
+	box-shadow: 0 0 55px rgba(72,10,23,.12), 0 0 0 1px rgba(234,215,141,.55);
+}
+
+/* ---------- 上部タイトル画像に金のきらめきを走らせる ---------- */
+.tb-enhanced #hpb-title { position: relative; overflow: hidden; }
+.tb-enhanced #hpb-title::after {
+	content: ""; position: absolute; top: 0; left: -60%; width: 42%; height: 100%;
+	background: linear-gradient(105deg, transparent, rgba(255,255,255,.38), transparent);
+	transform: skewX(-18deg); pointer-events: none;
+	animation: tbSheen 7s ease-in-out 1.6s infinite;
+}
+@keyframes tbSheen { 0% { left: -60%; } 22% { left: 135%; } 100% { left: 135%; } }
+
+/* ---------- 本文の画像を上品に額装 ---------- */
+.tb-enhanced #hpb-main img {
+	border-radius: 8px;
+	box-shadow: 0 5px 16px rgba(72,10,23,.13);
+}
+.tb-enhanced #hpb-main img:hover {
+	transform: translateY(-4px) scale(1.015);
+	box-shadow: 0 12px 30px rgba(72,10,23,.24);
+}
+/* 小さなアイコン類は控えめに */
+.tb-enhanced #hpb-main img[width="57"],
+.tb-enhanced #hpb-main img[height="51"] { border-radius: 4px; box-shadow: 0 2px 6px rgba(72,10,23,.12); }
+
+/* ---------- スクロールで浮かび上がる演出 ---------- */
+.tb-enhanced .tb-reveal {
+	opacity: 0; transform: translateY(24px);
+	transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.3,1);
+	will-change: opacity, transform;
+}
+.tb-enhanced .tb-reveal.tb-in { opacity: 1; transform: none; }
+
+/* ---------- 見出しに金のアンダーライン ---------- */
+.tb-enhanced #hpb-main h3,
+.tb-enhanced .hpb-layoutset-02 #hpb-wrapper h3 { position: relative; }
+.tb-enhanced #hpb-main h3::after {
+	content: ""; position: absolute; left: 12px; bottom: -3px; height: 2px; width: 0;
+	background: linear-gradient(90deg, #a9770b, #ead78d 70%, transparent);
+	border-radius: 2px; transition: width .9s cubic-bezier(.2,.7,.3,1) .1s;
+}
+.tb-enhanced #hpb-main h3.tb-in::after,
+.tb-enhanced #hpb-main h3:hover::after { width: 96px; }
+
+/* 区切り線を金のグラデーションに */
+.tb-enhanced #hpb-main hr {
+	border: 0 !important; height: 1px !important;
+	background: linear-gradient(90deg, transparent, #ead78d, transparent) !important;
+}
+
+/* ---------- グローバルナビの上品なホバー ---------- */
+.tb-enhanced #hpb-nav li a:hover {
+	filter: brightness(1.12) saturate(1.08);
+	box-shadow: inset 0 -3px 0 rgba(234,215,141,.85);
+}
+
+/* ---------- サイドバナーのホバー（浮き上がり＋シャイン） ---------- */
+.tb-enhanced #banner li a { position: relative; overflow: hidden; }
+.tb-enhanced #banner li a::before {
+	content: ""; position: absolute; top: 0; left: -130%; width: 55%; height: 100%;
+	background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+	transform: skewX(-20deg); transition: left .6s ease; pointer-events: none;
+}
+.tb-enhanced #banner li a:hover {
+	transform: translateX(4px);
+	box-shadow: -5px 6px 16px rgba(72,10,23,.2);
+}
+.tb-enhanced #banner li a:hover::before { left: 140%; }
+
+/* 店舗情報カードに柔らかな影 */
+.tb-enhanced #shopinfo {
+	box-shadow: 0 4px 18px rgba(72,10,23,.1);
+	border-radius: 8px;
+}
+.tb-enhanced #shopinfo img { border-radius: 6px; }
+
+/* ---------- テキストリンクに伸びる下線 ---------- */
+.tb-enhanced #hpb-main a {
+	background-image: linear-gradient(#a9770b, #a9770b);
+	background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+}
+.tb-enhanced #hpb-main a:hover { background-size: 100% 1px; }
+.tb-enhanced #hpb-main a:has(img) { background-image: none; }
+
+/* 電話番号リンクを少し華やかに */
+.tb-enhanced #hpb-headerExtra1 p.tel a,
+.tb-enhanced #shopinfo .tel a,
+.tb-enhanced a[href^="tel:"] { text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+
+/* フッターのサブナビ */
+.tb-enhanced #hpb-footerExtra1 li a:hover { transform: translateY(-2px); }
+
+/* ---------- ページ先頭へ戻る フローティングボタン ---------- */
+.tb-totop {
+	position: fixed; right: 22px; bottom: 22px; width: 50px; height: 50px;
+	border: 0; border-radius: 50%; cursor: pointer; z-index: 9999;
+	background: linear-gradient(135deg, #c19a4a, #8a6209);
+	color: #fff; font-size: 15px; line-height: 50px; text-align: center;
+	box-shadow: 0 6px 20px rgba(72,10,23,.32);
+	opacity: 0; visibility: hidden; transform: translateY(14px) scale(.85);
+	transition: opacity .35s ease, transform .35s cubic-bezier(.2,.7,.3,1), background .3s ease, visibility .35s;
+}
+.tb-totop.show { opacity: 1; visibility: visible; transform: none; }
+.tb-totop:hover { background: linear-gradient(135deg, #a5455c, #480a17); transform: translateY(-4px); box-shadow: 0 10px 26px rgba(72,10,23,.4); }
+.tb-totop:active { transform: translateY(-1px); }
+
+/* ---------- フォーム送信ボタンにきらめき ---------- */
+.tb-enhanced .wpcf7 .wpcf7-submit { position: relative; overflow: hidden; }
+.tb-enhanced .wpcf7 .wpcf7-submit::after {
+	content: ""; position: absolute; top: 0; left: -120%; width: 45%; height: 100%;
+	background: linear-gradient(100deg, transparent, rgba(255,255,255,.4), transparent);
+	transform: skewX(-20deg); transition: left .6s ease;
+}
+.tb-enhanced .wpcf7 .wpcf7-submit:hover::after { left: 130%; }
+
+/* ---------- 動きを減らす設定を尊重 ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.tb-enhanced *,
+	.tb-enhanced #hpb-title::after,
+	.tb-enhanced #banner li a::before { animation: none !important; transition: none !important; }
+	.tb-enhanced .tb-reveal { opacity: 1 !important; transform: none !important; }
+}
