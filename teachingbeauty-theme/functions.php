@@ -1,9 +1,10 @@
 <?php
 /**
- * Teaching Beauty theme functions
+ * Teaching Beauty theme — 原本HTML完全再現版
  *
- * 現行デザインを再現する専用テーマの中核。
- * テーマサポート・メニュー・ウィジェット・アセット読み込みを定義する。
+ * 各ページは元サイトの <body> 内HTMLをそのまま出力し、
+ * レイアウトは元の4つのCSS（hpbparts / container_5H_2c_top / main_5H_2c / user）
+ * をそのまま読み込むことで、見た目を完全に一致させる。
  *
  * @package Teaching_Beauty
  */
@@ -11,124 +12,93 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+define( 'TB_VERSION', '2.0.0' );
 
-if ( ! defined( 'TB_VERSION' ) ) {
-	define( 'TB_VERSION', '1.0.0' );
-}
-
-/**
- * テーマの基本サポート
- */
-function tb_setup() {
-	load_theme_textdomain( 'teachingbeauty', get_template_directory() . '/languages' );
-
-	add_theme_support( 'automatic-feed-links' );
-	add_theme_support( 'title-tag' );
-	add_theme_support( 'post-thumbnails' );
-	add_theme_support( 'html5', array( 'search-form', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ) );
-	add_theme_support( 'responsive-embeds' );
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'      => 60,
-			'width'       => 320,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
-
-	register_nav_menus(
-		array(
-			'primary' => __( 'グローバルナビ', 'teachingbeauty' ),
-			'footer'  => __( 'フッターナビ', 'teachingbeauty' ),
-		)
-	);
-
-	// お知らせ・患者様の声を院内で更新できるよう、コンテンツ用の画像サイズ。
-	add_image_size( 'tb-news-thumb', 120, 120, true );
-}
-add_action( 'after_setup_theme', 'tb_setup' );
-
-/**
- * ウィジェットエリア（サイドバー）
- */
-function tb_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => __( 'サイドバー（バナー・店舗情報）', 'teachingbeauty' ),
-			'id'            => 'sidebar-main',
-			'description'   => __( '各ページ右側に表示されます。', 'teachingbeauty' ),
-			'before_widget' => '<section id="%1$s" class="tb-widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h3 class="tb-widget-title">',
-			'after_title'   => '</h3>',
-		)
-	);
-}
-add_action( 'widgets_init', 'tb_widgets_init' );
-
-/**
- * スタイル・スクリプトの読み込み
- */
-function tb_assets() {
-	wp_enqueue_style( 'teachingbeauty', get_stylesheet_uri(), array(), TB_VERSION );
-
-	// Google Fonts（明朝＋ゴシック）。現行のヒラギノ系を優先し、無い環境の代替として。
-	wp_enqueue_style(
-		'tb-fonts',
-		'https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap',
-		array(),
-		null
-	);
-
-	wp_enqueue_script( 'tb-nav', get_template_directory_uri() . '/inc/nav.js', array(), TB_VERSION, true );
-}
-add_action( 'wp_enqueue_scripts', 'tb_assets' );
-
-/**
- * パンくずリスト（構造化データは Stage 4 で JSON-LD 実装）
- */
-function tb_breadcrumb() {
-	if ( is_front_page() ) {
-		return;
+add_action(
+	'after_setup_theme',
+	function () {
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'automatic-feed-links' );
 	}
-	echo '<nav class="tb-breadcrumb" aria-label="' . esc_attr__( 'パンくずリスト', 'teachingbeauty' ) . '"><ol>';
-	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'ホーム', 'teachingbeauty' ) . '</a></li>';
+);
 
-	if ( is_page() ) {
-		$ancestors = array_reverse( get_post_ancestors( get_the_ID() ) );
-		foreach ( $ancestors as $ancestor ) {
-			echo '<li><a href="' . esc_url( get_permalink( $ancestor ) ) . '">' . esc_html( get_the_title( $ancestor ) ) . '</a></li>';
+/**
+ * 元サイトの4つのCSSをそのままの順序で読み込む（レイアウト完全再現）。
+ * CSS・画像はサイトルート（/wp/ 内）の元の場所に配置されている。
+ */
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		$root = home_url( '/' );
+		wp_enqueue_style( 'hpbparts', $root . 'hpbparts.css', array(), null );
+		wp_enqueue_style( 'hpbcontainer', $root . 'container_5H_2c_top.css', array( 'hpbparts' ), null );
+		wp_enqueue_style( 'hpbmain', $root . 'main_5H_2c.css', array( 'hpbcontainer' ), null );
+		wp_enqueue_style( 'hpbuser', $root . 'user.css', array( 'hpbmain' ), null );
+	}
+);
+
+/**
+ * <title> は元の値をそのまま（サイト名サフィックスを付けない）。
+ */
+add_filter(
+	'document_title_parts',
+	function ( $parts ) {
+		return array( 'title' => isset( $parts['title'] ) ? $parts['title'] : get_the_title() );
+	}
+);
+
+/**
+ * 元の meta description / keywords を出力。
+ */
+add_action(
+	'wp_head',
+	function () {
+		if ( is_singular() ) {
+			$d = get_post_meta( get_the_ID(), '_tb_description', true );
+			$k = get_post_meta( get_the_ID(), '_tb_keywords', true );
+			if ( '' !== (string) $d ) {
+				echo '<meta name="description" content="' . esc_attr( $d ) . '">' . "\n";
+			}
+			if ( '' !== (string) $k ) {
+				echo '<meta name="keywords" content="' . esc_attr( $k ) . '">' . "\n";
+			}
 		}
-		echo '<li aria-current="page">' . esc_html( get_the_title() ) . '</li>';
-	} elseif ( is_singular( 'post' ) ) {
-		echo '<li aria-current="page">' . esc_html( get_the_title() ) . '</li>';
-	} elseif ( is_archive() ) {
-		echo '<li aria-current="page">' . esc_html( wp_strip_all_tags( get_the_archive_title() ) ) . '</li>';
-	} elseif ( is_search() ) {
-		echo '<li aria-current="page">' . esc_html__( '検索結果', 'teachingbeauty' ) . '</li>';
+	},
+	1
+);
+
+/**
+ * 本文の自動整形を無効化（原文HTMLをそのまま保つ）。
+ * 出力はテンプレート側で do_shortcode( get_the_content() ) を用いる。
+ */
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_content', 'wptexturize' );
+remove_filter( 'the_content', 'shortcode_unautop' );
+
+/**
+ * 元サイトに無い WordPress の付加出力を抑制し、出力を原本に近づける。
+ */
+add_action(
+	'init',
+	function () {
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_action( 'wp_head', 'wp_generator' );
+		remove_action( 'wp_head', 'rsd_link' );
+		remove_action( 'wp_head', 'wlwmanifest_link' );
+		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+		remove_action( 'wp_head', 'feed_links_extra', 3 );
+		remove_action( 'wp_head', 'feed_links', 2 );
+		remove_action( 'wp_head', 'wp_resource_hints', 2 );
 	}
-	echo '</ol></nav>';
-}
+);
+add_filter( 'wp_speculation_rules_configuration', '__return_null' );
 
 /**
- * グローバルナビが未設定でも壊れないフォールバック
+ * 原文HTMLをそのまま出力（ショートコードのみ処理）。
  */
-function tb_primary_menu_fallback() {
-	echo '<ul class="menu">';
-	echo '<li class="current-menu-item"><a href="' . esc_url( home_url( '/' ) ) . '"><span class="en">top</span>トップページ</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/concept.html' ) ) . '"><span class="en">concept</span>当院について</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/menu.html' ) ) . '"><span class="en">menu</span>治療内容・料金</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/news.html' ) ) . '"><span class="en">news</span>キャンペーン・割引</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/muryou.html' ) ) . '"><span class="en">free</span>無料相談</a></li>';
-	echo '<li><a href="' . esc_url( home_url( '/reserve.html' ) ) . '"><span class="en">reserve</span>ご予約</a></li>';
-	echo '</ul>';
+function tb_render_raw() {
+	echo do_shortcode( get_the_content() );
 }
-
-/**
- * 抜粋の省略記号を日本語向けに
- */
-function tb_excerpt_more() {
-	return '…';
-}
-add_filter( 'excerpt_more', 'tb_excerpt_more' );
