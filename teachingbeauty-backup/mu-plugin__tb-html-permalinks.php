@@ -53,12 +53,14 @@ add_action(
 	function () {
 		$req = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
 		$path = rawurldecode( (string) wp_parse_url( $req, PHP_URL_PATH ) );
-		if ( '/index.html' === $path ) {
+		// WordPress のホームパス（本番=空文字, 検証環境=/wp）を基準に判定。
+		$home = rtrim( (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH ), '/' );
+		if ( $path === $home . '/index.html' ) {
 			wp_safe_redirect( home_url( '/' ), 301 );
 			exit;
 		}
 		// 旧サイトの不正URL（空白入り）funin aen.html を funin.html へ 301。
-		if ( '/funin aen.html' === $path ) {
+		if ( $path === $home . '/funin aen.html' ) {
 			wp_safe_redirect( home_url( '/funin.html' ), 301 );
 			exit;
 		}
