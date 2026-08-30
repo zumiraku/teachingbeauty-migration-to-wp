@@ -14,9 +14,10 @@
 		var reduce = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 		document.body.classList.add( 'tb-enhanced' );
 
-		/* --- スクロールで浮かび上がる演出 --- */
-		var selector = '#hpb-main img, #hpb-main h2, #hpb-main h3, #hpb-main h4, ' +
-			'#hpb-main table, #hpb-main section, #toppage-news, .news-comment, #hpb-title';
+		/* --- スクロールで浮かび上がる演出 ---
+		   本文はブロック単位でまとめてフェードイン（文章・画像を一体で。
+		   一部だけ animate される不自然さを避ける）。 */
+		var selector = '#hpb-title, #hpb-main, #hpb-aside #banner, #hpb-aside #shopinfo';
 		var targets = Array.prototype.slice.call( document.querySelectorAll( selector ) );
 
 		if ( ! reduce && 'IntersectionObserver' in window ) {

@@ -4,7 +4,7 @@
    （元サイトの配色: クリーム #fdf8e1 / 金 #ead78d・#a9770b / 臙脂 #91384b・#480a17）
    ============================================================ */
 
-/* ---------- 本文をゆったり・上品に（行間＋字間を広げて読みやすく） ---------- */
+/* ---------- 本文の行間を程よく（字間は原本どおり＝標準） ---------- */
 .tb-enhanced #hpb-main,
 .tb-enhanced #hpb-main p,
 .tb-enhanced #hpb-main li,
@@ -13,12 +13,9 @@
 .tb-enhanced #hpb-main td,
 .tb-enhanced #hpb-main span,
 .tb-enhanced #hpb-main font {
-	line-height: 2.1 !important;
-	letter-spacing: .045em;
+	line-height: 1.9 !important;
+	letter-spacing: normal !important;
 }
-/* 段落・ブロックの上下に余白を足してさらに読みやすく */
-.tb-enhanced #hpb-main p { margin-bottom: 1.4em; }
-.tb-enhanced #hpb-main li { padding-top: 7px; padding-bottom: 7px; }
 
 /* ---------- なめらかな遷移 ---------- */
 .tb-enhanced a,
@@ -75,7 +72,7 @@
 	background: linear-gradient(90deg, #a9770b, #ead78d 70%, transparent);
 	border-radius: 2px; transition: width .9s cubic-bezier(.2,.7,.3,1) .1s;
 }
-.tb-enhanced #hpb-main h3.tb-in::after,
+.tb-enhanced #hpb-main.tb-in h3::after,
 .tb-enhanced #hpb-main h3:hover::after { width: 96px; }
 
 /* 区切り線を金のグラデーションに */
