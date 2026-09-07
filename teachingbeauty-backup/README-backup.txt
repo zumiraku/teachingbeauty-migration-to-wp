@@ -1,14 +1,20 @@
-﻿Teaching Beauty (teachingbeauty.jp) - Public site backup
-Captured: 2026-08-29 14:40
-Method  : HTTP mirror from https://www.teachingbeauty.jp/ (crawl of all sitemap + linked assets)
-Files   : 344
-Size    : 21.86 MB
-NOTE    : This is a MIRROR of publicly reachable files only. It does NOT include
-          server-side files such as .htaccess, unlinked files, or the raw directory
-          layout of the Lolipop account. A full FTP backup is still required before
-          any overwrite of the server. Do NOT overwrite the live server yet.
-Pre-existing broken references found (not backup errors):
-  - 3okushi.html         (typo link; real file is kokushi.html)
-  - reset.css (root)     (referenced by index.html but 404; only /sp/reset.css exists)
-  - flash_temporary[N].png under /sp/st_image/ (referenced but 404)
-  - msohtmlclip clipboard leftover reference in a page
+Teaching Beauty（teachingbeauty.jp）公開サイト バックアップ
+
+取得日時 : 2026-08-29 14:40
+取得方法 : https://www.teachingbeauty.jp/ からのHTTPミラー
+           （サイトマップ全件＋リンクされている素材をクロール）
+ファイル数 : 344
+サイズ     : 21.86 MB
+
+注意 : これは公開状態で到達できるファイルのみのミラーである。.htaccess などの
+       サーバー側ファイル、どこからもリンクされていないファイル、ロリポップ
+       アカウントのディレクトリ構成そのものは含まれない。
+       サーバーを上書きする前に、FTPによる完全バックアップが別途必要。
+       現時点で本番サーバーを上書きしないこと。
+
+取得前から存在していた壊れた参照（バックアップの不具合ではない）:
+  - 3okushi.html          リンクの打ち間違い。実ファイルは kokushi.html
+  - reset.css（ルート）    index.html から参照されているが404。
+                          存在するのは /sp/reset.css のみ
+  - flash_temporary[N].png /sp/st_image/ 配下。参照されているが404
+  - msohtmlclip           ページ内に残ったクリップボード由来の参照
