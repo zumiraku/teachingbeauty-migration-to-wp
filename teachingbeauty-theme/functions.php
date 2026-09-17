@@ -105,7 +105,28 @@ add_action(
 		remove_action( 'wp_head', 'feed_links_extra', 3 );
 		remove_action( 'wp_head', 'feed_links', 2 );
 		remove_action( 'wp_head', 'wp_resource_hints', 2 );
+
+		// WordPress 既定のフロント用CSS（ブロック・グローバルスタイル等）は元サイトに無く、
+		// 原本HTMLの表示を変えることがある（例: html :where([style^="border-bottom-width"]) が
+		// 壊れた style 属性に反応して下線を描く、img[class*="wp-image-"] に height:auto を当てる）。
+		// 原本の4CSSだけで描画するため、読み込まない。
+		remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+		remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+		remove_action( 'wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles' );
+		remove_action( 'wp_enqueue_scripts', 'wp_enqueue_stored_styles' );
+		remove_action( 'wp_footer', 'wp_enqueue_stored_styles', 1 );
 	}
+);
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		wp_dequeue_style( 'wp-block-library' );
+		wp_dequeue_style( 'wp-block-library-theme' );
+		wp_dequeue_style( 'classic-theme-styles' );
+		wp_dequeue_style( 'global-styles' );
+		wp_dequeue_style( 'wp-img-auto-sizes-contain' );
+	},
+	100
 );
 add_filter( 'wp_speculation_rules_configuration', '__return_null' );
 
