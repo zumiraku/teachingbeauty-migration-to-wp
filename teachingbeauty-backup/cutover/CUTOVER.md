@@ -10,7 +10,7 @@ WordPress 公式の「WordPress を専用ディレクトリに配置する」構
 | 公開URL | `https://www.teachingbeauty.jp/`、`/concept.html` など**現行と同一** |
 | 管理画面 | `https://www.teachingbeauty.jp/wp/wp-admin/`（変更なし・クライアントの操作も同じ） |
 | 画像・テーマ | `/wp/wp-content/...` のまま（本文中の URL 書き換え不要） |
-| 元サイトの CSS・画像・`/sp/`・孤立ページ | ルートに残す。`/sp/index.html`（スマホ用トップ）はトップページからの UA 判定リダイレクトも原本どおり再現 |
+| 元サイトの CSS・画像・`/sp/`・孤立ページ | ルートに残す。トップページのスマホ→`/sp/index.html` リダイレクトは切替時は原本どおり再現し、2026-09-21 にクライアント判断で廃止（スマホにも WordPress のトップを表示） |
 | 移行済み 39 ページの静的 `.html` | `/_old-static/` へ退避（外部からは閲覧不可）。WordPress が同じ URL で配信 |
 | 既存の 301（https / www / funin_aen） | ルート `.htaccess` に**そのまま**残し、WordPress のルールをその後ろに追加 |
 | 旧 `/wp/xxx.html` | ルートへ 301（重複 URL を残さない） |
@@ -90,3 +90,8 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 補足：本番サーバーは CSS を `Content-Type: text/css`（charset 指定なし）で配信するため、CSS 内の `@charset "Shift_JIS"` が効き、
 フォント名（'メイリオ' 等）が元サイトどおりに解決される。ローカル再現では PHP の組み込みサーバーが `charset=UTF-8` を付けるため
 初回比較で全ページに差が出たが、配信条件を本番に合わせると上記のとおり一致した（切替前の静的サイト・検証環境とも同じ配信条件）。
+
+## 切替後の変更（2026-09-21）：スマホ→/sp/ リダイレクトの廃止
+クライアントの判断で、トップページのスマホ判定リダイレクト（`/sp/index.html` へ）を外した（`header.php`）。
+スマホでも他のページと同様に WordPress のトップページが表示される。`/sp/` フォルダ自体は静的ファイルとしてそのまま残す。
+`verify-site.mjs` の該当チェックは「リダイレクト無し」に反転。
