@@ -20,7 +20,11 @@
 
 ## 設置手順（ステージング `/wp/`）
 
-順番どおりに。**3 → 1 → 2** の順でも動くが、画像登録（2）は必ずテーマ修正（1）の後に行う。
+**一括実行**：`deploy-editing.local.ps1`（Git 管理外・FTP パスワードを含む）を PowerShell で実行すると、下記 1〜3 に加えてドライラン・25件ずつの画像登録・スクリプト削除・結果確認まで自動で行う。
+```powershell
+powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-backup\deploy-editing.local.ps1"
+```
+以下は手動で行う場合の手順。順番どおりに。**3 → 1 → 2** の順でも動くが、画像登録（2）は必ずテーマ修正（1）の後に行う。
 
 ### 1. テーマの functions.php を差し替える
 ```powershell
