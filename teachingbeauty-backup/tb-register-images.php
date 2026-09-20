@@ -152,3 +152,5 @@ if ( $dry ) {
 } else {
 	echo "完了\n";
 }
+// 自動実行用の目印（文字コードに依存しない英数字）
+echo '[STATUS ' . ( $dry ? 'DRY' : ( $more ? 'MORE' : 'DONE' ) ) . " tags={$total_tags} new={$total_new} reuse={$total_reuse} skip={$total_skip} missing={$total_missing}]\n";
