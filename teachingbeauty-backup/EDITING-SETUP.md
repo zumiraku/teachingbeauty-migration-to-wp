@@ -27,8 +27,9 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 以下は手動で行う場合の手順。順番どおりに。**3 → 1 → 2** の順でも動くが、画像登録（2）は必ずテーマ修正（1）の後に行う。
 
 ### 1. テーマの functions.php を差し替える
+※ サーバー上のテーマフォルダ名は `teachingbeauty`（リポジトリの `teachingbeauty-theme` とは異なる）。
 ```powershell
-curl.exe -T "（リポジトリ）\teachingbeauty-theme\functions.php" "ftp://main.jp-teachingbeauty:（FTPパスワード）@ftp.lolipop.jp/wp/wp-content/themes/teachingbeauty-theme/functions.php"
+curl.exe -T "（リポジトリ）\teachingbeauty-theme\functions.php" "ftp://main.jp-teachingbeauty:（FTPパスワード）@ftp.lolipop.jp/wp/wp-content/themes/teachingbeauty/functions.php"
 ```
 確認：任意のページを開き、ソースに `id="global-styles-inline-css"` が**無い**こと。表示は変わらない（`hari.html` の本文中の下線だけが原本どおり消える）。
 
