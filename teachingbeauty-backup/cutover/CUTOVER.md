@@ -72,3 +72,21 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 - `/_old-static/` は 1〜2 週間問題が無ければ削除してよい（リポジトリの `www/` に同じものがある）
 - `/wp/` 直下にある元サイトの画像・CSS のコピー（検証時代のもの）は不要だが害もない
 - Search Console：URL は変わらないため再登録不要。確認ファイル `googlee9db13e7722f4047.html` はルートに残している
+
+## 本番切替の実施結果（2026-09-20 16:33 JST）
+
+`cutover.local.ps1` を実行。0/4〜4/4 まで停止なしで完了。
+
+| 検証 | 結果 |
+|---|---|
+| スクリプト内の本番検証（`verify-site.mjs https://www.teachingbeauty.jp --live`） | **PASS 1737 / FAIL 0**（39 ページ、画像 308 参照、内部リンク 827 参照、資産 285 種） |
+| 別セッションからの独立検証（同スクリプト） | **PASS 1737 / FAIL 0** |
+| リダイレクト | `/index.html`→`/`、`/wp/xxx.html`→`/xxx.html`、`/wp/`→`/`、`http`→`https`、非www→www、`/3okushi.html`→`/kokushi.html` すべて 301 |
+| 退避フォルダ `/_old-static/` | 403（閲覧不可） |
+| 静的資産 | `/sp/index.html`・`/sitemap.xml`・`/robots.txt`・Search Console 確認ファイル・孤立ページ 200 |
+| 管理画面・REST | `/wp/wp-login.php` 200、`/wp-json/` 200、サイト名「Teaching Beauty」（検証ラベル除去）、home=ルート・url=/wp |
+| 全 39 ページのピクセル比較（本番 vs 事前検証済みのローカル再現） | **36 / 39 差分ゼロ**。残り 3 件は説明可能：home（ローカル側の編集テストで写真を差し替えたまま）、reserve（本番のみ Contact Form 7 のフォームあり）、kanja（ページ最下端の 48 px） |
+
+補足：本番サーバーは CSS を `Content-Type: text/css`（charset 指定なし）で配信するため、CSS 内の `@charset "Shift_JIS"` が効き、
+フォント名（'メイリオ' 等）が元サイトどおりに解決される。ローカル再現では PHP の組み込みサーバーが `charset=UTF-8` を付けるため
+初回比較で全ページに差が出たが、配信条件を本番に合わせると上記のとおり一致した（切替前の静的サイト・検証環境とも同じ配信条件）。
