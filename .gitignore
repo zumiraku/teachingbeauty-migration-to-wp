@@ -10,3 +10,6 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 *.tmp
+
+# 認証情報を含むローカル専用スクリプト（Git に入れない）
+*.local.ps1
