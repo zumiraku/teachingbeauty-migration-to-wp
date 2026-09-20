@@ -62,7 +62,7 @@ for ( const p of pages ) {
 	ok( ! r.text.includes( 'global-styles-inline-css' ), `${ p.slug }: WP既定CSSなし` );
 	ok( ! /<meta name=.robots.[^>]*noindex/i.test( r.text ), `${ p.slug }: noindex なし` );
 	ok( ! /\/wp\/[^"']*\.html/.test( r.text ), `${ p.slug }: 本文に /wp/xxx.html リンクなし` );
-	if ( p.slug === 'home' ) { ok( r.text.includes( "location.href = '/sp/index.html'" ), 'home: スマホ→/sp/ リダイレクトあり' ); }
+	if ( p.slug === 'home' ) { ok( ! r.text.includes( "location.href = '/sp/index.html'" ), 'home: スマホ→/sp/ リダイレクトなし（2026-09-21 廃止）' ); }
 	if ( p.slug === 'reserve' && live ) { ok( /wpcf7|contact-form-7/.test( r.text ), 'reserve: 予約フォーム(CF7)あり' ); }
 	if ( p.slug === 'muryou' ) { ok( ! /wpcf7-form/.test( r.text ), 'muryou: フォームなし（原本どおり）' ); }
 	for ( const css of [ 'hpbparts.css', 'container_5H_2c_top.css', 'main_5H_2c.css', 'user.css' ] ) {
