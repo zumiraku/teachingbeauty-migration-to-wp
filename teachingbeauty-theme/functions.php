@@ -129,6 +129,8 @@ add_action(
 	100
 );
 add_filter( 'wp_speculation_rules_configuration', '__return_null' );
+// <meta name="robots" content="max-image-preview:large"> は元サイトに無いので出さない（インデックスには無関係）
+remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
 
 /**
  * Contact Form 7 の JS/CSS・フォーム専用スタイルは、フォームを含むページのみ読み込む。

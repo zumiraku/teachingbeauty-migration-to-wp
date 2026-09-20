@@ -1,0 +1,38 @@
+RewriteEngine On
+
+# ---- 元サイトから引き継ぐ 301（変更なし。WordPress のルールより前に置く）----
+
+# http -> https
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# main.jp -> www.teachingbeauty.jp
+RewriteCond %{HTTP_HOST} ^(www\.)?teachingbeauty\.main\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+# ssl-lolipop -> www.teachingbeauty.jp
+RewriteCond %{HTTP_HOST} ^main-teachingbeauty\.ssl-lolipop\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+# 非www -> www
+RewriteCond %{HTTP_HOST} ^teachingbeauty\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+# WordPress を優先（/sp/ など静的フォルダの index.html はそのまま生きる）
+DirectoryIndex index.php index.html
+
+Redirect 301 /funin_aen.html https://www.teachingbeauty.jp/funin.html
+
+# ---- WordPress（本体は /wp/、表示はルート）----
+# 実在するファイル・フォルダ（画像・CSS・/sp/・移行対象外の静的 .html など）はそのまま配信し、
+# それ以外（/concept.html 等の移行済みページ）を WordPress へ渡す。
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress

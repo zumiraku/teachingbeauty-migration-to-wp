@@ -13,3 +13,6 @@ Desktop.ini
 
 # 認証情報を含むローカル専用スクリプト（Git に入れない）
 *.local.ps1
+
+# 切替前バックアップ（サーバーから取得した DB・.htaccess・静的HTML）
+*.local/

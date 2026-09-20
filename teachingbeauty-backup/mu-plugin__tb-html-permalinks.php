@@ -15,6 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * 元サイトのファイル名（大文字小文字）を返す。WordPress はスラッグを小文字に正規化するため、
+ * 原本と異なるものだけここで元の表記に戻す（現行サイトでは Meniere.html の1件）。
+ * URL の解決自体は大文字小文字を問わず通るので、これは canonical とリンク生成用。
+ */
+function tb_original_html_name( $slug ) {
+	static $map = array( 'meniere' => 'Meniere' );
+	return isset( $map[ $slug ] ) ? $map[ $slug ] : $slug;
+}
+
+/**
  * /{slug}.html を固定ページに解決するリライトルールを追加。
  * 現行は全ページがルート直下の .html なので、フラットな pagename で解決できる。
  */
@@ -64,6 +74,11 @@ add_action(
 			wp_safe_redirect( home_url( '/funin.html' ), 301 );
 			exit;
 		}
+		// 旧サイトの誤字リンク（menu.html 内の 3okushi.html）を kokushi.html へ 301。
+		if ( $path === $home . '/3okushi.html' ) {
+			wp_safe_redirect( home_url( '/kokushi.html' ), 301 );
+			exit;
+		}
 	}
 );
 
@@ -82,7 +97,7 @@ add_filter(
 			return $link; // 下書き等は既定の ?page_id= を維持
 		}
 		// 子ページを作らない前提でフラットに slug.html を返す
-		return home_url( '/' . $post->post_name . '.html' );
+		return home_url( '/' . tb_original_html_name( $post->post_name ) . '.html' );
 	},
 	10,
 	2
@@ -101,7 +116,7 @@ add_action(
 				if ( (int) get_option( 'page_on_front' ) === (int) $post->ID ) {
 					$url = home_url( '/' );
 				} else {
-					$url = home_url( '/' . $post->post_name . '.html' );
+					$url = home_url( '/' . tb_original_html_name( $post->post_name ) . '.html' );
 				}
 				echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
 			}

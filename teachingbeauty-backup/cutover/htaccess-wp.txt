@@ -1,0 +1,30 @@
+# Teaching Beauty — WordPress 本体ディレクトリ（/wp/）
+# 表示アドレスはサイトルート。検証時代の /wp/xxx.html や /wp/ はルートへ 301（重複を残さない）。
+# 管理画面・ログイン・REST・テーマ/アップロードのファイルはこのまま /wp/ 配下で動く。
+RewriteEngine On
+RewriteBase /wp/
+
+# https / www への統一（ルートの .htaccess と同じ。mod_rewrite はディレクトリ毎に上書きされるためここにも置く）
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^(www\.)?teachingbeauty\.main\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^main-teachingbeauty\.ssl-lolipop\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^teachingbeauty\.jp$ [NC]
+RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
+
+# /wp/xxx.html → /xxx.html、/wp/ → /
+RewriteRule ^([^/]+\.html)$ /$1 [R=301,L]
+RewriteRule ^$ / [R=301,L]
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /wp/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /wp/index.php [L]
+</IfModule>
+# END WordPress

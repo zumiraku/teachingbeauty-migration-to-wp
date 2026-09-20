@@ -18,6 +18,15 @@ if ( '' === $tb_bodyattr ) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1">
+<?php if ( is_front_page() ) : ?>
+<?php // 元サイトの index.html と同じ: スマホはモバイル版トップ（/sp/index.html・静的）へ ?>
+<script type="text/javascript">
+	var ua = navigator.userAgent;
+	if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || (ua.indexOf('Android') > 0) && (ua.indexOf('Mobile') > 0) || ua.indexOf('Windows Phone') > 0) {
+		location.href = '/sp/index.html';
+	}
+</script>
+<?php endif; ?>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T3DMTM6');</script>
 <!-- End Google Tag Manager -->
