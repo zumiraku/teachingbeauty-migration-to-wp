@@ -175,3 +175,49 @@ add_filter(
 function tb_render_raw() {
 	echo do_shortcode( get_the_content() );
 }
+
+/**
+ * 編集画面に「説明文（description）／キーワード（keywords）」の欄を追加。
+ * 値は元サイトの各ページから引き継いだ _tb_description / _tb_keywords で、<head> に出力している（上記）。
+ * アンダースコア付きのメタは標準の「カスタムフィールド」欄に出ないため、専用の欄を用意する。
+ */
+add_action(
+	'add_meta_boxes',
+	function () {
+		foreach ( array( 'page', 'post' ) as $type ) {
+			add_meta_box( 'tb-seo', 'このページの説明文とキーワード（検索エンジン向け）', 'tb_seo_meta_box', $type, 'normal', 'high' );
+		}
+	}
+);
+function tb_seo_meta_box( $post ) {
+	wp_nonce_field( 'tb_seo_save', 'tb_seo_nonce' );
+	$d = (string) get_post_meta( $post->ID, '_tb_description', true );
+	$k = (string) get_post_meta( $post->ID, '_tb_keywords', true );
+	?>
+	<p><label for="tb_description"><b>説明文（description）</b>　検索結果でページ名の下に出る紹介文。全角 80〜120 字くらいが目安です。</label><br>
+	<textarea id="tb_description" name="tb_description" rows="3" style="width:100%"><?php echo esc_textarea( $d ); ?></textarea></p>
+	<p><label for="tb_keywords"><b>キーワード（keywords）</b>　「,」区切り。今の Google は順位に使いませんが、元サイトの設定をそのまま引き継いでいます。</label><br>
+	<input type="text" id="tb_keywords" name="tb_keywords" value="<?php echo esc_attr( $k ); ?>" style="width:100%"></p>
+	<p class="description">ブラウザのタブや検索結果の見出しになる「ページのタイトル」は、この画面のいちばん上のタイトル欄がそのまま使われます（サイト名は付きません）。</p>
+	<?php
+}
+add_action(
+	'save_post',
+	function ( $post_id ) {
+		if ( ! isset( $_POST['tb_seo_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tb_seo_nonce'] ) ), 'tb_seo_save' ) ) {
+			return;
+		}
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+		if ( isset( $_POST['tb_description'] ) ) {
+			update_post_meta( $post_id, '_tb_description', sanitize_textarea_field( wp_unslash( $_POST['tb_description'] ) ) );
+		}
+		if ( isset( $_POST['tb_keywords'] ) ) {
+			update_post_meta( $post_id, '_tb_keywords', sanitize_text_field( wp_unslash( $_POST['tb_keywords'] ) ) );
+		}
+	}
+);
