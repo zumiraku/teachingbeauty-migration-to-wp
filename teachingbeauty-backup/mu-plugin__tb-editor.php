@@ -145,6 +145,26 @@ add_filter(
 );
 
 /**
+ * 3.5) ツールバーに「マーカー（背景色）」ボタンを追加。文字色（forecolor）は標準で2段目にあるが、
+ *      背景色（backcolor）は WordPress 標準では出ていない。同じ textcolor プラグインの機能なので追加するだけ。
+ *      出力は <span style="background-color: …"> で、原本の <font color> と同様にそのまま保存される。
+ */
+add_filter(
+	'mce_buttons_2',
+	function ( $buttons ) {
+		if ( ! in_array( 'backcolor', $buttons, true ) ) {
+			$i = array_search( 'forecolor', $buttons, true );
+			if ( false !== $i ) {
+				array_splice( $buttons, $i + 1, 0, 'backcolor' );
+			} else {
+				$buttons[] = 'backcolor';
+			}
+		}
+		return $buttons;
+	}
+);
+
+/**
  * 4) 編集画面の案内（クライアント向け）。
  */
 add_action(
