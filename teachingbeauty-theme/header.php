@@ -20,6 +20,17 @@ if ( '' === $tb_bodyattr ) {
 <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1">
 <link rel="icon" href="<?php echo esc_url( home_url( '/favicon.ico' ) ); ?>">
 <link rel="apple-touch-icon" href="<?php echo esc_url( home_url( '/apple-touch-icon.png' ) ); ?>">
+<?php
+// Google の検索結果でページ名の上に出る「サイト名」の手がかり（WebSite 構造化データ／og:site_name）。
+// 値は「設定 → 一般 → サイトのタイトル」。各ページの <title> や本文には影響しない。
+$tb_site_name = get_bloginfo( 'name' );
+if ( '' !== $tb_site_name ) :
+?>
+<meta property="og:site_name" content="<?php echo esc_attr( $tb_site_name ); ?>">
+<?php if ( is_front_page() ) : ?>
+<script type="application/ld+json"><?php echo wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'WebSite', 'name' => $tb_site_name, 'url' => home_url( '/' ) ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ); ?></script>
+<?php endif; ?>
+<?php endif; ?>
 <?php // 元サイトの index.html にあった「スマホは /sp/index.html（旧モバイル版）へ」のリダイレクトは、
       // 2026-09-21 のクライアント判断で廃止。スマホにも他ページと同様に WordPress のトップページを表示する。 ?>
 <!-- Google Tag Manager -->
