@@ -18,6 +18,8 @@ if ( '' === $tb_bodyattr ) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1">
+<link rel="icon" href="<?php echo esc_url( home_url( '/favicon.ico' ) ); ?>">
+<link rel="apple-touch-icon" href="<?php echo esc_url( home_url( '/apple-touch-icon.png' ) ); ?>">
 <?php // 元サイトの index.html にあった「スマホは /sp/index.html（旧モバイル版）へ」のリダイレクトは、
       // 2026-09-21 のクライアント判断で廃止。スマホにも他ページと同様に WordPress のトップページを表示する。 ?>
 <!-- Google Tag Manager -->

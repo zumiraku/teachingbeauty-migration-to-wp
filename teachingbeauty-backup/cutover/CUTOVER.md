@@ -95,3 +95,29 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 クライアントの判断で、トップページのスマホ判定リダイレクト（`/sp/index.html` へ）を外した（`header.php`）。
 スマホでも他のページと同様に WordPress のトップページが表示される。`/sp/` フォルダ自体は静的ファイルとしてそのまま残す。
 `verify-site.mjs` の該当チェックは「リダイレクト無し」に反転。
+
+## 全ページ監査と修正（2026-09-21）
+
+クライアントからサイドバー「→アクセス」の矢印だけが別書体で小さく表示される（Mac / iPhone）との報告を受け、
+**本番の全 URL をブラウザで巡回する監査**（`audit-site.mjs`）と、**元サイトの静的ミラーとの全ページ比較**
+（`compare-original.mjs`：装飾レイヤーあり／なしの両方）を実施した。
+
+### 見つかった不具合と対処
+
+| # | 症状 | 原因 | 対処 |
+|---|---|---|---|
+| 1 | Mac / iPhone で「→アクセス」の矢印だけ小さい | 元サイトの書体指定（ヒラギノ角ゴ **Pro** W3 等）が今の macOS / iOS に存在せず、文字ごとに別の代替書体になる | `enhance.css` の `body` に Hiragino Sans / ProN を追加（Windows はメイリオ先頭のまま不変） |
+| 2 | **患者様の声（kanja）など 22 ページ・55 箇所の見出しが横並びに崩れる**、6 ページで横スクロール発生 | 8/30 の「見出しを縦中央に」で h3 を `display:flex` にしたが、元サイトには h3 の中に改行・画像・本文まで入っているものがあり、それらの中身が横一列になっていた | flex を「1行のタイトルだけを含む h3」に限定（`:not(:has(br, img, div, …))`）。装飾ありで全 39 ページの要素の横位置が装飾なしと一致することを確認 |
+| 3 | newpage23 のリンクが 404（`newpage13.html>突発性難聴</a>…` という URL） | 元サイトの HTML で `href` の閉じ引用符が欠落 | 本文の該当 1 箇所に引用符を補う（`tb-fix-content.php`） |
+| 4 | トップページで混在コンテンツ（`http://platform.twitter.com/widgets.js` がブロック） | 元サイトの Tweet ボタン用スクリプト（https 化以前のもの） | スクリプトを削除（元サイトでもブロックされ表示に影響なし）、リンクを https に |
+| 5 | 全ページで `/favicon.ico` が 404 | 元サイトに favicon が無い | ロゴのシンボルから `favicon.ico` / `apple-touch-icon.png` を生成しルートへ。`header.php` で指定 |
+| 6 | `/sp/index.html`（旧スマホ版）で jQuery・Twitter・Facebook が http でブロック、存在しない画像 4 件 | 元サイトのまま | https 化、FC2 カウンター削除、存在しない画像の `<li>` を削除。iPhone 相当の表示で console エラー 0 を確認 |
+
+### 監査で確認した「問題なし」
+- 装飾レイヤー無しの WordPress は元サイトと **35 / 39 ページでピクセル一致**（差があった 4 ページ：home はクライアントが写真を差し替えたもの、reserve は予約フォームが CF7、menu / beauty は 2px の縦ずれ）
+- 39 ページの `<title>`・canonical・本文・画像 308 参照・内部リンク 827 参照：異常なし
+- 外部リンクで応答が無いもの（`privacy.html` の相互リンク先 3 件：kenkounavi.jp / shinq-compass.jp / aroeseitai.homeip.net）は**リンク先が閉鎖・拒否**しているもので、サイト側の不具合ではない。掲載を続けるかはクライアント判断
+- 移行対象外の孤立静的ページ（`newpage15.html` 等 18 件）には元サイトの時点から存在しない画像への参照がある。どこからもリンクされていないページのため今回は手を入れていない（削除するかはクライアント判断）
+
+### 適用
+`fix-round1.local.ps1`（Git 管理外）で、テーマ・favicon・`/sp/index.html`・本文修正・検証まで一括。

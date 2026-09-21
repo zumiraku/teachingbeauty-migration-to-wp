@@ -61,6 +61,9 @@ for ( const p of pages ) {
 	ok( norm( canon ) === norm( url ), `${ p.slug }: canonical`, `"${ canon }"` );
 	ok( ! r.text.includes( 'global-styles-inline-css' ), `${ p.slug }: WP既定CSSなし` );
 	ok( ! /<meta name=.robots.[^>]*noindex/i.test( r.text ), `${ p.slug }: noindex なし` );
+	ok( ! /\b(src|href)="http:\/\/(platform\.twitter|ajax\.googleapis|counter1\.fc2|www\.facebook)/.test( r.text ), `${ p.slug }: 混在コンテンツ（http スクリプト等）なし` );
+	ok( ! /href="[^" ]*>/.test( r.text ), `${ p.slug }: 閉じ引用符の無い href なし` );
+	if ( live ) { ok( /<link rel="icon" href="[^"]*\/favicon\.ico"/.test( r.text ), `${ p.slug }: favicon 指定あり` ); }
 	ok( ! /\/wp\/[^"']*\.html/.test( r.text ), `${ p.slug }: 本文に /wp/xxx.html リンクなし` );
 	if ( p.slug === 'home' ) { ok( ! r.text.includes( "location.href = '/sp/index.html'" ), 'home: スマホ→/sp/ リダイレクトなし（2026-09-21 廃止）' ); }
 	if ( p.slug === 'reserve' && live ) { ok( /wpcf7|contact-form-7/.test( r.text ), 'reserve: 予約フォーム(CF7)あり' ); }
@@ -127,8 +130,8 @@ const a4 = live ? await get( `${ base }/wp-json/contact-form-7/v1/contact-forms`
 ok( a4.status === 401 || a4.status === 403 || a4.status === 200, 'CF7 REST 応答', `${ a4.status }` );
 
 // 4) 静的資産（残すもの）
-for ( const f of [ '/sp/index.html', '/sitemap.xml', '/robots.txt', '/googlee9db13e7722f4047.html', '/hpbparts.css', '/newpage26.html', '/este.html' ] ) {
-	if ( ! live && ( f === '/newpage26.html' || f === '/este.html' || f === '/googlee9db13e7722f4047.html' ) ) { continue; } // ローカルのミラーには孤立ページが無い
+for ( const f of [ '/sp/index.html', '/sitemap.xml', '/robots.txt', '/googlee9db13e7722f4047.html', '/hpbparts.css', '/newpage26.html', '/este.html', '/favicon.ico', '/apple-touch-icon.png' ] ) {
+	if ( ! live && ( f === '/newpage26.html' || f === '/este.html' || f === '/googlee9db13e7722f4047.html' || f === '/favicon.ico' || f === '/apple-touch-icon.png' ) ) { continue; } // ローカルのミラーには孤立ページが無い
 	const s = await head( `${ base }${ f }` );
 	ok( s === 200, `静的 ${ f } 200`, `HTTP ${ s }` );
 }

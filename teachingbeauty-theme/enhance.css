@@ -4,6 +4,17 @@
    （元サイトの配色: クリーム #fdf8e1 / 金 #ead78d・#a9770b / 臙脂 #91384b・#480a17）
    ============================================================ */
 
+/* ---------- 書体の指定を今の Mac / iPhone にも通す ----------
+   元サイトの指定（メイリオ → ヒラギノ角ゴ Pro W3 → ＭＳ Ｐゴシック → Osaka）は、Windows では
+   メイリオで表示されるが、今の macOS / iOS にはどれも無く、文字ごとにバラバラの代替書体になる
+   （例: サイドバー「→アクセス」の矢印だけが別書体で小さく表示される）。
+   Windows の見た目は変えず（メイリオが先頭のまま）、Apple 環境には実在するヒラギノを追加する。 */
+body {
+	font-family: 'メイリオ', Meiryo,
+		'Hiragino Sans', 'ヒラギノ角ゴシック', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
+		'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'ＭＳ Ｐゴシック', Osaka, sans-serif;
+}
+
 /* ---------- 本文の行間を程よく（字間は原本どおり＝標準） ---------- */
 .tb-enhanced #hpb-main,
 .tb-enhanced #hpb-main p,
@@ -64,27 +75,32 @@
 }
 .tb-enhanced .tb-rv.tb-in { opacity: 1; transform: none; }
 
-/* ---------- 見出し（ゴールドバー）のテキストを縦中央に ---------- */
-.tb-enhanced #hpb-main h3:not(.hpb-c-index),
-.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index) {
+/* ---------- 見出し（ゴールドバー）のテキストを縦中央に ----------
+   対象は「1行のタイトルだけを含む h3」に限る。元サイトには h3 の中に改行・画像・本文まで
+   入っているもの（患者様の声 など 22 ページ・55 箇所）があり、それらを flex にすると
+   中身が横に並んで崩れる（kanja で確認）。:has() 非対応の古いブラウザではこの規則ごと
+   無視され、元サイトどおりの表示になる。 */
+.tb-enhanced #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)),
+.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)) {
 	line-height: 33px !important;   /* バー画像 indexBg_5H.png の高さに合わせて縦中央 */
 	min-height: 33px;
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 }
-.tb-enhanced #hpb-main h3:not(.hpb-c-index) font,
-.tb-enhanced #hpb-main h3:not(.hpb-c-index) span,
-.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index) font,
-.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index) span {
+.tb-enhanced #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)) font,
+.tb-enhanced #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)) span,
+.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)) font,
+.tb-enhanced #hpb-wrapper h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)) span {
 	line-height: 1.3 !important;
 }
 
-/* ---------- 見出しに金のアンダーライン ---------- */
+/* ---------- 見出しに金のアンダーライン（同じく1行タイトルの h3 のみ） ---------- */
 .tb-enhanced #hpb-main h3,
 .tb-enhanced .hpb-layoutset-02 #hpb-wrapper h3 { position: relative; }
-.tb-enhanced #hpb-main h3::after {
+.tb-enhanced #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form))::after {
 	content: ""; position: absolute; left: 12px; bottom: -3px; height: 2px; width: 0;
 	background: linear-gradient(90deg, #a9770b, #ead78d 70%, transparent);
 	border-radius: 2px; transition: width .9s cubic-bezier(.2,.7,.3,1) .1s;
