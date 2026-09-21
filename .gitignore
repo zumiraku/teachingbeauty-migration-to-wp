@@ -16,3 +16,7 @@ Desktop.ini
 
 # 切替前バックアップ（サーバーから取得した DB・.htaccess・静的HTML）
 *.local/
+
+# 監査スクリプトの依存
+teachingbeauty-backup/cutover/node_modules/
+teachingbeauty-backup/cutover/package-lock.json

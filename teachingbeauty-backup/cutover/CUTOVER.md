@@ -121,3 +121,11 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 
 ### 適用
 `fix-round1.local.ps1`（Git 管理外）で、テーマ・favicon・`/sp/index.html`・本文修正・検証まで一括。
+
+### 適用結果（2026-09-21 06:58 JST）
+`fix-round1.local.ps1` を実行。テーマ・favicon・`/sp/index.html`・本文修正（3 箇所）を適用。
+- 全数検証（HTTP）: **PASS 1857 / FAIL 0**（混在コンテンツ・壊れた href・favicon の検査を追加した上で）
+- ブラウザ巡回監査（Chrome）: **43 URL / 問題 0**（console エラー・失敗リクエスト・壊れた画像・横スクロール・文字化けなし）
+- 装飾あり／なしで全 39 ページの要素の横位置を比較: 38 ページ一致、reserve は CF7 フォーム要素の並びによる比較上の 1 件のみ（表示は正常）
+- サイドバー「→アクセス」: 書体が `メイリオ, Meiryo, Hiragino Sans, …` で解決されることを確認（Apple 環境での実表示はクライアント確認待ち）
+- 応答の無い外部リンク先（privacy.html の 3 件）は警告として一覧に出す運用に変更（サイト側の不具合ではないため FAIL にしない）

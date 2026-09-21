@@ -78,7 +78,7 @@ while ( queue.length ) {
 		rec.links = info.links.length;
 		for ( const l of info.links ) {
 			if ( isInternal( l ) ) { if ( ! noCrawl && ! skip( l.replace( base, '' ) ) ) queue.push( l ); }
-			else if ( /^https?:/.test( l ) ) { const s = await checkExternal( l ); if ( s !== 200 && s !== 301 && s !== 302 ) rec.externalBad.push( `${ s } ${ l }` ); }
+			else if ( /^https?:/.test( l ) ) { const s = await checkExternal( l ); if ( s !== 200 && s !== 301 && s !== 302 && s !== 429 ) rec.externalBad.push( `${ s } ${ l }` ); }
 		}
 		const name = url.replace( base, '' ).replace( /[^a-zA-Z0-9._-]+/g, '_' ) || '_root';
 		await page.screenshot( { path: path.join( outDir, `${ engine }-${ name }.png` ), fullPage: true } ).catch( () => {} );
@@ -87,7 +87,8 @@ while ( queue.length ) {
 	}
 	await page.close();
 	// ノイズ除去: 外部ウィジェット（ekiten/GTM/FC2）由来のものは別扱い
-	const isExt = ( s ) => /ekiten|googletagmanager|google-analytics|analytics\.google|google\.com\/(ccm|rmkt|pagead)|google\.co\.jp\/pagead|fc2|doubleclick|googleads|youtube|ameblo/i.test( s );
+	// 外部サービス由来（GTM/GA のビーコン、Facebook iframe の Permissions-Policy 警告、ヘッドレス Chrome の WebGPU 警告）も別扱い
+	const isExt = ( s ) => /ekiten|googletagmanager|google-analytics|analytics\.google|google\.com\/(ccm|rmkt|pagead)|google\.co\.jp\/pagead|fc2|doubleclick|googleads|youtube|ameblo|Permissions-Policy header|powerPreference|No available adapters/i.test( s );
 	rec.consoleExt = rec.console.filter( isExt ); rec.console = rec.console.filter( s => ! isExt( s ) );
 	rec.failedExt = rec.failed.filter( isExt ); rec.failed = rec.failed.filter( s => ! isExt( s ) );
 	results.push( rec );
@@ -96,7 +97,7 @@ while ( queue.length ) {
 }
 await browser.close();
 fs.writeFileSync( path.join( outDir, `audit-${ engine }.json` ), JSON.stringify( results, null, 2 ) );
-const bad = results.filter( r => r.status !== 200 || r.console.length || r.failed.length || r.brokenImages.length || r.mojibake || r.httpRefs.length || r.hScroll || r.externalBad.length || r.error );
+const bad = results.filter( r => r.status !== 200 || r.console.length || r.failed.length || r.brokenImages.length || r.mojibake || r.httpRefs.length || r.hScroll || r.error );
 console.log( `\n巡回 ${ results.length } URL / 問題あり ${ bad.length }` );
 for ( const r of bad ) {
 	console.log( `\n--- ${ r.url }` );
@@ -112,4 +113,7 @@ for ( const r of bad ) {
 }
 const extNoise = results.filter( r => r.consoleExt.length || r.failedExt.length );
 if ( extNoise.length ) { console.log( `\n（参考）外部ウィジェット由来の警告があるページ: ${ extNoise.length }` ); }
+const extDead = results.filter( r => r.externalBad.length );
+if ( extDead.length ) { console.log( `
+（警告）応答の無い外部リンク先があるページ: ${ extDead.length }（サイト側の不具合ではない・掲載継続はクライアント判断）` ); for ( const r of extDead ) for ( const e of r.externalBad ) console.log( '  ' + r.url.replace( base, '' ) + ' → ' + e ); }
 console.log( bad.length ? '[AUDIT FAIL]' : '[AUDIT PASS]' );

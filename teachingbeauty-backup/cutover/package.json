@@ -1,0 +1,11 @@
+{
+  "name": "teachingbeauty-cutover-tools",
+  "private": true,
+  "type": "module",
+  "description": "本番検証・監査スクリプト用の依存（node verify-site.mjs / audit-site.mjs / compare-original.mjs）。初回のみ npm install",
+  "dependencies": {
+    "pixelmatch": "^7.1.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0"
+  }
+}
