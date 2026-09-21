@@ -68,9 +68,35 @@
 		return out;
 	}
 
+	/* サイドバーの電話番号を、実際の描画幅で測って枠内に収める（書体・端末に依存しない最後の保険）。
+	   CSS 側の 22px で収まるのが通常。収まらない環境（想定外の書体・文字拡大）でのみ 1px ずつ縮める。 */
+	function fitSidebarTel() {
+		try {
+			var box = document.getElementById( 'shopinfo' );
+			var a = box && box.querySelector( 'a[href^="tel:"]' );
+			if ( ! a ) { return; }
+			// <a> と、その中の <font>（入れ子が逆のページ）の両方に同じサイズを当てる
+			var targets = [ a ].concat( Array.prototype.slice.call( a.querySelectorAll( 'font' ) ) );
+			targets.forEach( function ( el ) { el.style.fontSize = ''; } );
+			var cs = window.getComputedStyle( box );
+			var avail = box.clientWidth - parseFloat( cs.paddingLeft || 0 ) - parseFloat( cs.paddingRight || 0 );
+			var size = parseFloat( window.getComputedStyle( a ).fontSize );
+			var guard = 0;
+			while ( a.getBoundingClientRect().width > avail && size > 12 && guard++ < 24 ) {
+				size -= 1;
+				targets.forEach( function ( el ) { el.style.fontSize = size + 'px'; } );
+			}
+		} catch ( e ) { /* 測れない環境では何もしない */ }
+	}
+
 	ready( function () {
 		var reduce = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 		document.body.classList.add( 'tb-enhanced' );
+
+		fitSidebarTel();
+		window.addEventListener( 'load', fitSidebarTel );
+		window.addEventListener( 'resize', fitSidebarTel );
+		if ( document.fonts && document.fonts.ready && document.fonts.ready.then ) { document.fonts.ready.then( fitSidebarTel ); }
 
 		try {
 			var targets = [];

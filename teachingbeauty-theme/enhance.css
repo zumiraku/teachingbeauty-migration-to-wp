@@ -150,10 +150,23 @@ body {
 }
 /* ロゴが余白ぶん詰まってもはみ出さないように収める（比率は維持） */
 .tb-enhanced #hpb-aside #shopinfo img { max-width: 100%; height: auto; }
-/* 電話番号：1行を維持しつつ、余白内に収まるよう文字サイズを調整（はみ出し防止） */
-.tb-enhanced #hpb-aside #shopinfo a[href^="tel:"] {
+/* 電話番号：どの端末・どの書体でも枠に収める。
+   - JS（.tb-enhanced）に依存させない。JS が動かない環境でも <font size="6">＝32px のままにしない
+   - 数字は Windows ではメイリオ、Mac / iPhone では Helvetica（元サイトが Mac で表示していた書体）に固定し、幅を予測可能にする
+   - iOS Safari の自動文字拡大（幅の広いレイアウトで文字を勝手に大きくする）を枠内では止める
+   - 仕上げに enhance.js が実測して、それでも収まらなければ縮める */
+#hpb-aside #shopinfo {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+/* <font size="6"><a>番号</a></font> と <a><font size="6">番号</font></a> の両方の入れ子に効かせる
+   （元サイトはページによって入れ子が逆で、後者では <a> だけ指定しても中の <font> の 32px が残る） */
+#hpb-aside #shopinfo a[href^="tel:"],
+#hpb-aside #shopinfo a[href^="tel:"] font {
 	white-space: nowrap;
 	font-size: 22px;
+	font-family: 'メイリオ', Meiryo, Helvetica, Arial, sans-serif;
+	letter-spacing: 0;
 }
 
 /* ---------- テキストリンクに伸びる下線 ---------- */
