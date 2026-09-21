@@ -149,3 +149,6 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 - `tb-fix-content.php`：home / newpage13 / taiban のサイドバー TEL／→アクセス ブロックを、他 36 ページと同じ標準の形に統一
 - 検証（本番 HTML に同じ置換を施して新 CSS/JS で描画）：3 ページとも番号 22px・余白 66px、幅広書体（Verdana）でも余白 43px、
   「→アクセス」は 18px で矢印とアクセスが同じ大きさ。CSS が効かない／JS が動かない／両方の場合も枠内（余白 35px 以上）
+
+適用結果（2026-09-21 07:56 JST・`fix-round2.local.ps1`）：本文修正 3 箇所適用、全数検証 **PASS 1855 / FAIL 0**、ブラウザ巡回 **43 URL / 問題 0**。
+本番実測：home / newpage13 / taiban / concept とも番号 22px・幅 137px・枠の余り 66px（PC・iPhone 相当とも）。サイドバーの HTML は 39 ページすべて標準形。
