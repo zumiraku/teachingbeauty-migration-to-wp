@@ -21,8 +21,8 @@ if ( '' === $tb_bodyattr ) {
 <link rel="icon" href="<?php echo esc_url( home_url( '/favicon.ico' ) ); ?>">
 <link rel="apple-touch-icon" href="<?php echo esc_url( home_url( '/apple-touch-icon.png' ) ); ?>">
 <?php
-// Google の検索結果でページ名の上に出る「サイト名」の手がかり（WebSite 構造化データ／og:site_name）。
-// 値は「設定 → 一般 → サイトのタイトル」。各ページの <title> や本文には影響しない。
+// 検索結果でページ名の上に出るサイト名の手がかり。値は「設定 → 一般 → サイトのタイトル」。
+// 各ページの <title> は post_title をそのまま使うので、ここは関係しない。
 $tb_site_name = get_bloginfo( 'name' );
 if ( '' !== $tb_site_name ) :
 ?>
@@ -31,8 +31,7 @@ if ( '' !== $tb_site_name ) :
 <script type="application/ld+json"><?php echo wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'WebSite', 'name' => $tb_site_name, 'url' => home_url( '/' ) ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ); ?></script>
 <?php endif; ?>
 <?php endif; ?>
-<?php // 元サイトの index.html にあった「スマホは /sp/index.html（旧モバイル版）へ」のリダイレクトは、
-      // 2026-09-21 のクライアント判断で廃止。スマホにも他ページと同様に WordPress のトップページを表示する。 ?>
+<?php // 旧 index.html にあったスマホ→/sp/index.html のリダイレクトは 2026-09-21 に廃止（先方の希望）。 ?>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T3DMTM6');</script>
 <!-- End Google Tag Manager -->

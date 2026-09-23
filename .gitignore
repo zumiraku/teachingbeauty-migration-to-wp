@@ -20,3 +20,6 @@ Desktop.ini
 # 監査スクリプトの依存
 teachingbeauty-backup/cutover/node_modules/
 teachingbeauty-backup/cutover/package-lock.json
+
+# エディタのセッション履歴
+.cc-history/

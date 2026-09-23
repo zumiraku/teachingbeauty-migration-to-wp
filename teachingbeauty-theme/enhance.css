@@ -4,11 +4,8 @@
    （元サイトの配色: クリーム #fdf8e1 / 金 #ead78d・#a9770b / 臙脂 #91384b・#480a17）
    ============================================================ */
 
-/* ---------- 書体の指定を今の Mac / iPhone にも通す ----------
-   元サイトの指定（メイリオ → ヒラギノ角ゴ Pro W3 → ＭＳ Ｐゴシック → Osaka）は、Windows では
-   メイリオで表示されるが、今の macOS / iOS にはどれも無く、文字ごとにバラバラの代替書体になる
-   （例: サイドバー「→アクセス」の矢印だけが別書体で小さく表示される）。
-   Windows の見た目は変えず（メイリオが先頭のまま）、Apple 環境には実在するヒラギノを追加する。 */
+/* 旧サイトの font-family は「ヒラギノ角ゴ Pro W3」止まりで、今の macOS / iOS には無い。
+   欠けると文字ごとに別の代替書体が当たる。メイリオは先頭のまま、後ろに現行のヒラギノを足す。 */
 body {
 	font-family: 'メイリオ', Meiryo,
 		'Hiragino Sans', 'ヒラギノ角ゴシック', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
@@ -76,10 +73,8 @@ body {
 .tb-enhanced .tb-rv.tb-in { opacity: 1; transform: none; }
 
 /* ---------- 見出し（ゴールドバー）のテキストを縦中央に ----------
-   対象は「1行のタイトルだけを含む h3」に限る。元サイトには h3 の中に改行・画像・本文まで
-   入っているもの（患者様の声 など 22 ページ・55 箇所）があり、それらを flex にすると
-   中身が横に並んで崩れる（kanja で確認）。:has() 非対応の古いブラウザではこの規則ごと
-   無視され、元サイトどおりの表示になる。 */
+   1行のタイトルだけの h3 に限る。旧サイトには h3 の中に改行も画像も本文も入っているものがあり、
+   flex にすると横一列に並んでしまう。:has() 非対応のブラウザではこの規則ごと無視され、元の表示に戻る。 */
 .tb-enhanced #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)),
 .tb-enhanced #hpb-wrapper h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, h1, h2, h4, h5, h6, iframe, form)) {
 	line-height: 33px !important;   /* バー画像 indexBg_5H.png の高さに合わせて縦中央 */
@@ -140,27 +135,22 @@ body {
 }
 .tb-enhanced #shopinfo img { border-radius: 6px; }
 
-/* ---------- サイドバー 店舗情報：内容の左右に余白のみを設ける ----------
-   書体・文字サイズ・字間・行間は原本のまま。端に貼りついて見えるのを防ぐ
-   ため、ブロック内容の左右に余白を取るだけの最小限の調整。 */
+/* サイドバー店舗情報。端に貼りついて見えるので左右に余白だけ足す。書体・字間・行間は原本のまま。 */
 .tb-enhanced #hpb-aside #shopinfo {
 	box-sizing: border-box;
 	padding-left: 12px;
 	padding-right: 12px;
 }
-/* ロゴが余白ぶん詰まってもはみ出さないように収める（比率は維持） */
+/* 余白のぶんロゴが詰まってもはみ出さないように（比率は維持） */
 .tb-enhanced #hpb-aside #shopinfo img { max-width: 100%; height: auto; }
-/* 電話番号：どの端末・どの書体でも枠に収める。
-   - JS（.tb-enhanced）に依存させない。JS が動かない環境でも <font size="6">＝32px のままにしない
-   - 数字は Windows ではメイリオ、Mac / iPhone では Helvetica（元サイトが Mac で表示していた書体）に固定し、幅を予測可能にする
-   - iOS Safari の自動文字拡大（幅の広いレイアウトで文字を勝手に大きくする）を枠内では止める
-   - 仕上げに enhance.js が実測して、それでも収まらなければ縮める */
+
+/* 電話番号の枠はみ出し対策。.tb-enhanced を付けないのは、JS が動かなくても 32px のままにしないため。
+   iOS は幅の広いレイアウトで勝手に文字を拡大するので、ここでは切る。 */
 #hpb-aside #shopinfo {
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
 }
-/* <font size="6"><a>番号</a></font> と <a><font size="6">番号</font></a> の両方の入れ子に効かせる
-   （元サイトはページによって入れ子が逆で、後者では <a> だけ指定しても中の <font> の 32px が残る） */
+/* ページによって <font><a> と <a><font> の入れ子が逆。後者は <a> だけ指定しても中の 32px が残る。 */
 #hpb-aside #shopinfo a[href^="tel:"],
 #hpb-aside #shopinfo a[href^="tel:"] font {
 	white-space: nowrap;

@@ -48,12 +48,10 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 ローカルに作り、Apache の `.htaccess` の挙動（実在ファイル優先・DirectoryIndex・301）を再現するルーターで、
 **上記と同じ順序で切替 → 検証 → 切り戻し → 再切替** を実施。
 
-| 検証 | 結果 |
-|---|---|
-| `verify-site.mjs`（39 ページの 200・`<title>`・本文・canonical・noindex 無し・WP 既定 CSS 無し、画像 308 参照、内部リンク 743 参照、リダイレクト、管理画面・REST、静的資産） | **PASS 1647 / FAIL 0** |
-| 全 39 ページのピクセル比較（ルート表示 vs 切替前の検証済み表示） | **39 / 39 差分ゼロ** |
-| 切替後の編集（`/wp/wp-admin/` でログイン → 無編集で更新 → 写真を置換 → 更新） | 表示差分 0 px、新しい写真は `/wp/wp-content/uploads/` で 200 |
-| 切り戻し → 再切替 | 静的サイトが復帰（FC2 カウンタ検出）→ 再切替後 PASS 1647 / FAIL 0 |
+`verify-site.mjs` は通った。39 ページの HTTP・`<title>`・本文・canonical・noindex の有無・WP 既定 CSS の有無、
+画像と内部リンクの参照先、リダイレクト、管理画面と REST、静的資産まで、落ちたものは無し。
+全ページのスクリーンショット比較も切替前と一致。切替後に管理画面から無編集で更新しても、写真を差し替えても表示は崩れず、
+差し替えた写真は `/wp/wp-content/uploads/` から出る。切り戻すと静的サイトに戻り、もう一度切替をやり直しても同じ結果。
 
 事前検証で見つけて直したもの：
 - 元 `index.html` のスマホ→`/sp/index.html` リダイレクトがテーマに無かった → `header.php` にフロントページ限定で再現
@@ -77,19 +75,18 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 
 `cutover.local.ps1` を実行。0/4〜4/4 まで停止なしで完了。
 
-| 検証 | 結果 |
-|---|---|
-| スクリプト内の本番検証（`verify-site.mjs https://www.teachingbeauty.jp --live`） | **PASS 1737 / FAIL 0**（39 ページ、画像 308 参照、内部リンク 827 参照、資産 285 種） |
-| 別セッションからの独立検証（同スクリプト） | **PASS 1737 / FAIL 0** |
-| リダイレクト | `/index.html`→`/`、`/wp/xxx.html`→`/xxx.html`、`/wp/`→`/`、`http`→`https`、非www→www、`/3okushi.html`→`/kokushi.html` すべて 301 |
-| 退避フォルダ `/_old-static/` | 403（閲覧不可） |
-| 静的資産 | `/sp/index.html`・`/sitemap.xml`・`/robots.txt`・Search Console 確認ファイル・孤立ページ 200 |
-| 管理画面・REST | `/wp/wp-login.php` 200、`/wp-json/` 200、サイト名「Teaching Beauty」（検証ラベル除去）、home=ルート・url=/wp |
-| 全 39 ページのピクセル比較（本番 vs 事前検証済みのローカル再現） | **36 / 39 差分ゼロ**。残り 3 件は説明可能：home（ローカル側の編集テストで写真を差し替えたまま）、reserve（本番のみ Contact Form 7 のフォームあり）、kanja（ページ最下端の 48 px） |
+本番でも `verify-site.mjs --live` は通った。念のため時間を置いてもう一度流したが同じ。
 
-補足：本番サーバーは CSS を `Content-Type: text/css`（charset 指定なし）で配信するため、CSS 内の `@charset "Shift_JIS"` が効き、
-フォント名（'メイリオ' 等）が元サイトどおりに解決される。ローカル再現では PHP の組み込みサーバーが `charset=UTF-8` を付けるため
-初回比較で全ページに差が出たが、配信条件を本番に合わせると上記のとおり一致した（切替前の静的サイト・検証環境とも同じ配信条件）。
+- リダイレクト：`/index.html`→`/`、`/wp/xxx.html`→`/xxx.html`、`/wp/`→`/`、`http`→`https`、非www→www、`/3okushi.html`→`/kokushi.html` すべて 301
+- 退避した `/_old-static/` は 403 で外から見えない
+- `/sp/index.html`・`sitemap.xml`・`robots.txt`・Search Console の確認ファイル・孤立ページはそのまま 200
+- `/wp/wp-login.php` と `/wp-json/` も 200。サイト名から「(検証)」が取れ、home はルート、siteurl は /wp のまま
+- 全ページのスクリーンショット比較は一致。ずれた 3 ページは理由がはっきりしている（home は手元で写真を差し替えたまま、
+  reserve は本番だけ CF7 のフォームが入る、kanja は最下端の数十 px）
+
+CSS の配信条件だけ注意。本番は `Content-Type: text/css` を charset 無しで返すので CSS 側の `@charset "Shift_JIS"` が効き、
+フォント名が旧サイトどおりに解決される。手元の PHP 組み込みサーバーは `charset=UTF-8` を付けるためここが食い違い、
+最初の比較で全ページ差が出た。切替前の静的サイトも検証環境も本番と同じ条件なので、合わせれば一致する。
 
 ## 切替後の変更（2026-09-21）：スマホ→/sp/ リダイレクトの廃止
 クライアントの判断で、トップページのスマホ判定リダイレクト（`/sp/index.html` へ）を外した（`header.php`）。
@@ -124,11 +121,11 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 
 ### 適用結果（2026-09-21 06:58 JST）
 `fix-round1.local.ps1` を実行。テーマ・favicon・`/sp/index.html`・本文修正（3 箇所）を適用。
-- 全数検証（HTTP）: **PASS 1857 / FAIL 0**（混在コンテンツ・壊れた href・favicon の検査を追加した上で）
-- ブラウザ巡回監査（Chrome）: **43 URL / 問題 0**（console エラー・失敗リクエスト・壊れた画像・横スクロール・文字化けなし）
-- 装飾あり／なしで全 39 ページの要素の横位置を比較: 38 ページ一致、reserve は CF7 フォーム要素の並びによる比較上の 1 件のみ（表示は正常）
-- サイドバー「→アクセス」: 書体が `メイリオ, Meiryo, Hiragino Sans, …` で解決されることを確認（Apple 環境での実表示はクライアント確認待ち）
-- 応答の無い外部リンク先（privacy.html の 3 件）は警告として一覧に出す運用に変更（サイト側の不具合ではないため FAIL にしない）
+- 混在コンテンツ・壊れた href・favicon の検査を足したうえで `verify-site.mjs` は通った
+- ブラウザで全 URL を巡回しても、console エラー・失敗リクエスト・壊れた画像・横スクロール・文字化けとも無し
+- 装飾あり／なしで要素の横位置を比べ、崩れが残っていないことを確認。reserve だけ差が出るが CF7 の要素の並びによるもので表示は正常
+- サイドバー「→アクセス」の書体が `メイリオ, Meiryo, Hiragino Sans, …` で解決されることを確認（Apple 実機は先方確認待ち）
+- 応答の無い外部リンク先（privacy.html の 3 件）は警告として出すだけにした。こちらの不具合ではないため
 
 ### 訂正と追加修正（2026-09-21・第2弾）：サイドバー電話番号のはみ出し
 
@@ -150,5 +147,6 @@ powershell -ExecutionPolicy Bypass -File "（リポジトリ）\teachingbeauty-b
 - 検証（本番 HTML に同じ置換を施して新 CSS/JS で描画）：3 ページとも番号 22px・余白 66px、幅広書体（Verdana）でも余白 43px、
   「→アクセス」は 18px で矢印とアクセスが同じ大きさ。CSS が効かない／JS が動かない／両方の場合も枠内（余白 35px 以上）
 
-適用結果（2026-09-21 07:56 JST・`fix-round2.local.ps1`）：本文修正 3 箇所適用、全数検証 **PASS 1855 / FAIL 0**、ブラウザ巡回 **43 URL / 問題 0**。
-本番実測：home / newpage13 / taiban / concept とも番号 22px・幅 137px・枠の余り 66px（PC・iPhone 相当とも）。サイドバーの HTML は 39 ページすべて標準形。
+適用（`fix-round2.local.ps1`）。本文の直しは 3 箇所。検証もブラウザ巡回も通った。
+本番で測り直したところ home / newpage13 / taiban / concept とも番号は 22px・幅 137px で、枠に 66px 余る（PC・iPhone 相当とも）。
+サイドバーの HTML は 39 ページすべて同じ形になった。

@@ -11,9 +11,7 @@
 		else { document.addEventListener( 'DOMContentLoaded', fn ); }
 	}
 
-	/* 本文コンテナの子ノードを、段落・ブロック単位のフェードイン対象に分割する。
-	   ・見出し/画像/表/div 等はそれぞれ独立した対象に
-	   ・地の文は連続する <br><br>（空行）で段落に分割して対象に          */
+	/* 見出し・画像・表などはそのまま1単位、地の文は <br><br> で段落に割ってフェードイン対象にする。 */
 	function buildChunks( root ) {
 		var out = [];
 		var nodes = Array.prototype.slice.call( root.childNodes );
@@ -68,14 +66,13 @@
 		return out;
 	}
 
-	/* サイドバーの電話番号を、実際の描画幅で測って枠内に収める（書体・端末に依存しない最後の保険）。
-	   CSS 側の 22px で収まるのが通常。収まらない環境（想定外の書体・文字拡大）でのみ 1px ずつ縮める。 */
+	/* 電話番号の保険。ふつうは CSS の 22px で収まる。書体の都合で溢れた時だけ実測して縮める。 */
 	function fitSidebarTel() {
 		try {
 			var box = document.getElementById( 'shopinfo' );
 			var a = box && box.querySelector( 'a[href^="tel:"]' );
 			if ( ! a ) { return; }
-			// <a> と、その中の <font>（入れ子が逆のページ）の両方に同じサイズを当てる
+			// 入れ子が逆のページがあるので <a> と中の <font> の両方に当てる
 			var targets = [ a ].concat( Array.prototype.slice.call( a.querySelectorAll( 'font' ) ) );
 			targets.forEach( function ( el ) { el.style.fontSize = ''; } );
 			var cs = window.getComputedStyle( box );
@@ -125,7 +122,7 @@
 				targets.forEach( function ( el ) { el.classList.add( 'tb-in' ); } );
 			}
 		} catch ( e ) {
-			// 何らかの理由で失敗しても、本文が隠れたままにならないよう全て表示する。
+			// 失敗しても本文が隠れたままにならないように、全部表示しておく
 			Array.prototype.forEach.call( document.querySelectorAll( '.tb-rv' ), function ( el ) {
 				el.classList.add( 'tb-in' );
 			} );

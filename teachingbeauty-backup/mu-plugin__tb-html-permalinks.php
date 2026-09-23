@@ -1,11 +1,10 @@
 <?php
 /**
  * Plugin Name: Teaching Beauty – .html パーマリンク維持
- * Description: 現行サイトの .html URL（例 /concept.html）をそのまま維持するための must-use プラグイン。1:1 移行で URL を一切変えないために使用する。
+ * Description: /concept.html のような旧サイトの URL をそのまま使い続けるための mu-plugin。
  * Version: 1.0.0
  *
- * 設置方法: wp-content/mu-plugins/ に置く（mu-plugins が無ければフォルダを作成）。
- * 設置後、「設定 → パーマリンク」を一度開いて保存し、リライトを反映する。
+ * wp-content/mu-plugins/ に置いたあと、「設定 → パーマリンク」を一度保存してリライトを反映する。
  *
  * @package Teaching_Beauty
  */
@@ -15,9 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * 元サイトのファイル名（大文字小文字）を返す。WordPress はスラッグを小文字に正規化するため、
- * 原本と異なるものだけここで元の表記に戻す（現行サイトでは Meniere.html の1件）。
- * URL の解決自体は大文字小文字を問わず通るので、これは canonical とリンク生成用。
+ * WordPress はスラッグを小文字にしてしまうので、旧サイトの表記に戻すものだけここで持つ。
+ * 今は Meniere.html だけ。URL 解決は大小どちらでも通るので canonical とリンク生成用。
  */
 function tb_original_html_name( $slug ) {
 	static $map = array( 'meniere' => 'Meniere' );
@@ -36,10 +34,8 @@ add_action(
 );
 
 /**
- * 自作の .html パーマリンクに対して WordPress の正規化リダイレクト
- * （redirect_canonical）が誤作動し、空応答を返すのを防ぐ。
- * 固定ページ・投稿では canonical リダイレクトを無効化し、
- * 重複対策は wp_head の canonical タグに任せる。
+ * 自前の .html パーマリンクだと redirect_canonical が誤作動して空応答を返す。
+ * 固定ページと投稿では切り、重複対策は下の canonical タグに任せる。
  */
 add_filter(
 	'redirect_canonical',
@@ -54,16 +50,14 @@ add_filter(
 );
 
 /**
- * 現行サイトの /index.html はトップ（/）へ 301。
- * 旧サイトの index.html への内部リンク・被リンクを維持しつつ、
- * / と /index.html の重複（インデックス重複の主因）を正規化する。
+ * /index.html はトップへ 301。被リンクは生かしたまま / との重複を潰す。
  */
 add_action(
 	'template_redirect',
 	function () {
 		$req = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
 		$path = rawurldecode( (string) wp_parse_url( $req, PHP_URL_PATH ) );
-		// WordPress のホームパス（本番=空文字, 検証環境=/wp）を基準に判定。
+		// 本番は空、検証環境は /wp。home を基準に見る。
 		$home = rtrim( (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH ), '/' );
 		if ( $path === $home . '/index.html' ) {
 			wp_safe_redirect( home_url( '/' ), 301 );
@@ -104,8 +98,7 @@ add_filter(
 );
 
 /**
- * 旧ドメイン main.jp からの流入や、末尾スラッシュ差異による重複を避けるため
- * canonical を明示（インデックス重複対策・URL は変えない）。
+ * 旧ドメインからの流入や末尾スラッシュの違いで重複扱いされないよう canonical を明示する。
  */
 add_action(
 	'wp_head',

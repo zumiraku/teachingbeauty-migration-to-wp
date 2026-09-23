@@ -1,13 +1,11 @@
 <?php
 /**
- * 本番切替（/wp/ → ルート）の WordPress 側設定を切り替える一時スクリプト。実行後は削除すること。
+ * 切替用の使い捨てスクリプト。/wp/ に置いて、使ったら消す。
+ *   ?k=TOKEN&do=status … 今の設定を見るだけ
+ *   ?k=TOKEN&do=root   … home をルートに（ルートに index.php が無ければ何もしない）
+ *   ?k=TOKEN&do=wp     … home を /wp/ に戻す
  *
- * 置き場所: /wp/tb-cutover.php
- *   ?k=（トークン）&do=status … 現在の設定を表示（何も変えない）
- *   ?k=（トークン）&do=root   … サイトアドレス(home) をルートにする（切替）。ルートの index.php が無ければ拒否
- *   ?k=（トークン）&do=wp     … サイトアドレス(home) を /wp/ に戻す（切り戻し）
- *
- * WordPress アドレス(siteurl) は /wp/ のまま変えない（管理画面・アップロードのURLは不変）。
+ * siteurl は /wp/ のまま触らない。管理画面とアップロードの URL が動かないように。
  */
 
 header( 'Content-Type: text/plain; charset=UTF-8' );

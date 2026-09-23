@@ -1,17 +1,10 @@
 <?php
 /**
- * 本文の不具合を修正する一時スクリプト（2026-09-21 の全ページ監査で見つかったもの）。実行後は削除すること。
+ * 本文の細かい直しを流すための使い捨てスクリプト。/wp/ に置いて、使ったら消す。
+ *   ?k=TOKEN&dry=1 … 変更予定を出すだけ
+ *   ?k=TOKEN       … 適用
  *
- * 置き場所: /wp/tb-fix-content.php
- *   ?k=（トークン）&dry=1  … 変更予定を表示するだけ
- *   ?k=（トークン）        … 適用
- *
- * 修正内容:
- *  1. newpage23: <a href="https://www.teachingbeauty.jp/newpage13.html>…  （閉じ引用符の欠落・元サイトからの不具合）
- *     → リンク先が本文ごと URL になり 404 になっていた。引用符を補う。
- *  2. home: <script src="http://platform.twitter.com/widgets.js"> （https ページ内の http スクリプト＝ブラウザがブロック）
- *     → 元サイトでも読み込まれておらず表示に影響しないため削除。ツイートボタンのリンクは https に。
- * 変更は上記の文字列だけ。他の本文には触れない。
+ * 下の $fixes に書いた文字列だけを置き換える。他の本文には触らない。
  */
 
 header( 'Content-Type: text/plain; charset=UTF-8' );
@@ -24,9 +17,8 @@ define( 'WP_USE_THEMES', false );
 require_once __DIR__ . '/wp-load.php';
 global $wpdb;
 
-// サイドバー「TEL／→アクセス」ブロックを、36 ページで使われている標準の形に揃える。
-// home / newpage13 は「小さな矢印＋太字のアクセス」「<a> の中に <font size=6>」、taiban は太字 size=5 の番号、という
-// 元サイト時点からの不揃い。標準の形なら CSS の 22px と「→アクセス」の書体・サイズが他ページと同じに揃う。
+// サイドバーの TEL／→アクセスの書き方が、旧サイトの時点で home / newpage13 / taiban だけ他と違う。
+// 矢印が size の外に出ていたり <a> と <font> の入れ子が逆だったりする。他のページと同じ形に揃える。
 $std_tel_block = '<font size="6" color="#91384b"><a href="tel:0364137803">03-6413-7803</a><br>'
 	. "\n" . '<br>'
 	. "\n" . '<a href="access.html"><font size="4" color="#91384b">→アクセス</font></a></font>';

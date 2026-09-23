@@ -1,10 +1,9 @@
 <?php
 /**
- * Teaching Beauty theme — 原本HTML完全再現版
+ * Teaching Beauty
  *
- * 各ページは元サイトの <body> 内HTMLをそのまま出力し、
- * レイアウトは元の4つのCSS（hpbparts / container_5H_2c_top / main_5H_2c / user）
- * をそのまま読み込むことで、見た目を完全に一致させる。
+ * 各ページは旧サイトの <body> をそのまま出力し、レイアウトも旧サイトの4つの CSS
+ * （hpbparts / container_5H_2c_top / main_5H_2c / user）をそのまま読ませている。
  *
  * @package Teaching_Beauty
  */
@@ -23,8 +22,7 @@ add_action(
 );
 
 /**
- * 元サイトの4つのCSSをそのままの順序で読み込む（レイアウト完全再現）。
- * CSS・画像はサイトルート（/wp/ 内）の元の場所に配置されている。
+ * 旧サイトの CSS を元の順序で読む。CSS も画像もサイトルートの元の場所に置いたまま。
  */
 add_action(
 	'wp_enqueue_scripts',
@@ -42,9 +40,8 @@ add_action(
 );
 
 /**
- * <title> は元ページの <title> をそのまま出力する。
- * post_title（生値）を使うことで、WordPress の自動整形（ハイフン→ダッシュ等）や
- * サイト名サフィックス、フロントページのサイト名置換を回避し、原本と完全一致させる。
+ * <title> は post_title を生のまま出す。フィルタを通すとハイフンがダッシュに変わったり
+ * サイト名が付いたりして、旧サイトとずれる。
  */
 add_filter(
 	'pre_get_document_title',
@@ -89,7 +86,7 @@ remove_filter( 'the_content', 'wptexturize' );
 remove_filter( 'the_content', 'shortcode_unautop' );
 
 /**
- * 元サイトに無い WordPress の付加出力を抑制し、出力を原本に近づける。
+ * 旧サイトに無かった WordPress の付加出力を止める。
  */
 add_action(
 	'init',
@@ -106,10 +103,9 @@ add_action(
 		remove_action( 'wp_head', 'feed_links', 2 );
 		remove_action( 'wp_head', 'wp_resource_hints', 2 );
 
-		// WordPress 既定のフロント用CSS（ブロック・グローバルスタイル等）は元サイトに無く、
-		// 原本HTMLの表示を変えることがある（例: html :where([style^="border-bottom-width"]) が
-		// 壊れた style 属性に反応して下線を描く、img[class*="wp-image-"] に height:auto を当てる）。
-		// 原本の4CSSだけで描画するため、読み込まない。
+		// WordPress 既定のフロント CSS は旧サイトに無いうえ、旧 HTML の表示を変えてしまう。
+		// hari.html の壊れた style 属性に :where([style^="border-bottom-width"]) が反応して
+		// 下線が出たのが実例。旧サイトの4枚だけで描画させる。
 		remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
 		remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
 		remove_action( 'wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles' );
@@ -133,8 +129,7 @@ add_filter( 'wp_speculation_rules_configuration', '__return_null' );
 remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
 
 /**
- * Contact Form 7 の JS/CSS・フォーム専用スタイルは、フォームを含むページのみ読み込む。
- * 他ページには不要な出力をせず、原本に近い軽量な出力にする。
+ * Contact Form 7 の JS/CSS はフォームのあるページだけで読む。
  */
 add_action(
 	'wp_enqueue_scripts',
@@ -177,9 +172,8 @@ function tb_render_raw() {
 }
 
 /**
- * 編集画面に「説明文（description）／キーワード（keywords）」の欄を追加。
- * 値は元サイトの各ページから引き継いだ _tb_description / _tb_keywords で、<head> に出力している（上記）。
- * アンダースコア付きのメタは標準の「カスタムフィールド」欄に出ないため、専用の欄を用意する。
+ * description / keywords の編集欄。_tb_ 始まりのメタはアンダースコア付きなので
+ * 標準の「カスタムフィールド」には出てこない。専用の欄を置く。
  */
 add_action(
 	'add_meta_boxes',
