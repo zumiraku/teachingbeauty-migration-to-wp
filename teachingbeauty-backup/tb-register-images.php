@@ -16,7 +16,7 @@
 
 if ( PHP_SAPI !== 'cli' ) {
 	header( 'Content-Type: text/plain; charset=UTF-8' );
-	if ( ! isset( $_GET['k'] ) || 'k7Qm2xR9vTd4' !== $_GET['k'] ) {
+	if ( ! isset( $_GET['k'] ) || '__TB_TOKEN__' !== $_GET['k'] ) {
 		http_response_code( 404 );
 		exit( 'not found' );
 	}

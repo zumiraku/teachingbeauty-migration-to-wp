@@ -42,14 +42,17 @@ curl.exe -T "（リポジトリ）\teachingbeauty-backup\mu-plugin__tb-editor.ph
 
 ### 3. 画像をメディアライブラリに登録する
 `tb-register-images.php` を `/wp/` 直下に置き、ブラウザで開く。
+アップロードする前に、ファイル内の `__TB_TOKEN__` を自分で決めた合言葉に書き換えておく
+（この合言葉を知らない相手には 404 を返すだけの、外から叩かれないための鍵）。
+以下の URL の `（トークン）` は、その書き換えた文字列に読み替えること。
 ```powershell
 curl.exe -T "（リポジトリ）\teachingbeauty-backup\tb-register-images.php" "ftp://main.jp-teachingbeauty:（FTPパスワード）@ftp.lolipop.jp/wp/tb-register-images.php"
 ```
 1. まず **ドライラン**（何も変えない・一覧だけ表示）
-   `https://www.teachingbeauty.jp/wp/tb-register-images.php?k=k7Qm2xR9vTd4&dry=1`
+   `https://www.teachingbeauty.jp/wp/tb-register-images.php?k=（トークン）&dry=1`
    → 末尾が「imgタグ 308 / 新規登録 238 / 対象外 0 / ファイル無し 0」になるはず（ローカルと同じ）。
 2. 問題なければ **実行**。共用サーバーの実行時間制限に当たらないよう **25件ずつ**処理する。
-   `https://www.teachingbeauty.jp/wp/tb-register-images.php?k=k7Qm2xR9vTd4&n=25`
+   `https://www.teachingbeauty.jp/wp/tb-register-images.php?k=（トークン）&n=25`
    → 「続きがあります」と出たら同じURLをもう一度開く。「完了」が出るまで繰り返す（10回程度）。
    → 「登録失敗: teion」が1件出るのは想定内（拡張子の無いファイル。表示はそのまま）。
    → 何度実行しても安全（登録済みはスキップ、同じファイルは再利用して重複登録しない）。
