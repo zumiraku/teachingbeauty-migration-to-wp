@@ -23,3 +23,6 @@ teachingbeauty-backup/cutover/package-lock.json
 
 # エディタのセッション履歴
 .cc-history/
+
+# 調べ物のための使い捨てスクリプト
+teachingbeauty-backup/cutover/_*.mjs
