@@ -111,6 +111,15 @@ const r8 = await get( `${ base }/Meniere.html` );
 ok( r8.status === 200 && /canonical" href="[^"]*\/Meniere\.html"/.test( r8.text ), '/Meniere.html: 200 かつ canonical が Meniere.html', `${ r8.status }` );
 const r4 = await get( `${ base }/funin_aen.html` );
 ok( r4.status === 301 && /\/funin\.html$/.test( r4.location ), '/funin_aen.html → /funin.html (301)', `${ r4.status } ${ r4.location }` );
+// 旧スマホ版は 2026-09-26 に廃止。/_old-sp/ へ退避して該当ページへ送っている。
+if ( live ) {
+	const s1 = await get( `${ base }/sp/index.html` );
+	ok( s1.status === 301 && /\/$/.test( s1.location ), '/sp/index.html → トップ (301)', `${ s1.status } ${ s1.location }` );
+	const s2 = await get( `${ base }/sp/taiban.html` );
+	ok( s2.status === 301 && /\/taiban\.html$/.test( s2.location ), '/sp/taiban.html → /taiban.html (301)', `${ s2.status } ${ s2.location }` );
+	const s3 = await head( `${ base }/_old-sp/index.html` );
+	ok( s3 === 403, '/_old-sp/ は外から見えない', `HTTP ${ s3 }` );
+}
 if ( live ) {
 	const h = new URL( base ).host;
 	const r5 = await get( `http://${ h }/concept.html` );
@@ -130,7 +139,7 @@ const a4 = live ? await get( `${ base }/wp-json/contact-form-7/v1/contact-forms`
 ok( a4.status === 401 || a4.status === 403 || a4.status === 200, 'CF7 REST 応答', `${ a4.status }` );
 
 // 4) 静的資産（残すもの）
-for ( const f of [ '/sp/index.html', '/sitemap.xml', '/robots.txt', '/googlee9db13e7722f4047.html', '/hpbparts.css', '/newpage26.html', '/este.html', '/favicon.ico', '/apple-touch-icon.png' ] ) {
+for ( const f of [ '/sitemap.xml', '/robots.txt', '/googlee9db13e7722f4047.html', '/hpbparts.css', '/newpage26.html', '/este.html', '/favicon.ico', '/apple-touch-icon.png' ] ) {
 	if ( ! live && ( f === '/newpage26.html' || f === '/este.html' || f === '/googlee9db13e7722f4047.html' || f === '/favicon.ico' || f === '/apple-touch-icon.png' ) ) { continue; } // ローカルのミラーには孤立ページが無い
 	const s = await head( `${ base }${ f }` );
 	ok( s === 200, `静的 ${ f } 200`, `HTTP ${ s }` );
