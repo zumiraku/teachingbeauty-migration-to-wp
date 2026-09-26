@@ -18,21 +18,31 @@ RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
 RewriteCond %{HTTP_HOST} ^teachingbeauty\.jp$ [NC]
 RewriteRule ^ https://www.teachingbeauty.jp%{REQUEST_URI} [R=301,L]
 
-# WordPress を優先（/sp/ など静的フォルダの index.html はそのまま生きる）
+# WordPress を優先（移行対象外の静的フォルダの index.html はそのまま生きる）
 DirectoryIndex index.php index.html
 
 Redirect 301 /funin_aen.html https://www.teachingbeauty.jp/funin.html
 
+# 旧スマホ版 /sp/ は廃止（2026-09-26・クライアント判断）。今のページはスマホでもそのまま見られる。
+# フォルダは /_old-sp/ へ退避するので、古いリンクから来た人は該当ページへ送る。
+RewriteRule ^sp/taiban\.html$ https://www.teachingbeauty.jp/taiban.html [R=301,L]
+RewriteRule ^sp(/.*)?$ https://www.teachingbeauty.jp/ [R=301,L]
+
 # ---- WordPress（本体は /wp/、表示はルート）----
-# 実在するファイル・フォルダ（画像・CSS・/sp/・移行対象外の静的 .html など）はそのまま配信し、
+# 実在するファイル・フォルダ（画像・CSS・移行対象外の静的 .html など）はそのまま配信し、
 # それ以外（/concept.html 等の移行済みページ）を WordPress へ渡す。
 # BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
 <IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
+
 # END WordPress

@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const [url, out, w, y, h] = process.argv.slice(2);
+const b = await chromium.launch({ channel: 'chrome' });
+const p = await b.newPage({ viewport: { width: Number(w), height: 900 } });
+await p.goto(url, { waitUntil: 'load' });
+await p.addStyleTag({ content: `*,*::before,*::after{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}` });
+await p.waitForTimeout(600);
+await p.screenshot({ path: out, clip: { x: 0, y: Number(y), width: Number(w), height: Number(h) } });
+console.log('保存:', out);
+await b.close();

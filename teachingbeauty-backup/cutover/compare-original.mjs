@@ -20,7 +20,7 @@ const here = path.dirname( fileURLToPath( import.meta.url ) );
 const wxr = fs.readFileSync( path.join( here, '..', 'teachingbeauty-fullbody.wxr' ), 'utf8' );
 const slugs = [ ...wxr.matchAll( /<wp:post_name><!\[CDATA\[([^\]]+)\]\]>/g ) ].map( m => m[ 1 ] ).filter( s => ! only.length || only.includes( s ) );
 
-const browser = await chromium.launch( { channel: 'chrome', headless: true } );
+const browser = await chromium.launch( { channel: 'chrome', channel: 'chrome', headless: true } );
 async function shot( base, slug, out, blockEnhance ) {
 	const ctx = await browser.newContext( { viewport: { width: 1100, height: 900 }, reducedMotion: 'reduce', locale: 'ja-JP' } );
 	await ctx.route( '**/*', ( r ) => {

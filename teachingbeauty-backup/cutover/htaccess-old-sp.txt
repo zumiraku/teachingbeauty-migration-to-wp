@@ -1,0 +1,8 @@
+# 旧スマホ用サイトの退避フォルダ（/_old-sp/）: 外部からは見せない
+<IfModule mod_authz_core.c>
+Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+Order deny,allow
+Deny from all
+</IfModule>
