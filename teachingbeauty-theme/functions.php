@@ -129,6 +129,51 @@ add_filter( 'wp_speculation_rules_configuration', '__return_null' );
 remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
 
 /**
+ * 旧サイトにあったのは固定ページ39枚だけ。
+ * WordPress が自動で用意する投稿・カテゴリー・投稿者・検索結果・日付一覧は元サイトに無いので、
+ * サイトマップに載せないし、検索結果にも出さない。
+ * 放っておくと Google がそれらを拾って「中身が薄い」と判断し、
+ * サーチコンソールの未登録理由が増える。
+ */
+add_filter(
+	'wp_sitemaps_post_types',
+	function ( $types ) {
+		return array_intersect_key( $types, array( 'page' => true ) );
+	}
+);
+add_filter( 'wp_sitemaps_taxonomies', '__return_empty_array' );
+add_filter(
+	'wp_sitemaps_add_provider',
+	function ( $provider, $name ) {
+		return 'users' === $name ? false : $provider;
+	},
+	10,
+	2
+);
+add_filter(
+	'wp_robots',
+	function ( $robots ) {
+		if ( ! is_singular( 'page' ) ) {
+			$robots['noindex'] = true;
+		}
+		return $robots;
+	}
+);
+
+/**
+ * フィードも元サイトに無い。開かれたらトップへ返す。
+ */
+add_action(
+	'template_redirect',
+	function () {
+		if ( is_feed() ) {
+			wp_safe_redirect( home_url( '/' ), 301 );
+			exit;
+		}
+	}
+);
+
+/**
  * Contact Form 7 の JS/CSS はフォームのあるページだけで読む。
  */
 add_action(
