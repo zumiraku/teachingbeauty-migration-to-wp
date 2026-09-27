@@ -32,6 +32,10 @@ body {
 	box-shadow: 0 0 55px rgba(72,10,23,.12), 0 0 0 1px rgba(234,215,141,.55);
 }
 
+/* 上部の帯は幅 941px だが、トップページの写真だけ実寸が 851px しかなく、右に 90px 空いていた。
+   帯の幅いっぱいに伸ばす。他の38ページの画像はちょうど 941px なので、この指定でも大きさは変わらない。 */
+#hpb-title h2 { background-size: 100% auto; }
+
 /* ---------- 上部タイトル画像に金のきらめきを走らせる ---------- */
 .tb-enhanced #hpb-title { position: relative; overflow: hidden; }
 .tb-enhanced #hpb-title::after {
