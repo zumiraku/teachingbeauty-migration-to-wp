@@ -72,6 +72,16 @@ body {
    そのため iPhone では見出しだけが小さいまま残り、行頭が本文と揃わずクライアントから指摘を受けた。
    旧サイトの CSS でもバーの中で十分に収まっているので、ここは原本に任せる。 */
 
+/* 帯の絵（indexBg_5H.png 690x33）の左端の目印は y 6〜21、中心は 13.5px。
+   旧サイトの見出しは 18px で、文字の中心が 14px に来るのでちょうど目印に重なる。
+   あとから 24px（size="5"）にした見出しだけ中心が 17px になり、3.5px 下がって見える。
+   その 6 本だけ padding を詰めて、目印の中心に合わせる。
+   足した分は下に回すので、帯の高さ 37px もページの高さも変わらない。 */
+#hpb-main h3:not(.hpb-c-index):has(> font[size="5"]:only-child) {
+	padding-top: 1.5px;
+	padding-bottom: 11.5px;
+}
+
 /* ---------- 見出しに金のアンダーライン（同じく1行タイトルの h3 のみ） ---------- */
 .tb-enhanced #hpb-main h3,
 .tb-enhanced .hpb-layoutset-02 #hpb-wrapper h3 { position: relative; }
