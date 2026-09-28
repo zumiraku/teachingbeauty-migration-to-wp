@@ -17,7 +17,11 @@ if ( '' === $tb_bodyattr ) {
 <html lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1">
+<?php // レイアウトは 941px 固定。width=device-width だと「画面の幅＝ページの幅」と宣言することになり、
+	// iPhone では 941px が画面に収まらず左右が切れる（iPhone 13 で 390px に対し 941px）。
+	// 実寸の 941 を宣言すれば、iPhone 側が全体を縮めて画面に収めてくれる。
+	// 拡大禁止も外す。縮んだぶん文字が小さくなるので、指で広げて読めるようにしておく。 ?>
+<meta name="viewport" content="width=941">
 <link rel="icon" href="<?php echo esc_url( home_url( '/favicon.ico' ) ); ?>">
 <link rel="apple-touch-icon" href="<?php echo esc_url( home_url( '/apple-touch-icon.png' ) ); ?>">
 <?php
