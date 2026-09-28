@@ -28,9 +28,13 @@ const got = await page.evaluate( ( keys ) => {
 		const f = h.querySelector( 'font' );
 		out[ k ] = {
 			size: f ? getComputedStyle( f ).fontSize : getComputedStyle( h ).fontSize,
-			lines: rg.getClientRects().length,
+			// 行数は rect の個数では数えられない。h3・font・文字ノードそれぞれに rect が出るので、
+			// 1行でも2個3個になる。上端の座標が何種類あるかで数える。
+			lines: new Set( [ ...rg.getClientRects() ].map( ( r ) => Math.round( r.top ) ) ).size,
 			over: Math.round( tb.right - hb.right ) > 0 || Math.round( tb.bottom - hb.bottom ) > 0,
 			bar: Math.round( hb.height ),
+			width: Math.round( tb.width ),
+			barWidth: Math.round( hb.width ),
 		};
 	}
 	out.news = getComputedStyle( document.querySelector( '#toppage-news .en font' ) ).fontSize;
@@ -46,7 +50,7 @@ for ( const w of WANT ) {
 	if ( g.over ) { console.log( `  NG   「${ w.key }」の文字が帯からはみ出している` ); bad++; continue; }
 	if ( g.size !== w.size ) { console.log( `  NG   「${ w.key }」の文字が ${ g.size }（${ w.size } のはず）` ); bad++; continue; }
 	if ( g.lines !== w.lines ) { console.log( `  NG   「${ w.key }」が ${ g.lines } 行に折り返している` ); bad++; continue; }
-	console.log( `  OK   「${ w.key }」 文字 ${ g.size } / 帯 ${ g.bar }px / ${ g.lines }行 / はみ出しなし` );
+	console.log( `  OK   「${ w.key }」 文字 ${ g.size } / 帯 ${ g.bar }px / ${ g.lines }行 / 文字幅 ${ g.width }px（帯 ${ g.barWidth }px）` );
 }
 console.log( `  （参考）新着情報の文字: ${ got.news }` );
 process.exit( bad ? 1 : 0 );
