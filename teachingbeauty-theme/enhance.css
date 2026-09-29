@@ -162,6 +162,12 @@ body {
 #hpb-main:has(#toppage) > div {
 	padding-left: 8px;
 }
+/* ただし見出しバーは本文の左端いっぱいに出したいので、足した 8px を打ち消す。
+   これを入れないと、div の中にある【…の思い】のバーだけ左8px・幅690pxになり、
+   直下にある他のバー（左0・幅698px）と揃わない。 */
+#hpb-main:has(#toppage) > div > h3 {
+	margin-left: -8px;
+}
 
 /* 店舗情報カードに柔らかな影 */
 .tb-enhanced #shopinfo {
