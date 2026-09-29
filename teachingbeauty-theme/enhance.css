@@ -169,6 +169,14 @@ body {
 	margin-left: -8px;
 }
 
+/* li の中に入っている見出しだけ line-height が 15.68px になっていて、
+   中の 18px の文字が収まらず帯が 38px に伸び、文字が 3.5px 下がっていた。
+   （エステのページの「バストアップ」「ベーシックフェイシャル」がこれ）
+   normal に戻すと高さ 31px・文字の中心 14px になり、他のバーと揃う。 */
+#hpb-main li > h3 {
+	line-height: normal;
+}
+
 /* 店舗情報カードに柔らかな影 */
 .tb-enhanced #shopinfo {
 	box-shadow: 0 4px 18px rgba(72,10,23,.1);

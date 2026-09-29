@@ -1,119 +1,213 @@
-// 本番サイトの全 URL をブラウザで巡回して監査する
-//   node audit-site.mjs https://www.teachingbeauty.jp [--engine=chromium|webkit] [--out=DIR]
-// 巡回: トップから辿れる同一ホストの全リンク + sitemap.xml + /sp/index.html（管理画面・ログインは除外）
-// 各ページで記録: HTTP、console エラー/警告、失敗したリクエスト（4xx/5xx/ブロック/混在コンテンツ）、
-//   壊れた画像（naturalWidth 0）、文字化け（U+FFFD）、http:// 参照、横スクロール、外部リンクの生死
-import fs from 'node:fs';
-import path from 'node:path';
-import { chromium, webkit } from 'playwright';
+// 全39ページを、パソコンとスマホの両方で1回ずつ開いて、まとめて調べる。
+//   node audit-site.mjs https://www.teachingbeauty.jp
+//
+// これまで verify-iphone.mjs と audit-bars.mjs が別々に全ページを開いていて、
+// 同じページを4回読み込んでいた。40分以上かかり、途中でブラウザが落ちた。
+// 1ページにつき1回だけ開いて、そこで全部の項目を調べる形にまとめる。
+//
+// 調べること:
+//   スマホ   画面に収まっているか / 左右に余白があるか / サイドバーが追従するか
+//   共通     見出しバーの帯・左端・幅・右のはみ出し・折り返し・文字の中心
+//
+// 元サイト由来で直しようがないものは KNOWN に入れ、報告はするが失敗にしない。
 
-const args = process.argv.slice( 2 );
-const base = ( args.find( a => ! a.startsWith( '--' ) ) || '' ).replace( /\/$/, '' );
-const engine = ( args.find( a => a.startsWith( '--engine=' ) ) || '--engine=chromium' ).split( '=' )[ 1 ];
-const outDir = ( args.find( a => a.startsWith( '--out=' ) ) || '--out=./audit-out' ).split( '=' )[ 1 ];
-if ( ! base ) { console.log( 'usage: node audit-site.mjs <base> [--engine=chromium|webkit] [--out=DIR]' ); process.exit( 2 ); }
-fs.mkdirSync( outDir, { recursive: true } );
-const host = new URL( base ).host;
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { chromium, devices } from 'playwright';
 
-const isInternal = ( u ) => { try { const x = new URL( u ); return x.host === host; } catch { return false; } };
-const skip = ( u ) => /\/wp\/wp-(admin|login|json)|\/wp-json|\/_old-static\/|\?|#|\.(jpg|jpeg|png|gif|css|js|xml|txt|pdf|ico)$/i.test( u );
-const norm = ( u ) => { const x = new URL( u ); x.hash = ''; return x.href; };
+const here = path.dirname( fileURLToPath( import.meta.url ) );
+const base = ( process.argv[ 2 ] || 'https://www.teachingbeauty.jp' ).replace( /\/$/, '' );
+const wxr = fs.readFileSync( path.join( here, '..', 'teachingbeauty-fullbody.wxr' ), 'utf8' );
+const slugs = [ ...wxr.matchAll( /<wp:post_name><!\[CDATA\[([^\]]+)\]\]>/g ) ].map( ( m ) => m[ 1 ] );
 
-// seed: sitemap + トップ + /sp/（--seeds=FILE で URL 一覧を与えることもできる。--no-crawl でリンクを辿らない）
-const seedsFile = ( args.find( a => a.startsWith( '--seeds=' ) ) || '' ).split( '=' )[ 1 ];
-const noCrawl = args.includes( '--no-crawl' );
-const queue = seedsFile ? fs.readFileSync( seedsFile, 'utf8' ).split( /\r?\n/ ).filter( Boolean ) : [ `${ base }/`, `${ base }/sp/index.html` ];
-if ( ! seedsFile ) {
-	try {
-		const sm = await ( await fetch( `${ base }/sitemap.xml` ) ).text();
-		for ( const m of sm.matchAll( /<loc>([^<]+)<\/loc>/g ) ) { const u = m[ 1 ].trim(); if ( isInternal( u ) ) queue.push( u ); }
-	} catch {}
-}
+const TICK_C = 13.5;
+const BAR_IMG = 'indexBg_5H.png';
+const KNOWN_NO_BAR = [ 'news' ];   // #coupon の見出しは元から帯が無い意匠
+const KILL = '*{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}';
 
-const browserType = engine === 'webkit' ? webkit : chromium;
-const browser = await browserType.launch( engine === 'chromium' ? { channel: 'chrome', headless: true } : { headless: true } );
-const ctx = await browser.newContext( { viewport: { width: 1280, height: 900 }, locale: 'ja-JP' } );
+const DEVS = [
+	[ 'パソコン', { viewport: { width: 1280, height: 900 } }, false ],
+	[ 'スマホ', { ...devices[ 'iPhone 13' ] }, true ],
+];
 
-const seen = new Set();
-const results = [];
-const externalCache = new Map();
+const bars = [];
+const mobile = [];
+let fatal = null;
 
-async function checkExternal( u ) {
-	if ( externalCache.has( u ) ) return externalCache.get( u );
-	let s = 0;
-	try {
-		const r = await fetch( u, { method: 'HEAD', redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 tb-audit' }, signal: AbortSignal.timeout( 15000 ) } );
-		s = r.status;
-		if ( s === 405 || s === 403 ) { const r2 = await fetch( u, { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 tb-audit' }, signal: AbortSignal.timeout( 15000 ) } ); s = r2.status; }
-	} catch ( e ) { s = -1; }
-	externalCache.set( u, s );
-	return s;
-}
-
-while ( queue.length ) {
-	const raw = queue.shift();
-	let url; try { url = norm( raw ); } catch { continue; }
-	if ( seen.has( url ) || ! isInternal( url ) || skip( url.replace( base, '' ) ) ) continue;
-	seen.add( url );
-
+for ( const [ devName, opt, isPhone ] of DEVS ) {
+	// 端末ごとにブラウザを立て直す。1つを長く使い回すと途中で落ちることがある。
+	const browser = await chromium.launch( { channel: 'chrome' } );
+	const ctx = await browser.newContext( opt );
 	const page = await ctx.newPage();
-	const rec = { url, engine, status: 0, console: [], failed: [], brokenImages: [], mojibake: 0, httpRefs: [], hScroll: false, links: 0, externalBad: [], title: '' };
-	page.on( 'console', ( m ) => { if ( m.type() === 'error' || m.type() === 'warning' ) rec.console.push( `${ m.type() }: ${ m.text().slice( 0, 200 ) }` ); } );
-	page.on( 'requestfailed', ( r ) => rec.failed.push( `${ r.failure()?.errorText } ${ r.url().slice( 0, 160 ) }` ) );
-	page.on( 'response', ( r ) => { if ( r.status() >= 400 ) rec.failed.push( `HTTP ${ r.status() } ${ r.url().slice( 0, 160 ) }` ); } );
+	page.setDefaultTimeout( 45000 );
+
 	try {
-		const resp = await page.goto( url, { waitUntil: 'load', timeout: 60000 } );
-		rec.status = resp ? resp.status() : 0;
-		await page.waitForTimeout( 1500 );
-		const info = await page.evaluate( () => {
-			const imgs = [ ...document.images ].filter( i => i.complete && i.naturalWidth === 0 && i.getAttribute( 'src' ) ).map( i => i.getAttribute( 'src' ) );
-			const text = document.body ? document.body.innerText : '';
-			const mojibake = ( text.match( /�/g ) || [] ).length;
-			const httpRefs = [ ...document.querySelectorAll( '[src^="http://"],[href^="http://"][rel~="stylesheet"],link[href^="http://"]' ) ].map( e => e.getAttribute( 'src' ) || e.getAttribute( 'href' ) );
-			const hScroll = document.documentElement.scrollWidth > document.documentElement.clientWidth + 2;
-			const links = [ ...document.querySelectorAll( 'a[href]' ) ].map( a => a.href );
-			return { imgs, mojibake, httpRefs, hScroll, links, title: document.title };
-		} );
-		rec.brokenImages = info.imgs; rec.mojibake = info.mojibake; rec.httpRefs = info.httpRefs; rec.hScroll = info.hScroll; rec.title = info.title;
-		rec.links = info.links.length;
-		for ( const l of info.links ) {
-			if ( isInternal( l ) ) { if ( ! noCrawl && ! skip( l.replace( base, '' ) ) ) queue.push( l ); }
-			else if ( /^https?:/.test( l ) ) { const s = await checkExternal( l ); if ( s !== 200 && s !== 301 && s !== 302 && s !== 429 ) rec.externalBad.push( `${ s } ${ l }` ); }
+		for ( const slug of slugs ) {
+			const url = base + ( 'home' === slug ? '/' : `/${ slug }.html` );
+
+			// 一時的な失敗で全体を落とさない
+			let ok = false;
+			for ( let i = 0; i < 3 && ! ok; i++ ) {
+				try {
+					await page.goto( url, { waitUntil: 'domcontentloaded', timeout: 45000 } );
+					ok = true;
+				} catch ( e ) {
+					if ( 2 === i ) { throw e; }
+					await page.waitForTimeout( 1500 );
+				}
+			}
+			await page.addStyleTag( { content: KILL } ).catch( () => {} );
+			await page.waitForTimeout( 260 );
+
+			const got = await page.evaluate( ( { BAR_IMG, isPhone } ) => {
+				const main = document.querySelector( '#hpb-main' );
+				const inner = document.querySelector( '#hpb-inner' );
+				const out = { bars: [], phone: null };
+
+				if ( isPhone ) {
+					out.phone = {
+						screen: window.innerWidth,
+						doc: document.documentElement.scrollWidth,
+						meta: ( document.querySelector( 'meta[name="viewport"]' ) || {} ).content || '',
+						gutter: inner ? Math.round( inner.getBoundingClientRect().left ) : -1,
+						asidePos: ( () => {
+							const a = document.querySelector( '#hpb-aside' );
+							return a ? getComputedStyle( a ).position : 'なし';
+						} )(),
+					};
+				}
+
+				if ( ! main ) { return out; }
+				const mb = main.getBoundingClientRect();
+				for ( const h of main.querySelectorAll( 'h3' ) ) {
+					if ( h.classList.contains( 'hpb-c-index' ) ) { continue; }
+					const cs = getComputedStyle( h );
+					const hb = h.getBoundingClientRect();
+					const pb = h.parentElement.getBoundingClientRect();
+					const pcs = getComputedStyle( h.parentElement );
+					const padL = parseFloat( pcs.paddingLeft ) || 0;
+					const padR = parseFloat( pcs.paddingRight ) || 0;
+
+					// 行数と文字の位置は、文字そのものの箱で測る。
+					// <strong> などの要素は自前の rect を別の高さで返すので、
+					// 要素の rect を数えると1行でも2行に見えてしまう。
+					const rects = [];
+					const tw = document.createTreeWalker( h, NodeFilter.SHOW_TEXT );
+					let tn;
+					while ( ( tn = tw.nextNode() ) ) {
+						if ( ! tn.nodeValue.trim() ) { continue; }
+						const r2 = document.createRange();
+						r2.selectNode( tn );
+						for ( const rr of r2.getClientRects() ) {
+							if ( rr.height >= 4 && rr.width >= 2 ) { rects.push( rr ); }
+						}
+					}
+					if ( ! rects.length ) { continue; }
+					const top = Math.min( ...rects.map( ( r ) => r.top ) );
+					const bot = Math.max( ...rects.map( ( r ) => r.bottom ) );
+					const right = Math.max( ...rects.map( ( r ) => r.right ) );
+					const lines = new Set( rects.map( ( r ) => Math.round( r.top ) ) ).size;
+
+					out.bars.push( {
+						t: h.textContent.trim().replace( /\s+/g, ' ' ).slice( 0, 18 ),
+						帯あり: cs.backgroundImage.includes( BAR_IMG ),
+						左: Math.round( hb.left - pb.left - padL ),
+						主左: Math.round( hb.left - mb.left ),
+						幅: Math.round( hb.width ),
+						親幅: Math.round( pb.width - padL - padR ),
+						高さ: Math.round( hb.height ),
+						右はみ出し: Math.round( right - hb.right ),
+						行数: lines,
+						中心: +( ( ( top + bot ) / 2 - hb.top ).toFixed( 1 ) ),
+						飲み込み: Math.round( hb.height ) > 60,
+					} );
+				}
+				return out;
+			}, { BAR_IMG, isPhone } );
+
+			for ( const b of got.bars ) { bars.push( { dev: devName, slug, ...b } ); }
+
+			if ( isPhone ) {
+				// サイドバーの追従は、実際にスクロールして確かめる
+				const stuck = await page.evaluate( () => {
+					const h = document.body.scrollHeight;
+					window.scrollTo( 0, Math.max( 0, Math.min( 2600, h - window.innerHeight - 10 ) ) );
+					return new Promise( ( r ) => setTimeout( () => {
+						const a = document.querySelector( '#hpb-aside' );
+						if ( ! a ) { return r( { なし: true } ); }
+						const b = a.getBoundingClientRect();
+						r( { 見えている: b.bottom > 0 && b.top < window.innerHeight, top: Math.round( b.top ), scrolled: Math.round( window.scrollY ) } );
+					}, 380 ) );
+				} );
+				mobile.push( { slug, ...got.phone, ...stuck } );
+			}
 		}
-		const name = url.replace( base, '' ).replace( /[^a-zA-Z0-9._-]+/g, '_' ) || '_root';
-		await page.screenshot( { path: path.join( outDir, `${ engine }-${ name }.png` ), fullPage: true } ).catch( () => {} );
 	} catch ( e ) {
-		rec.error = e.message.slice( 0, 200 );
+		fatal = `${ devName } の途中で止まりました: ${ e.message.split( '\n' )[ 0 ] }`;
 	}
-	await page.close();
-	// ノイズ除去: 外部ウィジェット（ekiten/GTM/FC2）由来のものは別扱い
-	// 外部サービス由来（GTM/GA のビーコン、Facebook iframe の Permissions-Policy 警告、ヘッドレス Chrome の WebGPU 警告）も別扱い
-	const isExt = ( s ) => /ekiten|googletagmanager|google-analytics|analytics\.google|google\.com\/(ccm|rmkt|pagead)|google\.co\.jp\/pagead|fc2|doubleclick|googleads|youtube|ameblo|Permissions-Policy header|powerPreference|No available adapters/i.test( s );
-	rec.consoleExt = rec.console.filter( isExt ); rec.console = rec.console.filter( s => ! isExt( s ) );
-	rec.failedExt = rec.failed.filter( isExt ); rec.failed = rec.failed.filter( s => ! isExt( s ) );
-	results.push( rec );
-	const bad = rec.status !== 200 || rec.console.length || rec.failed.length || rec.brokenImages.length || rec.mojibake || rec.httpRefs.length || rec.hScroll || rec.externalBad.length || rec.error;
-	console.log( `${ bad ? '✗' : '✓' } ${ rec.status } ${ url.replace( base, '' ) || '/' }` + ( bad ? `  console=${ rec.console.length } failed=${ rec.failed.length } brokenImg=${ rec.brokenImages.length } mojibake=${ rec.mojibake } http=${ rec.httpRefs.length } hscroll=${ rec.hScroll } extBad=${ rec.externalBad.length }${ rec.error ? ' ERR ' + rec.error : '' }` : '' ) );
+
+	await ctx.close().catch( () => {} );
+	await browser.close().catch( () => {} );
+	if ( fatal ) { break; }
 }
-await browser.close();
-fs.writeFileSync( path.join( outDir, `audit-${ engine }.json` ), JSON.stringify( results, null, 2 ) );
-const bad = results.filter( r => r.status !== 200 || r.console.length || r.failed.length || r.brokenImages.length || r.mojibake || r.httpRefs.length || r.hScroll || r.error );
-console.log( `\n巡回 ${ results.length } URL / 問題あり ${ bad.length }` );
-for ( const r of bad ) {
-	console.log( `\n--- ${ r.url }` );
-	if ( r.status !== 200 ) console.log( '  HTTP', r.status );
-	for ( const c of r.console ) console.log( '  console:', c );
-	for ( const f of r.failed ) console.log( '  failed:', f );
-	for ( const i of r.brokenImages ) console.log( '  broken img:', i );
-	if ( r.mojibake ) console.log( '  mojibake chars:', r.mojibake );
-	for ( const h of r.httpRefs ) console.log( '  http ref:', h );
-	if ( r.hScroll ) console.log( '  horizontal scroll' );
-	for ( const e of r.externalBad ) console.log( '  external:', e );
-	if ( r.error ) console.log( '  error:', r.error );
+
+if ( fatal ) {
+	console.log( `  NG   ${ fatal }` );
+	process.exitCode = 1;
 }
-const extNoise = results.filter( r => r.consoleExt.length || r.failedExt.length );
-if ( extNoise.length ) { console.log( `\n（参考）外部ウィジェット由来の警告があるページ: ${ extNoise.length }` ); }
-const extDead = results.filter( r => r.externalBad.length );
-if ( extDead.length ) { console.log( `
-（警告）応答の無い外部リンク先があるページ: ${ extDead.length }（サイト側の不具合ではない・掲載継続はクライアント判断）` ); for ( const r of extDead ) for ( const e of r.externalBad ) console.log( '  ' + r.url.replace( base, '' ) + ' → ' + e ); }
-console.log( bad.length ? '[AUDIT FAIL]' : '[AUDIT PASS]' );
+
+// ---- スマホ ----
+const mProblems = [];
+for ( const m of mobile ) {
+	if ( m.doc > m.screen + 2 ) { mProblems.push( `${ m.slug }: ページ ${ m.doc }px が画面 ${ m.screen }px に収まらない` ); }
+	if ( ! /width=965/.test( m.meta ) ) { mProblems.push( `${ m.slug }: viewport が ${ m.meta }` ); }
+	if ( m.gutter < 8 ) { mProblems.push( `${ m.slug }: 左の余白が ${ m.gutter }px` ); }
+	if ( 'sticky' !== m.asidePos ) { mProblems.push( `${ m.slug }: サイドバーが sticky でない（${ m.asidePos }）` ); }
+	if ( m.scrolled > 200 && ! m.見えている && ! m.なし ) { mProblems.push( `${ m.slug }: スクロール後にサイドバーが消える（top=${ m.top }）` ); }
+}
+console.log( `スマホ: ${ mobile.length } ページ` );
+if ( mProblems.length ) {
+	for ( const x of mProblems.slice( 0, 15 ) ) { console.log( `  NG   ${ x }` ); }
+	if ( mProblems.length > 15 ) { console.log( `       …ほか ${ mProblems.length - 15 } 件` ); }
+} else {
+	console.log( '  OK   全ページ、画面に収まり・余白あり・サイドバーが追従' );
+}
+
+// ---- 見出しバー ----
+const P = { 帯なし: [], 右はみ出し: [], 折り返し: [], 中心ずれ: [], ページ内で左が不揃い: [], 飲み込み: [] };
+const byPage = {};
+for ( const r of bars ) {
+	const id = `${ r.dev } ${ r.slug }「${ r.t }」`;
+	const known = KNOWN_NO_BAR.includes( r.slug );
+	if ( ! r.帯あり && ! known ) { P.帯なし.push( id ); }
+	if ( r.右はみ出し > 2 ) { P.右はみ出し.push( `${ id } +${ r.右はみ出し }px` ); }
+	if ( r.行数 > 1 && ! r.飲み込み ) { P.折り返し.push( `${ id } ${ r.行数 }行` ); }
+	if ( ! r.飲み込み && 1 === r.行数 && ! known && Math.abs( r.中心 - TICK_C ) > 1.5 ) { P.中心ずれ.push( `${ id } 中心${ r.中心 }` ); }
+	if ( r.飲み込み ) { P.飲み込み.push( `${ id } 高さ${ r.高さ }px` ); }
+	// 同じページのバーどうしで左端が揃っているか（自分で入れた指定の巻き添えを拾う）
+	if ( ! r.飲み込み && ! known ) {
+		const key = `${ r.dev } ${ r.slug }`;
+		( byPage[ key ] = byPage[ key ] || [] ).push( r.主左 );
+	}
+}
+for ( const [ key, list ] of Object.entries( byPage ) ) {
+	const uniq = [ ...new Set( list ) ];
+	if ( uniq.length > 1 ) { P.ページ内で左が不揃い.push( `${ key }: ${ uniq.join( ' / ' ) }px` ); }
+}
+
+console.log( `\n見出しバー: ${ bars.length } 本（パソコン＋スマホ）` );
+let bad = 0;
+const SOFT = [ '飲み込み', '折り返し' ];   // 元サイト由来・文章の長さの問題
+for ( const [ name, list ] of Object.entries( P ) ) {
+	if ( ! list.length ) { console.log( `  OK   ${ name }: なし` ); continue; }
+	const soft = SOFT.includes( name );
+	console.log( `  ${ soft ? '--' : 'NG' }   ${ name }: ${ list.length } 件${ soft ? '（元サイト由来・別件）' : '' }` );
+	for ( const x of list.slice( 0, 10 ) ) { console.log( `        ${ x }` ); }
+	if ( list.length > 10 ) { console.log( `        …ほか ${ list.length - 10 } 件` ); }
+	if ( ! soft ) { bad += list.length; }
+}
+
+bad += mProblems.length;
+console.log( bad ? `\n直すべき問題 ${ bad } 件` : '\n直すべき問題はありません' );
+if ( bad ) { process.exitCode = 1; }
