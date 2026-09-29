@@ -254,7 +254,9 @@ for ( const [ key, list ] of Object.entries( byPage ) ) {
 
 console.log( `\n見出しバー: ${ bars.length } 本（パソコン＋スマホ）` );
 let bad = 0;
-const SOFT = [ '飲み込み', '折り返し', 'ページ内で大きさが不揃い', 'ページ内で左が不揃い' ];   // 元サイト由来・文章の長さの問題
+// 大きさはこちらで全ページ24pxに揃えたので、ばらけていたら不具合として扱う。
+// 折り返し・左の不揃い・飲み込みは元サイト由来なので報告のみ。
+const SOFT = [ '飲み込み', '折り返し', 'ページ内で左が不揃い' ];   // 元サイト由来・文章の長さの問題
 for ( const [ name, list ] of Object.entries( P ) ) {
 	if ( ! list.length ) { console.log( `  OK   ${ name }: なし` ); continue; }
 	const soft = SOFT.includes( name );

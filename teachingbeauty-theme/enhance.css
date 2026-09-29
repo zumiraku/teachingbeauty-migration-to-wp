@@ -80,10 +80,29 @@ body {
 
    入れ子はたどらない。編集画面で太字にすると <strong> が挟まって
    h3 > font という直接の親子関係が切れ、指定が外れてしまうため。
-   代わりに、本文を飲み込んでいる見出しに当たらないよう1行の帯だけに絞る。 */
-#hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)):has(font[size="5"]) {
+   代わりに、本文を飲み込んでいる見出しに当たらないよう1行の帯だけに絞る。
+
+   タイトルバーの文字は、ページによって 18px・16px・24px が混ざっていた
+   （元サイトのまま。18px が98本、16px が62本、24px が10本）。
+   同じサイトの中で大きさが揃っていないので、全部 24px にする。
+
+   :not(...) で br・img・表などを含む見出しを外しているのが肝心なところ。
+   旧サイトには </h3> の閉じ忘れで本文まで飲み込んでいる見出しが80本あり、
+   そこに font-size を効かせると本文の文字まで大きくなってページが崩れる。
+   除外していれば巻き込まない（全39ページで本文の高さを測って確認済み）。
+
+   帯の絵は 690x33 の固定サイズなので、文字だけ大きくすると帯から出る。
+   長いタイトルが2行3行になったときは帯が1行ぶんしか無く、2行目から下は
+   帯が消えてしまう。background-size で h3 の高さいっぱいに伸ばす。 */
+#hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)),
+#hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)) * {
+	font-size: 24px;
+	line-height: 24px;
+}
+#hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)) {
 	padding-top: 1.5px;
 	padding-bottom: 11.5px;
+	background-size: 100% 100%;
 }
 
 /* ---------- 見出しに金のアンダーライン（同じく1行タイトルの h3 のみ） ---------- */
