@@ -47,6 +47,23 @@ for ( const dev of [ 'iPhone 13', 'iPhone SE' ] ) {
 		}
 	}
 
+
+	// サイドバーがスクロールに追従するか（トップページで実際に動かして見る）
+	await page.goto( base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 } );
+	await page.waitForTimeout( 1200 );
+	const pos = await page.evaluate( () => getComputedStyle( document.querySelector( '#hpb-aside' ) ).position );
+	await page.evaluate( () => window.scrollTo( 0, 2600 ) );
+	await page.waitForTimeout( 400 );
+	const stuck = await page.evaluate( () => {
+		const r = document.querySelector( '#hpb-aside' ).getBoundingClientRect();
+		return { top: Math.round( r.top ), 見えている: r.bottom > 0 && r.top < window.innerHeight };
+	} );
+	if ( 'sticky' !== pos || ! stuck.見えている ) {
+		console.log( `  NG   ${ dev } サイドバーが追従しない（position=${ pos } / スクロール後 top=${ stuck.top }）` );
+		ng++;
+	} else {
+		console.log( `  OK   ${ dev } サイドバーが追従する（2600px スクロール後も top=${ stuck.top }）` );
+	}
 	if ( ng ) { bad += ng; } else { console.log( `  OK   ${ dev } 全 ${ slugs.length } ページが画面に収まり、左右に余白がある` ); }
 	await ctx.close();
 }

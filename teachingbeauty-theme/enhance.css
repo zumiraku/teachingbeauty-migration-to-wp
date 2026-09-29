@@ -122,6 +122,18 @@ body {
 }
 .tb-enhanced #banner li a:hover::before { left: 140%; }
 
+/* サイドバーをスクロールに追従させる。
+   本文はトップで 5032px あるのにサイドバーは 1856px で終わるので、右側が
+   3000px 以上も空っぽに見える。追従させれば空きが目立たなくなり、バナーの
+   リンクにもいつでも手が届く。
+   sticky は途中の親に overflow: hidden などがあると効かないが、#hpb-aside の
+   祖先には無いことを確認済み。止まる位置は #hpb-inner の終わりなので、
+   フッターに重なることもない。 */
+#hpb-aside {
+	position: sticky;
+	top: 8px;
+}
+
 /* 店舗情報カードに柔らかな影 */
 .tb-enhanced #shopinfo {
 	box-shadow: 0 4px 18px rgba(72,10,23,.1);
