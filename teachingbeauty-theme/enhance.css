@@ -230,6 +230,23 @@ body {
 	margin-top: 6px;
 }
 
+/* トップの「News 新着情報」の帯だけ、他のバーより大きかった。
+   帯 65px・英字 32px で、帯の絵（33px）から文字が 52px まではみ出していた。
+   英字が明朝の代替書体になると行の高さがさらに伸びるため、font-size だけ
+   下げても収まらない（24px にしても 52px のまま）。行の高さも一緒に決める。
+   結果: 帯 38px・文字の下端 29px・中心 13px。他のバー（37/26/13.5）とほぼ同じ。
+   元サイトの CSS のほうが詳しいセレクタなので、こちらも #hpb-main から書く。 */
+#hpb-main #toppage-news h3 {
+	padding-top: 1.5px;
+	padding-bottom: 13.5px;
+	line-height: 22px;
+}
+#hpb-main #toppage-news h3 span,
+#hpb-main #toppage-news h3 font {
+	font-size: 24px;
+	line-height: 22px;
+}
+
 /* ---------- テキストリンクに伸びる下線 ---------- */
 .tb-enhanced #hpb-main a {
 	background-image: linear-gradient(#a9770b, #a9770b);
