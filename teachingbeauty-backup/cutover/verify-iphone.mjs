@@ -1,7 +1,8 @@
 // iPhone で全39ページが画面に収まっているかを確かめる。
 //   node verify-iphone.mjs https://www.teachingbeauty.jp
-// レイアウトは 941px 固定なので、viewport に実寸を宣言して端末側に縮めてもらう。
-// 宣言が画面幅のままだと 941px が収まらず、左右が切れる。
+// レイアウトは 941px 固定なので、viewport に実寸＋余白を宣言して端末側に縮めてもらう。
+// 宣言が画面幅のままだと 941px が収まらず左右が切れる。
+// ちょうど 941 だと中身が画面の端に貼りつくので、左右 12px ぶんを足した 965 にする。
 
 import fs from 'fs';
 import path from 'path';
@@ -29,19 +30,24 @@ for ( const dev of [ 'iPhone 13', 'iPhone SE' ] ) {
 			screen: window.innerWidth,
 			doc: document.documentElement.scrollWidth,
 			meta: ( document.querySelector( 'meta[name="viewport"]' ) || {} ).content || '',
+			gutter: Math.round( ( document.querySelector( '#hpb-inner' ) || document.body ).getBoundingClientRect().left ),
 		} ) );
 		// 端末が縮めてくれていれば innerWidth はレイアウト幅と同じになる。
 		if ( r.doc > r.screen + 2 ) {
 			console.log( `  NG   ${ dev } ${ slug }: ページ ${ r.doc }px が画面 ${ r.screen }px に収まらない` );
 			ng++;
 		}
-		if ( ! /width=941/.test( r.meta ) ) {
+		if ( ! /width=965/.test( r.meta ) ) {
 			console.log( `  NG   ${ dev } ${ slug }: viewport の指定が違う（${ r.meta }）` );
+			ng++;
+		}
+		if ( r.gutter < 8 ) {
+			console.log( `  NG   ${ dev } ${ slug }: 左の余白が ${ r.gutter }px しかない（端に貼りついている）` );
 			ng++;
 		}
 	}
 
-	if ( ng ) { bad += ng; } else { console.log( `  OK   ${ dev } 全 ${ slugs.length } ページが画面に収まっている` ); }
+	if ( ng ) { bad += ng; } else { console.log( `  OK   ${ dev } 全 ${ slugs.length } ページが画面に収まり、左右に余白がある` ); }
 	await ctx.close();
 }
 
