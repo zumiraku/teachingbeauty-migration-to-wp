@@ -219,6 +219,17 @@ body {
 	letter-spacing: 0;
 }
 
+/* サイドバーの「→アクセス」の上の余白。
+   元の作りだと、電話番号との間の改行が <font size="6"> の中にあるため
+   1行ぶんが 32px もある。広すぎるので改行を消すと今度はくっついてしまう、
+   という 0 か 32 かの二択になっていた。
+   余白は CSS 側で持たせて、間の数字で決められるようにする。
+   広くしたいときはこの px を増やすだけでよい。 */
+#hpb-aside #shopinfo a[href="access.html"] {
+	display: inline-block;
+	margin-top: 6px;
+}
+
 /* ---------- テキストリンクに伸びる下線 ---------- */
 .tb-enhanced #hpb-main a {
 	background-image: linear-gradient(#a9770b, #a9770b);

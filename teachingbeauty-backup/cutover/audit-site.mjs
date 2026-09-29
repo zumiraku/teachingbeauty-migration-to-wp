@@ -167,6 +167,35 @@ for ( const m of mobile ) {
 	if ( 'sticky' !== m.asidePos ) { mProblems.push( `${ m.slug }: サイドバーが sticky でない（${ m.asidePos }）` ); }
 	if ( m.scrolled > 200 && ! m.見えている && ! m.なし ) { mProblems.push( `${ m.slug }: スクロール後にサイドバーが消える（top=${ m.top }）` ); }
 }
+// サイドバーの確認（バナーに画像の無い項目が混ざっていないか／アクセスの余白）
+{
+	const br = await chromium.launch( { channel: 'chrome' } );
+	const pg = await br.newPage( { viewport: { width: 1280, height: 900 } } );
+	await pg.goto( base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 } );
+	await pg.waitForTimeout( 1500 );
+	const side = await pg.evaluate( () => {
+		const noImg = [ ...document.querySelectorAll( '#banner li a' ) ]
+			.filter( ( a ) => 'none' === getComputedStyle( a ).backgroundImage )
+			.map( ( a ) => a.textContent.trim().slice( 0, 12 ) );
+		const acc = document.querySelector( '#shopinfo a[href="access.html"]' );
+		const tel = document.querySelector( '#shopinfo a[href^="tel:"]' );
+		return {
+			画像の無いバナー: noImg,
+			アクセスの余白: acc ? getComputedStyle( acc ).marginTop : 'なし',
+			電話からの間隔: ( acc && tel ) ? Math.round( acc.getBoundingClientRect().top - tel.getBoundingClientRect().bottom ) : null,
+		};
+	} );
+	await br.close();
+	console.log( 'サイドバー:' );
+	if ( side.画像の無いバナー.length ) {
+		console.log( `  NG   バナーに画像の無い項目: ${ side.画像の無いバナー.join( ', ' ) }` );
+		process.exitCode = 1;
+	} else {
+		console.log( '  OK   バナーはすべて画像つき' );
+	}
+	console.log( `  OK   →アクセスの上の余白 ${ side.アクセスの余白 }（電話との間隔 ${ side.電話からの間隔 }px）` );
+	console.log( '' );
+}
 console.log( `スマホ: ${ mobile.length } ページ` );
 if ( mProblems.length ) {
 	for ( const x of mProblems.slice( 0, 15 ) ) { console.log( `  NG   ${ x }` ); }
