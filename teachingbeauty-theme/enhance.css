@@ -240,6 +240,11 @@ body {
 	padding-top: 1.5px;
 	padding-bottom: 13.5px;
 	line-height: 22px;
+	/* この帯は #toppage-news の中にあり、さらにその外側の div に
+	   本文用の左 8px が掛かっている。他のバー（左0・幅698px）と揃えるため、
+	   そのぶんを打ち消す。上の > div > h3 の指定は直接の子だけが対象で、
+	   ここまでは届かない。 */
+	margin-left: -8px;
 }
 #hpb-main #toppage-news h3 span,
 #hpb-main #toppage-news h3 font {

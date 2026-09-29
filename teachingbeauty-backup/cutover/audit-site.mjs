@@ -107,7 +107,21 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 					const top = Math.min( ...rects.map( ( r ) => r.top ) );
 					const bot = Math.max( ...rects.map( ( r ) => r.bottom ) );
 					const right = Math.max( ...rects.map( ( r ) => r.right ) );
-					const lines = new Set( rects.map( ( r ) => Math.round( r.top ) ) ).size;
+					// 行数は、縦に重なっている箱を同じ行として数える。
+					// 「news 新着情報」のように書体や大きさが違う文字が並ぶと、
+					// 同じ行でも箱の上端がずれるため、上端の種類で数えると
+					// 1行なのに2行と出てしまう。
+					const sorted = rects.slice().sort( ( a, c ) => a.top - c.top );
+					let lines = 0;
+					let lineBottom = -Infinity;
+					for ( const r of sorted ) {
+						if ( r.top >= lineBottom - Math.min( r.height, 6 ) ) {
+							lines++;
+							lineBottom = r.bottom;
+						} else {
+							lineBottom = Math.max( lineBottom, r.bottom );
+						}
+					}
 
 					out.bars.push( {
 						t: h.textContent.trim().replace( /\s+/g, ' ' ).slice( 0, 18 ),
