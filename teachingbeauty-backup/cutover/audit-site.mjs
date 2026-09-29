@@ -121,6 +121,7 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 						行数: lines,
 						中心: +( ( ( top + bot ) / 2 - hb.top ).toFixed( 1 ) ),
 						飲み込み: Math.round( hb.height ) > 60,
+					大きさ: ( () => { const ff = h.querySelector( 'font' ); return ff ? getComputedStyle( ff ).fontSize : cs.fontSize; } )(),
 					} );
 				}
 				return out;
@@ -175,8 +176,9 @@ if ( mProblems.length ) {
 }
 
 // ---- 見出しバー ----
-const P = { 帯なし: [], 右はみ出し: [], 折り返し: [], 中心ずれ: [], ページ内で左が不揃い: [], 飲み込み: [] };
+const P = { 帯なし: [], 右はみ出し: [], ページ内で大きさが不揃い: [], 折り返し: [], 中心ずれ: [], ページ内で左が不揃い: [], 飲み込み: [] };
 const byPage = {};
+const bySize = {};
 for ( const r of bars ) {
 	const id = `${ r.dev } ${ r.slug }「${ r.t }」`;
 	const known = KNOWN_NO_BAR.includes( r.slug );
@@ -189,6 +191,17 @@ for ( const r of bars ) {
 	if ( ! r.飲み込み && ! known ) {
 		const key = `${ r.dev } ${ r.slug }`;
 		( byPage[ key ] = byPage[ key ] || [] ).push( r.主左 );
+		( bySize[ key ] = bySize[ key ] || [] ).push( r.大きさ );
+	}
+}
+// ページごとに、多数派と違う大きさのバーが混ざっていないか。
+// 「バーは size=5」と一律に案内して taiban で浮いたので、その再発を防ぐ。
+for ( const [ key, list ] of Object.entries( bySize ) ) {
+	const c = {};
+	for ( const x of list ) { c[ x ] = ( c[ x ] || 0 ) + 1; }
+	const keys = Object.keys( c );
+	if ( keys.length > 1 ) {
+		P.ページ内で大きさが不揃い.push( `${ key }: ${ keys.map( ( k ) => `${ k }×${ c[ k ] }` ).join( ' / ' ) }` );
 	}
 }
 for ( const [ key, list ] of Object.entries( byPage ) ) {
@@ -198,7 +211,7 @@ for ( const [ key, list ] of Object.entries( byPage ) ) {
 
 console.log( `\n見出しバー: ${ bars.length } 本（パソコン＋スマホ）` );
 let bad = 0;
-const SOFT = [ '飲み込み', '折り返し' ];   // 元サイト由来・文章の長さの問題
+const SOFT = [ '飲み込み', '折り返し', 'ページ内で大きさが不揃い', 'ページ内で左が不揃い' ];   // 元サイト由来・文章の長さの問題
 for ( const [ name, list ] of Object.entries( P ) ) {
 	if ( ! list.length ) { console.log( `  OK   ${ name }: なし` ); continue; }
 	const soft = SOFT.includes( name );
