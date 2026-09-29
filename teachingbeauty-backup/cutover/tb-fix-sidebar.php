@@ -36,8 +36,15 @@ global $wpdb;
 
 const TB_SIDEBAR_BACKUP = '_tb_sidebar_backup';
 
-// <li> ... ameblo へのリンク ... </li> を、前後の空白ごと1つ取る。
-const TB_AMEBLO_RE = '#[\t ]*<li>\s*<a href="https://ameblo\.jp/teaching-beauty/">[^<]*</a>\s*</li>\s*#i';
+// アメブロの <li> を丸ごと1つ取る。
+// 書き方がページによってばらばらなので、閉じタグや属性をあてにしない。
+//   <li><a href="https://...">スタッフブログ</a></li>
+//   <li><a href="https://...">スタッフブログ</a>          ← </li> が無い（多数派）
+//   <li><font size="3" color="#000000"><a href="https://...">…  ← font が挟まる
+//   <li><a href="http://..." id="banner-blog">…              ← http で id つき
+// なので「<li> から、次の <li> か </ul> の手前まで」を取る形にする。
+// 全39ページで1回ずつ当たること、タグの数が壊れないことを手元で確認済み。
+const TB_AMEBLO_RE = '#[\t ]*<li>(?:(?!</?li|</ul)[\s\S])*?<a href="https?://ameblo\.jp/teaching-beauty/"[^>]*>[^<]*</a>(?:(?!<li|</ul)[\s\S])*?(?=<li|</ul)#i';
 
 $pages = get_posts(
 	array(
@@ -97,13 +104,26 @@ foreach ( $pages as $page ) {
 		continue;
 	}
 
-	// li と ul の数が想定どおり変わっているか
+	// タグの数が想定どおり変わっているか。
+	// <li> はちょうど1つ減るはず。ul・font・a は増減してはいけない
+	// （font や a まで巻き込んで消していたら、ここで止まる）。
 	$li1 = preg_match_all( '#<li\b#i', $before );
 	$li2 = preg_match_all( '#<li\b#i', $after );
-	$ul1 = preg_match_all( '#<ul\b#i', $before ) - preg_match_all( '#</ul>#i', $before );
-	$ul2 = preg_match_all( '#<ul\b#i', $after ) - preg_match_all( '#</ul>#i', $after );
-	if ( $li1 - 1 !== $li2 || $ul1 !== $ul2 ) {
-		printf( "%-16s タグの数が合わない（li %d→%d / ul の過不足 %d→%d）\n", $page->post_name, $li1, $li2, $ul1, $ul2 );
+	if ( $li1 - 1 !== $li2 ) {
+		printf( "%-16s li の数が合わない（%d→%d、1つ減るはず）\n", $page->post_name, $li1, $li2 );
+		$abort = true;
+		continue;
+	}
+	$ng = false;
+	foreach ( array( 'ul', 'font', 'a' ) as $tag ) {
+		$c1 = preg_match_all( "#<$tag\b#i", $before ) - preg_match_all( "#</$tag>#i", $before );
+		$c2 = preg_match_all( "#<$tag\b#i", $after ) - preg_match_all( "#</$tag>#i", $after );
+		if ( $c2 !== $c1 ) {
+			printf( "%-16s %s の開閉が合わない（%d→%d）\n", $page->post_name, $tag, $c1, $c2 );
+			$ng = true;
+		}
+	}
+	if ( $ng ) {
 		$abort = true;
 		continue;
 	}
