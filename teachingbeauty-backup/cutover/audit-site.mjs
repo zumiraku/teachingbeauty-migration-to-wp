@@ -92,15 +92,26 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 					// 行数と文字の位置は、文字そのものの箱で測る。
 					// <strong> などの要素は自前の rect を別の高さで返すので、
 					// 要素の rect を数えると1行でも2行に見えてしまう。
+					//
+					// さらに、空白でない文字のかたまりごとに測る。旧サイトは位置合わせに
+					// 全角スペースを使っていて、それが行末に何個もぶら下がっている。
+					// 全角スペースは普通の文字なので幅を持ち、文字ごと測ると
+					// 目に見えない空白のぶんまで「帯からはみ出している」と出てしまう。
+					// （エステの「美脚リンパマッサージ」で +13px と出たのがこれ）
 					const rects = [];
 					const tw = document.createTreeWalker( h, NodeFilter.SHOW_TEXT );
 					let tn;
 					while ( ( tn = tw.nextNode() ) ) {
 						if ( ! tn.nodeValue.trim() ) { continue; }
-						const r2 = document.createRange();
-						r2.selectNode( tn );
-						for ( const rr of r2.getClientRects() ) {
-							if ( rr.height >= 4 && rr.width >= 2 ) { rects.push( rr ); }
+						const re = /\S+/g;
+						let mm;
+						while ( ( mm = re.exec( tn.nodeValue ) ) ) {
+							const r2 = document.createRange();
+							r2.setStart( tn, mm.index );
+							r2.setEnd( tn, mm.index + mm[ 0 ].length );
+							for ( const rr of r2.getClientRects() ) {
+								if ( rr.height >= 4 && rr.width >= 2 ) { rects.push( rr ); }
+							}
 						}
 					}
 					if ( ! rects.length ) { continue; }
