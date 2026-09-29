@@ -17,6 +17,7 @@ const TICK_C = 13.5;         // 帯の絵の目印（y 6〜21）の中心
 const CHECKS = [
 	{ path: '/', key: '不妊症施術', style: true },
 	{ path: '/', key: 'の思い', style: true },
+	{ path: '/', key: 'テレビ・メディア出演実績', style: true },
 	{ path: '/muryou.html', key: '無料相談', style: true, flush: true },
 	{ path: '/beauty.html', key: '交通事故施術', style: true, flush: true },
 ];

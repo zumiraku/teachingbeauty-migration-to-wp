@@ -146,6 +146,23 @@ body {
 	top: 8px;
 }
 
+/* サイドバーの隙間を詰める。クライアントは余白が嫌いで、詰まっているほうが好み。
+   バナー10本はそのまま、上の余白と下の余白だけを削る（1686px → 1619px）。 */
+#hpb-aside { padding-top: 70px; }
+#hpb-aside #banner,
+#hpb-aside #banner li { padding-bottom: 0; }
+#hpb-aside #shopinfo { margin-bottom: 8px; }
+
+/* トップページだけ本文の左端が他ページと違う。
+   他のページは本文が <p> に入っていて padding-left: 16.8px が付くが、
+   トップは <p> を使っておらず、文字が本文の左端（0px）から始まる。
+   同じ 16.8px を足すと、写真が2枚横に並ぶ行（350+340=690px）が
+   本文の幅 698px に収まらなくなり折り返す（横並びが5行→4行に減る）。
+   収まる範囲の 8px にして差を詰める。#toppage があるのはトップだけ。 */
+#hpb-main:has(#toppage) > div {
+	padding-left: 8px;
+}
+
 /* 店舗情報カードに柔らかな影 */
 .tb-enhanced #shopinfo {
 	box-shadow: 0 4px 18px rgba(72,10,23,.1);
