@@ -128,7 +128,19 @@ body {
    リンクにもいつでも手が届く。
    sticky は途中の親に overflow: hidden などがあると効かないが、#hpb-aside の
    祖先には無いことを確認済み。止まる位置は #hpb-inner の終わりなので、
-   フッターに重なることもない。 */
+   フッターに重なることもない。
+
+   ただし sticky が動けるのは「いちばん近いブロックの親」の中だけ。
+   39ページ中 29ページはサイドバーが #hpb-wrapper の中に入っていて、その
+   wrapper は中身が float なので高さが 107px に潰れている。これだと動く余地が
+   無く、サイドバーはそのまま流れていってしまう。
+   wrapper の箱そのものを消して（display: contents）、中身を #hpb-inner の
+   直接の子として扱わせる。これで親が 7842px などになり sticky が効く。
+   高さを持たせる方法（display: flow-root）も試したが、残り10ページの
+   レイアウトが崩れ、ページの高さが 11ページで最大 1700px 変わったのでやめた。 */
+#hpb-wrapper {
+	display: contents;
+}
 #hpb-aside {
 	position: sticky;
 	top: 8px;

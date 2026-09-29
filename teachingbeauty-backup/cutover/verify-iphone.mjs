@@ -49,7 +49,9 @@ for ( const dev of [ 'iPhone 13', 'iPhone SE' ] ) {
 
 
 	// サイドバーがスクロールに追従するか（トップページで実際に動かして見る）
-	await page.goto( base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 } );
+	// サイドバーの親はページによって #hpb-inner だったり #hpb-wrapper だったりする。
+	// 後者のほうが多い（29ページ）ので、そちらを代表に taiban で確かめる。
+	await page.goto( base + '/taiban.html', { waitUntil: 'domcontentloaded', timeout: 60000 } );
 	await page.waitForTimeout( 1200 );
 	const pos = await page.evaluate( () => getComputedStyle( document.querySelector( '#hpb-aside' ) ).position );
 	await page.evaluate( () => window.scrollTo( 0, 2600 ) );
