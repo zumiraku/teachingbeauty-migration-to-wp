@@ -134,8 +134,18 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 						右はみ出し: Math.round( right - hb.right ),
 						行数: lines,
 						中心: +( ( ( top + bot ) / 2 - hb.top ).toFixed( 1 ) ),
-						飲み込み: Math.round( hb.height ) > 60,
-					大きさ: ( () => { const ff = h.querySelector( 'font' ); return ff ? getComputedStyle( ff ).fontSize : cs.fontSize; } )(),
+						飲み込み: !! h.querySelector( 'br, img, div, p, table, ul, ol, dl, iframe, form' ),
+					// 大きさは実際に字が出ているところから取る。外側が <font size="1"> の
+					// ような入れ物になっていることがあり、要素を先頭から拾うと
+					// 見えている字と違う値になる（エステのページで 10px と出ていた）。
+					大きさ: ( () => {
+						const w2 = document.createTreeWalker( h, NodeFilter.SHOW_TEXT );
+						let n2;
+						while ( ( n2 = w2.nextNode() ) ) {
+							if ( n2.nodeValue.trim() ) { return getComputedStyle( n2.parentElement ).fontSize; }
+						}
+						return cs.fontSize;
+					} )(),
 					} );
 				}
 				return out;
