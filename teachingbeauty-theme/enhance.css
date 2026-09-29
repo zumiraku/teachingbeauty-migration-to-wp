@@ -105,6 +105,26 @@ body {
 	background-size: 100% 100%;
 }
 
+/* 見本: 画像を使わない色ベタの帯（白字）。
+   今の帯は 690x33 の画像なので、文字の大きさを変えるたびに収まりを見る必要がある。
+   色ベタなら帯が文字に合わせて伸びるので、何文字でも何行でもズレようがない。
+   色はサイトの臙脂（帯の目印と同じ #480a17）。変えたければこの1行だけでよい。
+
+   使い方: 見出しに class="tb-bar-solid" を足すだけ。
+     <h3 class="tb-bar-solid"><font size="5">タイトル</font></h3>
+
+   :not(.hpb-c-index) を付けているのは、上の指定より詳しくして確実に勝たせるため。 */
+#hpb-main h3.tb-bar-solid:not(.hpb-c-index) {
+	background: #480a17;
+	background-image: none;
+	padding: 7px 14px 7px 16px;
+	border-radius: 2px;
+}
+#hpb-main h3.tb-bar-solid:not(.hpb-c-index),
+#hpb-main h3.tb-bar-solid:not(.hpb-c-index) * {
+	color: #fff;
+}
+
 /* ---------- 見出しに金のアンダーライン（同じく1行タイトルの h3 のみ） ---------- */
 .tb-enhanced #hpb-main h3,
 .tb-enhanced .hpb-layoutset-02 #hpb-wrapper h3 { position: relative; }
