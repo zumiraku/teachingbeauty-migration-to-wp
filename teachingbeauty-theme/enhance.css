@@ -93,11 +93,17 @@ body {
 
    帯の絵は 690x33 の固定サイズなので、文字だけ大きくすると帯から出る。
    長いタイトルが2行3行になったときは帯が1行ぶんしか無く、2行目から下は
-   帯が消えてしまう。background-size で h3 の高さいっぱいに伸ばす。 */
+   帯が消えてしまう。background-size で h3 の高さいっぱいに伸ばす。
+
+   !important を付けているのは、見出しの中に style="font-size : 117%;" のような
+   指定が直接書かれているものがあるため（nhk のバー7本など）。
+   要素に直接書かれた指定はスタイルシートより強いので、付けないと勝てない。
+   しかも % 指定なので、土台を 24px にすると 117% で 28.08px になり、
+   かえって不揃いが目立つ。ここは確実に押さえる。 */
 #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)),
 #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)) * {
-	font-size: 24px;
-	line-height: 24px;
+	font-size: 24px !important;
+	line-height: 24px !important;
 }
 #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)) {
 	padding-top: 1.5px;

@@ -125,7 +125,11 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 
 					out.bars.push( {
 						t: h.textContent.trim().replace( /\s+/g, ' ' ).slice( 0, 18 ),
-						帯あり: cs.backgroundImage.includes( BAR_IMG ),
+						// 色ベタの帯（class="tb-bar-solid"）は画像を使わないので、
+						// 画像の有無では判定できない。背景色が付いていれば帯とみなす。
+						ベタ帯: h.classList.contains( 'tb-bar-solid' ),
+						帯あり: cs.backgroundImage.includes( BAR_IMG )
+							|| ( h.classList.contains( 'tb-bar-solid' ) && 'rgba(0, 0, 0, 0)' !== cs.backgroundColor ),
 						左: Math.round( hb.left - pb.left - padL ),
 						主左: Math.round( hb.left - mb.left ),
 						幅: Math.round( hb.width ),
@@ -238,7 +242,13 @@ for ( const r of bars ) {
 	if ( ! r.帯あり && ! known ) { P.帯なし.push( id ); }
 	if ( r.右はみ出し > 2 ) { P.右はみ出し.push( `${ id } +${ r.右はみ出し }px` ); }
 	if ( r.行数 > 1 && ! r.飲み込み ) { P.折り返し.push( `${ id } ${ r.行数 }行` ); }
-	if ( ! r.飲み込み && 1 === r.行数 && ! known && Math.abs( r.中心 - TICK_C ) > 1.5 ) { P.中心ずれ.push( `${ id } 中心${ r.中心 }` ); }
+	// 画像の帯は絵の中の目印（中心 13.5px）に文字を合わせる。
+	// 色ベタの帯には目印が無いので、帯そのものの真ん中に来ていればよい。
+	if ( ! r.飲み込み && 1 === r.行数 && ! known ) {
+		const want = r.ベタ帯 ? r.高さ / 2 : TICK_C;
+		const tol = r.ベタ帯 ? 2 : 1.5;
+		if ( Math.abs( r.中心 - want ) > tol ) { P.中心ずれ.push( `${ id } 中心${ r.中心 }（${ want.toFixed( 1 ) } のはず）` ); }
+	}
 	if ( r.飲み込み ) { P.飲み込み.push( `${ id } 高さ${ r.高さ }px` ); }
 	// 同じページのバーどうしで左端が揃っているか（自分で入れた指定の巻き添えを拾う）
 	if ( ! r.飲み込み && ! known ) {
