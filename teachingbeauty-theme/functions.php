@@ -13,6 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 define( 'TB_VERSION', '2.0.0' );
 
+/**
+ * テーマ内ファイルの版として、更新時刻を返す。
+ *
+ * 固定の版だと URL が変わらないため、中身を差し替えてもブラウザは
+ * キャッシュを使い続ける（このサーバーは max-age=604800＝7日）。
+ * 更新時刻を付けておけば、直した瞬間に URL が変わって必ず読み直される。
+ *
+ * @param string $rel テーマフォルダからの相対パス（先頭にスラッシュ）。
+ * @return string 版として使う文字列。
+ */
+function tb_asset_ver( $rel ) {
+	$path = get_template_directory() . $rel;
+	$time = @filemtime( $path );
+	return $time ? (string) $time : TB_VERSION;
+}
+
 add_action(
 	'after_setup_theme',
 	function () {
@@ -34,8 +50,12 @@ add_action(
 		wp_enqueue_style( 'hpbuser', $root . 'user.css', array( 'hpbmain' ), null );
 
 		// 装飾・アニメーション強化レイヤー（レイアウトは不変）。
-		wp_enqueue_style( 'tb-enhance', get_template_directory_uri() . '/enhance.css', array( 'hpbuser' ), TB_VERSION );
-		wp_enqueue_script( 'tb-enhance', get_template_directory_uri() . '/inc/enhance.js', array(), TB_VERSION, true );
+		// バージョンはファイルの更新時刻にする。TB_VERSION 固定だと、
+		// 中身を直しても URL が変わらないので、一度見た人のブラウザは
+		// 最大7日（Cache-Control: max-age=604800）古いものを使い続ける。
+		// 直したのに直っていないように見える、の原因になる。
+		wp_enqueue_style( 'tb-enhance', get_template_directory_uri() . '/enhance.css', array( 'hpbuser' ), tb_asset_ver( '/enhance.css' ) );
+		wp_enqueue_script( 'tb-enhance', get_template_directory_uri() . '/inc/enhance.js', array(), tb_asset_ver( '/inc/enhance.js' ), true );
 	}
 );
 
@@ -183,7 +203,7 @@ add_action(
 			$post     = get_post( get_queried_object_id() );
 			$has_form = $post && false !== strpos( (string) $post->post_content, '[contact-form-7' );
 			if ( $has_form ) {
-				wp_enqueue_style( 'tb-form', get_template_directory_uri() . '/form.css', array( 'hpbuser' ), TB_VERSION );
+				wp_enqueue_style( 'tb-form', get_template_directory_uri() . '/form.css', array( 'hpbuser' ), tb_asset_ver( '/form.css' ) );
 			} else {
 				wp_dequeue_script( 'contact-form-7' );
 				wp_dequeue_script( 'swv' );
