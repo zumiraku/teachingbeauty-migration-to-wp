@@ -105,10 +105,33 @@ body {
 	font-size: 24px !important;
 	line-height: 24px !important;
 }
+/* 帯は色ベタ＋白字にする（クライアント判断で全部こちらに切り替え）。
+   画像の帯は 690x33 の固定サイズで、文字を変えるたびに収まりの調整が要った。
+   色ベタなら帯が文字に合わせて伸びるので、何文字でも何行でもズレない。
+   色を変えたいときは background の1行だけ直せばよい。 */
 #hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)) {
-	padding-top: 1.5px;
-	padding-bottom: 11.5px;
-	background-size: 100% 100%;
+	background: #480a17;
+	background-image: none;
+	padding: 7px 14px 7px 16px;
+	border-radius: 2px;
+}
+#hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)),
+#hpb-main h3:not(.hpb-c-index):not(:has(br, img, div, p, table, ul, ol, dl, iframe, form, span)) * {
+	color: #fff;
+}
+
+/* キャンペーンのページのクーポン枠の中の見出しは、元から帯の無い意匠。
+   （背景なし・臙脂の文字・枠の中に余白をとる）
+   色ベタの対象に入れると、枠の中が急に塗りつぶされて文字も読みにくくなる。
+   ここだけ元の見た目に戻す。 */
+#hpb-main #coupon h3 {
+	background: none;
+	padding: 20px 20px 15px;
+	border-radius: 0;
+}
+#hpb-main #coupon h3,
+#hpb-main #coupon h3 * {
+	color: #561f16;
 }
 
 /* 見本: 画像を使わない色ベタの帯（白字）。
@@ -189,6 +212,15 @@ body {
 #hpb-aside {
 	position: sticky;
 	top: 8px;
+	/* 追従させると位置指定ありの要素になる。上部メニュー（#hpb-nav）も
+	   position: absolute なので、どちらも重なり順の指定が無いと
+	   HTML で後ろに書かれているサイドバーが上に乗る。
+	   メニューの右端（ご予約）がサイドバーの下に隠れてクリックできなくなり、
+	   全39ページで予約ページへ行けなくなっていた。メニューを前面に出す。 */
+	z-index: 1;
+}
+#hpb-nav {
+	z-index: 2;
 }
 
 /* サイドバーの隙間を詰める。クライアントは余白が嫌いで、詰まっているほうが好み。
@@ -295,6 +327,18 @@ body {
 #hpb-main #toppage-news h3 font {
 	font-size: 24px;
 	line-height: 22px;
+}
+/* この帯は中に span があるので上の一括指定から外れている。
+   他のバーを色ベタにしたので、ここだけ画像のままにならないよう個別に揃える。 */
+#hpb-main #toppage-news h3 {
+	background: #480a17;
+	background-image: none;
+	padding: 7px 14px 7px 16px;
+	border-radius: 2px;
+}
+#hpb-main #toppage-news h3,
+#hpb-main #toppage-news h3 * {
+	color: #fff;
 }
 
 /* ---------- テキストリンクに伸びる下線 ---------- */
