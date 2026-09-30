@@ -136,11 +136,11 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 
 					out.bars.push( {
 						t: h.textContent.trim().replace( /\s+/g, ' ' ).slice( 0, 18 ),
-						// 色ベタの帯（class="tb-bar-solid"）は画像を使わないので、
-						// 画像の有無では判定できない。背景色が付いていれば帯とみなす。
-						ベタ帯: h.classList.contains( 'tb-bar-solid' ),
-						帯あり: cs.backgroundImage.includes( BAR_IMG )
-							|| ( h.classList.contains( 'tb-bar-solid' ) && 'rgba(0, 0, 0, 0)' !== cs.backgroundColor ),
+						// 色ベタの帯は画像を使わないので、画像の有無では判定できない。
+						// class ではなく見た目で判定する。全部を色ベタに切り替えたあとは
+						// class が付いていないバーも色ベタになるため。
+						ベタ帯: ! cs.backgroundImage.includes( BAR_IMG ) && 'rgba(0, 0, 0, 0)' !== cs.backgroundColor,
+						帯あり: cs.backgroundImage.includes( BAR_IMG ) || 'rgba(0, 0, 0, 0)' !== cs.backgroundColor,
 						左: Math.round( hb.left - pb.left - padL ),
 						主左: Math.round( hb.left - mb.left ),
 						幅: Math.round( hb.width ),
