@@ -43,3 +43,20 @@
 
 ## 状態
 現時点でサーバー未設置のためローカルで作成。ロリポップ！の FTP・WebDAV アクセス情報の受領後、検証環境で取り込み・確認を行う。
+
+---
+
+## つくった人
+
+ブラックにゃー（blacknyaa）— 大阪のフリーランスAIエンジニアです。生成AI×Web開発を軸に、業務システムとWebサイトを受託で作っています。
+
+| | |
+|---|---|
+| ランサーズ | [ブラックにゃー (Ponta-0363)](https://www.lancers.jp/profile/Ponta-0363) |
+| note | [note.com/blacknyaa](https://note.com/blacknyaa) |
+| Qiita | [qiita.com/blacknyaa](https://qiita.com/blacknyaa) |
+| Zenn | [zenn.dev/blacknyaa](https://zenn.dev/blacknyaa) |
+| YOUTRUST | [youtrust.jp/users/blacknyaa](https://youtrust.jp/users/blacknyaa) |
+| GitHub | [github.com/blacknyaa](https://github.com/blacknyaa) |
+
+お仕事のご相談は、ランサーズ経由でも直接でも受けています。NDAも対応します。
