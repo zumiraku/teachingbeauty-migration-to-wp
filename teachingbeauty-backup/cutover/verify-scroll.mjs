@@ -69,6 +69,8 @@ for ( const [ devName, opt ] of [ [ 'パソコン', { viewport: { width: 1280, h
 			problems.push( `${ devName } ${ slug }: ページが開けない` );
 			continue;
 		}
+		// 手元の CSS を当てて、反映前でも確かめられるようにする
+		if ( process.env.TB_LOCAL_CSS ) { await page.addStyleTag( { content: fs.readFileSync( process.env.TB_LOCAL_CSS, 'utf8' ) } ).catch( () => {} ); }
 		await page.waitForTimeout( 200 );
 
 		for ( const frac of [ 0, 0.4, 0.85 ] ) {
@@ -81,12 +83,33 @@ for ( const [ devName, opt ] of [ [ 'パソコン', { viewport: { width: 1280, h
 			checks++;
 			for ( const x of r ) { problems.push( `${ devName } ${ slug } (${ Math.round( frac * 100 ) }%): ${ x }` ); }
 		}
+		// 3か所だけでは重なる位置をまたいで見落とす。
+		// サイドバーの中身どうしは 60px刻み で最後まで確かめる。
+		const fine = await page.evaluate( () => {
+			const list = document.querySelector( '#banner ul' );
+			const shop = document.querySelector( '#shopinfo' );
+			if ( ! list || ! shop ) { return null; }
+			if ( list.contains( shop ) || shop.contains( list ) ) { return null; }
+			const H = document.body.scrollHeight;
+			let worst = 0, at = -1;
+			for ( let y = 0; y <= H - window.innerHeight; y += 60 ) {
+				window.scrollTo( 0, y );
+				const a = list.getBoundingClientRect(), c = shop.getBoundingClientRect();
+				const ov = Math.min( a.bottom, c.bottom ) - Math.max( a.top, c.top );
+				const hx = Math.min( a.right, c.right ) - Math.max( a.left, c.left );
+				if ( ov > 0 && hx > 0 && ov > worst ) { worst = Math.round( ov ); at = y; }
+			}
+			window.scrollTo( 0, 0 );
+			return worst > 0 ? { worst, at } : null;
+		} );
+		checks++;
+		if ( fine ) { problems.push( `${ devName } ${ slug }: バナー一覧と店舗情報が ${ fine.worst }px 重なる（${ fine.at }px 地点）` ); }
 	}
 	await ctx.close();
 }
 await browser.close();
 
-console.log( `確認した回数: ${ checks }（全 ${ slugs.length } ページ × 2端末 × 3か所）` );
+console.log( `確認した回数: ${ checks }（全 ${ slugs.length } ページ × 2端末 × 3か所 ＋ 60px刻みの通し確認）` );
 const uniq = [ ...new Set( problems ) ];
 if ( uniq.length ) {
 	console.log( `  NG   ${ uniq.length } 件` );
