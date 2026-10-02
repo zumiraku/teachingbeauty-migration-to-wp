@@ -13,6 +13,10 @@ if ( ! base ) { console.log( 'usage: node verify-site.mjs <base> [--live]' ); pr
 
 const here = path.dirname( fileURLToPath( import.meta.url ) );
 const wxr = fs.readFileSync( path.join( here, '..', 'teachingbeauty-fullbody.wxr' ), 'utf8' );
+const CLIENT_TITLE = {
+	privacy: 'プライバシーポリシー',            // 元: プライポリシー（誤記）
+	kyuujin: '求人募集　桜新町徒歩1分',      // 元: 登録販売員　求人募集　桜新町徒歩1分
+};
 const pages = [];
 for ( const m of wxr.matchAll( /<item>[\s\S]*?<title>([^<]*)<\/title>[\s\S]*?<wp:post_name><!\[CDATA\[([^\]]+)\]\]>[\s\S]*?<\/item>/g ) ) {
 	const slug = m[ 2 ];
@@ -26,6 +30,9 @@ for ( const m of wxr.matchAll( /<item>[\s\S]*?<title>([^<]*)<\/title>[\s\S]*?<wp
 		const t = new TextDecoder( cs ).decode( buf ).match( /<title>([^<]*)<\/title>/ );
 		if ( t ) { title = t[ 1 ]; }
 	}
+	// クライアントが納品後に自分で直した題名。元サイトのままだと不一致になるので
+	// 期待値をこちらに寄せる。privacy は元サイトが「プライポリシー」と誤記していた。
+	if ( CLIENT_TITLE[ slug ] ) { title = CLIENT_TITLE[ slug ]; }
 	pages.push( { title, slug } );
 }
 

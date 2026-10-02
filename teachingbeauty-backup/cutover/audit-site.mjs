@@ -24,6 +24,10 @@ const slugs = [ ...wxr.matchAll( /<wp:post_name><!\[CDATA\[([^\]]+)\]\]>/g ) ].m
 const TICK_C = 13.5;
 const BAR_IMG = 'indexBg_5H.png';
 const KNOWN_NO_BAR = [ 'news' ];   // #coupon の見出しは元から帯が無い意匠
+// サイドバーが2つに分かれているページは、わざと追従させていない。
+// 片方だけ追従させると、流れていく店舗情報が貼り付いたバナーの下に潜り込む。
+// （enhance.css の #hpb-aside:has(#banner):has(#shopinfo) を参照）
+const KNOWN_NO_STICKY = [ 'newpage13' ];
 const KILL = '*{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}';
 
 const DEVS = [
@@ -203,6 +207,7 @@ for ( const m of mobile ) {
 	if ( m.doc > m.screen + 2 ) { mProblems.push( `${ m.slug }: ページ ${ m.doc }px が画面 ${ m.screen }px に収まらない` ); }
 	if ( ! /width=965/.test( m.meta ) ) { mProblems.push( `${ m.slug }: viewport が ${ m.meta }` ); }
 	if ( m.gutter < 8 ) { mProblems.push( `${ m.slug }: 左の余白が ${ m.gutter }px` ); }
+	if ( KNOWN_NO_STICKY.includes( m.slug ) ) { continue; }
 	if ( 'sticky' !== m.asidePos ) { mProblems.push( `${ m.slug }: サイドバーが sticky でない（${ m.asidePos }）` ); }
 	if ( m.scrolled > 200 && ! m.見えている && ! m.なし ) { mProblems.push( `${ m.slug }: スクロール後にサイドバーが消える（top=${ m.top }）` ); }
 }
@@ -240,7 +245,7 @@ if ( mProblems.length ) {
 	for ( const x of mProblems.slice( 0, 15 ) ) { console.log( `  NG   ${ x }` ); }
 	if ( mProblems.length > 15 ) { console.log( `       …ほか ${ mProblems.length - 15 } 件` ); }
 } else {
-	console.log( '  OK   全ページ、画面に収まり・余白あり・サイドバーが追従' );
+	console.log( `  OK   画面に収まり・余白あり・サイドバーが追従（追従させないページ ${ KNOWN_NO_STICKY.length } を除く全 ${ mobile.length - KNOWN_NO_STICKY.length } ページ）` );
 }
 
 // ---- 見出しバー ----
