@@ -55,6 +55,12 @@ for ( const [ devName, opt, isPhone ] of DEVS ) {
 			for ( let i = 0; i < 3 && ! ok; i++ ) {
 				try {
 					await page.goto( url, { waitUntil: 'domcontentloaded', timeout: 45000 } );
+					// 手元の CSS を当てて、反映前でも確かめられるようにする
+					if ( process.env.TB_LOCAL_CSS ) {
+						await page.evaluate( () => document.querySelectorAll( 'link[href*="enhance.css"]' ).forEach( ( l ) => l.remove() ) ).catch( () => {} );
+						await page.addStyleTag( { content: fs.readFileSync( process.env.TB_LOCAL_CSS, 'utf8' ) } ).catch( () => {} );
+						await page.waitForTimeout( 250 );
+					}
 					ok = true;
 				} catch ( e ) {
 					if ( 2 === i ) { throw e; }
@@ -216,6 +222,10 @@ for ( const m of mobile ) {
 	const br = await chromium.launch( { channel: 'chrome' } );
 	const pg = await br.newPage( { viewport: { width: 1280, height: 900 } } );
 	await pg.goto( base + '/', { waitUntil: 'domcontentloaded', timeout: 60000 } );
+	if ( process.env.TB_LOCAL_CSS ) {
+		await pg.evaluate( () => document.querySelectorAll( 'link[href*="enhance.css"]' ).forEach( ( l ) => l.remove() ) ).catch( () => {} );
+		await pg.addStyleTag( { content: fs.readFileSync( process.env.TB_LOCAL_CSS, 'utf8' ) } ).catch( () => {} );
+	}
 	await pg.waitForTimeout( 1500 );
 	const side = await pg.evaluate( () => {
 		const noImg = [ ...document.querySelectorAll( '#banner li a' ) ]
