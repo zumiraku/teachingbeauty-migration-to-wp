@@ -70,7 +70,11 @@ for ( const [ devName, opt ] of [ [ 'パソコン', { viewport: { width: 1280, h
 			continue;
 		}
 		// 手元の CSS を当てて、反映前でも確かめられるようにする
-		if ( process.env.TB_LOCAL_CSS ) { await page.addStyleTag( { content: fs.readFileSync( process.env.TB_LOCAL_CSS, 'utf8' ) } ).catch( () => {} ); }
+		if ( process.env.TB_LOCAL_CSS ) {
+			// 本番の enhance.css を外してから当てる（上書きだと詳しさ負けする指定がある）
+			await page.evaluate( () => document.querySelectorAll( 'link[href*="enhance.css"]' ).forEach( ( l ) => l.remove() ) ).catch( () => {} );
+			await page.addStyleTag( { content: fs.readFileSync( process.env.TB_LOCAL_CSS, 'utf8' ) } ).catch( () => {} );
+		}
 		await page.waitForTimeout( 200 );
 
 		for ( const frac of [ 0, 0.4, 0.85 ] ) {

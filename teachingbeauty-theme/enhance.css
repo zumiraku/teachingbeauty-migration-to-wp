@@ -253,20 +253,64 @@ body {
 #hpb-aside #banner li { padding-bottom: 0; }
 #hpb-aside #shopinfo { margin-bottom: 8px; }
 
-/* トップページだけ本文の左端が他ページと違う。
-   他のページは本文が <p> に入っていて padding-left: 16.8px が付くが、
-   トップは <p> を使っておらず、文字が本文の左端（0px）から始まる。
-   同じ 16.8px を足すと、写真が2枚横に並ぶ行（350+340=690px）が
-   本文の幅 698px に収まらなくなり折り返す（横並びが5行→4行に減る）。
-   収まる範囲の 8px にして差を詰める。#toppage があるのはトップだけ。 */
-#hpb-main:has(#toppage) > div {
-	padding-left: 8px;
+/* 本文の左端を全ページでそろえる。
+
+   元サイトは <p> だけに padding-left: 16.8px が付いていて、<p> を使わず
+   div に直接書かれた文は 0px から始まる。同じページの中で段落ごとに
+   左端が 16.8px ずれ、ページ間でも <p> の多い少ないで見え方が変わる。
+   （耳鳴りのページで、真ん中のブロックだけ左にずれて見えたのがこれ）
+
+   本文の容れ物に 16.8px を足して、地の文を <p> と同じ位置から始める。
+   <p> 自身の 16.8px は二重になるので外す。これで 39ページ全部、
+   本文の左端が 16.8px でそろう。
+
+   足すと本文の幅が 698px から 681.2px に縮むので、幅が効くものは戻す。
+   帯と横罫は全幅で見せたいので位置も幅も元のまま、表と動画は位置を戻す。
+   画像は1枚も動かさない。横に並ぶ画像の行は、行頭の1枚だけを margin で
+   左に出して、その行の幅を取り戻す（2枚目以降は行頭について動くため触らない）。
+   relative ではなく margin なのは、margin だけが行の幅を広げられるため。
+   逆に2枚目以降にも margin を使うと流れの中で足し算になり、2枚目は 16.8px、
+   3枚目は 33.6px と左にずれていく。 */
+#hpb-main > div {
+	padding-left: 16.8px;
 }
-/* ただし見出しバーは本文の左端いっぱいに出したいので、足した 8px を打ち消す。
-   これを入れないと、div の中にある【…の思い】のバーだけ左8px・幅690pxになり、
-   直下にある他のバー（左0・幅698px）と揃わない。 */
-#hpb-main:has(#toppage) > div > h3 {
-	margin-left: -8px;
+#hpb-main p {
+	padding-left: 0;
+}
+#hpb-main > div h3 {
+	position: relative;
+	left: -16.8px;
+	margin-right: -16.8px;
+}
+/* <hr> は既定が margin-left: auto なので、右に入れた負の余白を auto が吸って
+   左へ 16.8px 付いてしまう。幅も 100% で決まっていて負の右余白では戻らない。
+   どちらも明示して、元どおり 左0・幅698px に戻す。 */
+#hpb-main > div hr {
+	position: relative;
+	left: -16.8px;
+	margin-left: 0;
+	margin-right: 0;
+	width: calc(100% + 16.8px);
+}
+#hpb-main > div :is(table, iframe) {
+	position: relative;
+	left: -16.8px;
+	/* 幅が自動の表は縮んでしまうので戻す（幅指定のある表には効かない） */
+	margin-right: -16.8px;
+}
+/* 「このページの先頭へ」は右寄せなので、容れ物が右へ寄ると右端から外へ出る。
+   入れ子になっているページだけ、元の位置に戻す（直接の子のページは余白が
+   左に付くだけで右端は動かないため、そのままでよい）。 */
+#hpb-main > div #pagetop {
+	position: relative;
+	left: -16.8px;
+	margin-right: -16.8px;
+}
+#hpb-main > div img:not(.right):not(p img):not(td img):not(th img) {
+	margin-left: -16.8px;
+}
+#hpb-main > div :is(img, font:has(img), a:has(img), b:has(img), span:has(img), strong:has(img)) + img:not(.right):not(p img):not(td img):not(th img) {
+	margin-left: 0;
 }
 
 /* li の中に入っている見出しだけ line-height が 15.68px になっていて、
@@ -340,11 +384,6 @@ body {
 	padding-top: 1.5px;
 	padding-bottom: 13.5px;
 	line-height: 22px;
-	/* この帯は #toppage-news の中にあり、さらにその外側の div に
-	   本文用の左 8px が掛かっている。他のバー（左0・幅698px）と揃えるため、
-	   そのぶんを打ち消す。上の > div > h3 の指定は直接の子だけが対象で、
-	   ここまでは届かない。 */
-	margin-left: -8px;
 }
 #hpb-main #toppage-news h3 span,
 #hpb-main #toppage-news h3 font {
