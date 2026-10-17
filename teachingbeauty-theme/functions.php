@@ -280,3 +280,35 @@ add_action(
 		}
 	}
 );
+
+/**
+ * 固定ページの編集画面に文字サイズの欄を出す。
+ *
+ * WordPress はこの欄を標準で隠している。ツールバーの2段目（キッチンシンクの
+ * ボタンで開く段）の先頭に足す。1段目に入れると太字や箇条書きの並びが右へずれ、
+ * 今までの位置を覚えている人が押し間違えるため、2段目にした。
+ *
+ * 大きさの一覧は、既定の pt 表記だと本文の px と噛み合わず換算が要るので px で
+ * 並べ直す。元サイトの本文は 14px、帯の見出しは 24px なので、その前後を厚めにした。
+ *
+ * なお帯の見出しは enhance.css で 24px に固定してあるため、そこに大きさを指定しても
+ * 見た目は変わらない。帯の高さがページごとにバラバラにならないための指定で、
+ * 元サイトでは 18px が98本・16px が62本・24px が10本と混ざっていたのをそろえた経緯がある。
+ */
+add_filter(
+	'mce_buttons_2',
+	function ( $buttons ) {
+		if ( in_array( 'fontsizeselect', $buttons, true ) ) {
+			return $buttons;
+		}
+		array_unshift( $buttons, 'fontsizeselect' );
+		return $buttons;
+	}
+);
+add_filter(
+	'tiny_mce_before_init',
+	function ( $init ) {
+		$init['fontsize_formats'] = '10px 12px 14px 16px 18px 20px 24px 28px 32px 36px';
+		return $init;
+	}
+);
