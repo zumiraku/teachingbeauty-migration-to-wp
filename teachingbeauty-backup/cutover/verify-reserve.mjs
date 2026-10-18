@@ -34,7 +34,9 @@ for ( const [ name, opt ] of [
 				return b.width > 1 && b.height > 1 && 'none' !== c.display && 'hidden' !== c.visibility;
 			};
 			const inputs = form ? [ ...form.querySelectorAll( 'input, textarea, select' ) ].filter( vis ) : [];
-			const submit = form ? [ ...form.querySelectorAll( 'input[type="submit"], button' ) ].filter( vis ) : [];
+			// FC2 の送信は <input type="submit"> ではなく、onclick 付きの
+			// <input type="button" value="確認"> で JavaScript から送る形になっている。
+			const submit = form ? [ ...form.querySelectorAll( 'input[type="submit"], input[type="image"], input[type="button"], button' ) ].filter( vis ) : [];
 			return {
 				script: !! document.querySelector( 'script[src*="form1ssl.fc2.com/parts"]' ),
 				wpcf7:  !! document.querySelector( '.wpcf7, form.wpcf7-form' ),
