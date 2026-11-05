@@ -62,6 +62,7 @@ Web・アプリ開発／システム開発・インフラ／AI活用・セキュ
 
 | 媒体 | リンク | 表示名 |
 |---|---|---|
+| サイト | [zumiraku.com](https://zumiraku.com/) | 図美楽（ずみらく） |
 | note | [note.com/zumiraku](https://note.com/zumiraku) | 図美楽 |
 | Qiita | [qiita.com/zumiraku](https://qiita.com/zumiraku) | ずみらく |
 | Zenn | [zenn.dev/zumiraku](https://zenn.dev/zumiraku) | ズミラク |
